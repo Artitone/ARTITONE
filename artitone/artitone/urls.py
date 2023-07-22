@@ -24,6 +24,8 @@ from artitone.environment import environment
 urlpatterns = [
     path("", include("index.urls")),
     path('admin/', admin.site.urls),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("profiles/", include("profiles.urls")),
 ]
 
 if not environment.is_aws:

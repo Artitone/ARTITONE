@@ -13,3 +13,6 @@ artitone/media/*
 **/.elasticbeanstalk/
 .vscode/settings.json
 artitone/map/urls.py
+migrations
+**/migrations
+db.sqlite3
