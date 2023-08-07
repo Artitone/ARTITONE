@@ -1,0 +1,87 @@
+[
+    {
+        "model": "artworks.Category",
+        "pk": 1,
+        "fields": {
+            "name": "Fine Arts"
+        }
+    },
+    {
+        "model": "artworks.Category",
+        "pk": 2,
+        "fields": {
+            "parent": 1,
+            "name": "Sculpture"
+        }
+    },
+    {
+        "model": "artworks.Category",
+        "pk": 3,
+        "fields": {
+            "parent": 1,
+            "name": "Wall Arts"
+        }
+    },
+    {
+        "model": "artworks.Category",
+        "pk": 4,
+        "fields": {
+            "name": "Decoration"
+        }
+    },
+    {
+        "model": "artworks.Category",
+        "pk": 5,
+        "fields": {
+            "parent": 4,
+            "name": "Glassware"
+        }
+    },
+    {
+        "model": "artworks.Category",
+        "pk": 6,
+        "fields": {
+            "parent": 4,
+            "name": "Tableware"
+        }
+    },
+    {
+        "model": "artworks.Category",
+        "pk": 7,
+        "fields": {
+            "parent": 4,
+            "name": "Textile"
+        }
+    },
+    {
+        "model": "artworks.Category",
+        "pk": 8,
+        "fields": {
+            "name": "Furniture"
+        }
+    },
+    {
+        "model": "artworks.Category",
+        "pk": 9,
+        "fields": {
+            "parent": 8,
+            "name": "Table"
+        }
+    },
+    {
+        "model": "artworks.Category",
+        "pk": 10,
+        "fields": {
+            "parent": 8,
+            "name": "Chair"
+        }
+    },
+    {
+        "model": "artworks.Category",
+        "pk": 11,
+        "fields": {
+            "parent": 8,
+            "name": "Lighting"
+        }
+    }
+]

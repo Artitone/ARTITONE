@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
     path("profiles/", include("profiles.urls")),
+    path("artworks/", include("artworks.urls")),
 ]
 
 if not environment.is_aws:

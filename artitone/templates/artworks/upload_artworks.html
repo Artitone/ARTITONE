@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% if not is_tag_phase %}
+<form method="post" class="edit-form" 
+id="artwork_form" enctype="multipart/form-data" action="{% url 'upload_artwork' %}">
+    <img id="photo_preview" src="#" alt="Preview feature photo" height="100px">
+    {% csrf_token %}
+    {{ artwork_form.as_p }}
+    <button type="submit" id="edit-form-edit-btn" class="edit-form">upload</button>
+</form>
+{% else %}
+    <h2>{{ artwork.title }}</h2>
+    {% if artwork.photo %}
+    <img src="{{ artwork.photo.url }}" height="100px" alt="Preview feature photo">
+    {% endif %}
+    <h3>{{ artwork.category }}</h3>
+    <h3>{{ artwork.get_texture_display }}</h3>
+    <form method="post" class="edit-form" 
+    id="artwork_form" enctype="multipart/form-data" action="{% url 'update_tags' artwork.pk %}">
+    {% csrf_token %}
+    <p>Color detected:</p>
+    {% for color in colors %}
+        <div style="background-color: {{ color }}; padding: 10px;"></div>
+    {% endfor %}
+    <p>Our algorithm noticed that your artwork may be fit into the following tag(s):</p>
+    {% for tag in tags %}
+        <input type="checkbox" name="tags" value="{{ tag }}"> {{ tag }}<br>
+    {% endfor %}
+    <button type="submit" id="edit-form-edit-btn" class="edit-form">Add Tag(s)</button>
+</form>
+{% endif %}
+
+<script>
+    id_photo.onchange = evt => {
+        const [file] = id_photo.files
+        if (file) {
+            photo_preview.src = URL.createObjectURL(file)
+        }
+    }
+</script>
+
+
+{% endblock %}

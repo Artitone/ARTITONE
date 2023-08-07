@@ -1,11 +1,14 @@
+boto3
 crispy-bootstrap5==0.7
 Django==3.2.8
 django-crispy-forms==2.0
 django-mathfilters==1.0.0
+django-taggit==4.0.0
 django-ses==3.3.0
 django-storages==1.13.2
 Django-Verify-Email==2.0.3
 django-widget-tweaks==1.4.12
 django_debug_toolbar==3.8.1
 flake8==5.0.4
+scipy
 verify-email==2.4.3

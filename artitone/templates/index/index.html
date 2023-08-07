@@ -29,9 +29,12 @@
           </div>
           <nav class="account-dropdown-list w-dropdown-list">
             <div class="w-layout-blockcontainer container-9 w-container">
-              <div class="text-block-10">Log In         </div>
-              <div class="text-block-10">Sign Up       </div>
-              <div class="text-block-10">Log Out      </div>
+              <a href="{% url 'login' %}"><div class="text-block-10">Log In         </div></a>
+              <a href="{% url 'signup' %}"><div class="text-block-10">Sign Up       </div></a>
+              <a href="{% url 'logout' %}"><div class="text-block-10">Log Out      </div></a>
+              {% if user.is_authenticated %}
+                <a href="{% url 'my_artworks' user.pk%}"><div class="text-block-10">Profile      </div></a>
+              {% endif %}
             </div>
           </nav>
         </div><img src="images/search.png" loading="lazy" width="20" height="20" srcset="images/search.png 500w, images/search.png 800w, images/search.png 1080w, images/search.png 1600w, images/search.png 2000w, images/search.png 2048w" sizes="(max-width: 991px) 100vw, (max-width: 1439px) 20px, 1vw" alt="" class="image">

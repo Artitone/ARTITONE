@@ -67,9 +67,11 @@ INSTALLED_APPS = [
     # artitone app goes here
     "profiles.apps.ProfilesConfig",
     "index.apps.IndexConfig",
+    "artworks.apps.ArtworksConfig",
     # External applications
     "crispy_forms",
     "crispy_bootstrap5",
+    'taggit',
 ]
 
 MIDDLEWARE = [

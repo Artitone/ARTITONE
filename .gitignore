@@ -16,3 +16,4 @@ artitone/map/urls.py
 migrations
 **/migrations
 db.sqlite3
+**/cache

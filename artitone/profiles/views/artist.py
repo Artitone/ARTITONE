@@ -1,10 +1,14 @@
 from django.db import transaction
 from django.shortcuts import redirect
+from django.shortcuts import render
 from django.views.generic import CreateView
 
 from profiles.forms.artist import ArtistCreationForm
 from profiles.models import User
+from profiles.models import Artist
 from profiles.views.activate_email import activateEmail
+
+from artworks.models import Artwork
 
 
 class ArtistSignUpView(CreateView):
@@ -33,3 +37,19 @@ class ArtistSignUpView(CreateView):
             return redirect("signup")
 
         return redirect("login")
+
+
+def view_my_artworks(request, pk):
+    user = request.user
+    if user.is_artist:
+        artist = Artist.objects.get(user=pk)
+        artworks = Artwork.objects.filter(artist=artist)
+        for artwork in artworks:
+            print(artwork.tags.names())
+        return render(
+                request,
+                "profiles/my_artworks.html",
+                {"artworks": artworks},
+            )
+    else:
+        return redirect("home")
