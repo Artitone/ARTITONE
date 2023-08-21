@@ -6,16 +6,18 @@
 
 {% for artwork in artworks %}
     <hr>
-    <h2>{{ artwork.title }}</h2>
+    <h2>{{ artwork.name }}</h2>
     {% if artwork.photo %}
     <img src="{{ artwork.photo.url }}" width="100px">
     {% endif %}
     <h3>{{ artwork.category }}</h3>
     <h3>{{ artwork.get_texture_display }}</h3>
-    {% for tag in artwork.tags.all %}
-    <h4>{{ tag.name }}</h4>
-    {% endfor %}
+    <h4>{% for tag in artwork.tags.all %}
+    {{ tag.name }}
+    {% endfor %}</h4>
+    <h4>Price: ${{ artwork.price }}</h4>
+    
     <a href="{% url 'delete_artwork' artwork.pk %}"><button>delete</button></a>
+    <a href="{% url 'purchase_artwork' artwork.pk %}"><button>purchase</button></a>
 {% endfor %}
-
 {% endblock %}

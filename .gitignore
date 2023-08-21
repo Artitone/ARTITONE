@@ -17,3 +17,4 @@ migrations
 **/migrations
 db.sqlite3
 **/cache
+**/.pg_service.conf

@@ -1,17 +1,24 @@
 import boto3
+import time  
+
+from decimal import Decimal
 
 from django.shortcuts import redirect
 from django.shortcuts import render
+from paypal.standard.forms import PayPalPaymentsForm
+from django.urls import reverse
 
 from artworks.forms import CreateArtworkForm
 from artworks.models import Artwork
 from profiles.models import Artist
+from profiles.models import ArtistPaymentMethod
 from artworks.utils.rekognition import detect_labels
+
 
 # Create your views here.
 
 
-def upload_artwork_image(request):
+def upload_artwork(request):
     """create a new Artwork and save it to the database."""
     user = request.user
     if not user.is_artist:
@@ -80,10 +87,11 @@ def set_tags(pk, tags):
 
 
 def extract_tags_from_image(form):
-    image_name, bytes = form.get_image()
-    labels = detect_labels(image_name, bytes)
+    # image_name, bytes = form.get_image()
+    # labels = detect_labels(image_name, bytes)
 
-    return labels
+    # return labels
+    return ["label 1", "label 2", "label 3"]
 
 
 def delete_artwork(request, pk):
@@ -92,3 +100,36 @@ def delete_artwork(request, pk):
         return redirect("home")
     Artwork.objects.filter(pk=pk).delete()
     return redirect("my_artworks", pk=user.pk)
+
+
+def purchase_artwork(request, pk, alert=None):
+    user = request.user
+    artist = Artist.objects.get(pk=user)
+    artwork = Artwork.objects.get(pk=pk)
+    payment_method = ArtistPaymentMethod.objects.get(pk=artist)
+
+    # What you want the button to do.
+    time_stamp = time.time()
+    paypal_dict = {
+        "business": payment_method.business_email,
+        "amount": artwork.price,
+        "item_name": artwork.name,
+        "invoice": str(artist.pk)+str(artwork.pk)+str(time_stamp),
+        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+        "return": request.build_absolute_uri(reverse('purchase_success', kwargs={'pk':artwork.pk})),
+        "cancel_return": request.build_absolute_uri(reverse('purchase_fail', kwargs={'pk':artwork.pk})),
+        "custom": "premium_plan",  # Custom command to correlate to some function later (optional)
+    }
+
+    # Create the instance.
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    context = {"form": form, "alert": alert}
+    return render(request, "payment.html", context)
+
+
+def purchase_success(request, pk):
+    return purchase_artwork(request, pk, "Successfully payed!!")
+
+
+def purchase_fail(request, pk):
+    return purchase_artwork(request, pk, "Payment failed!!")

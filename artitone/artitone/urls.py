@@ -27,6 +27,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("profiles/", include("profiles.urls")),
     path("artworks/", include("artworks.urls")),
+    path('paypal/', include("paypal.standard.ipn.urls")),
 ]
 
 if not environment.is_aws:

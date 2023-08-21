@@ -46,13 +46,14 @@ class Artwork(models.Model):
     """
 
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, blank=False)
-    title = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     photo = models.ImageField(
         upload_to=_post_photo_path, blank=True, null=True, validators=[file_size]
     )
     category = models.ForeignKey(
         Category, on_delete=models.DO_NOTHING, blank=True, null=True
     )
+    price = models.FloatField(default=0)
     SATIN = "SA"
     MATTE = "MA"
     ROUGH = "RO"

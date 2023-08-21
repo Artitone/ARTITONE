@@ -9,10 +9,11 @@ class CreateArtworkForm(forms.ModelForm):
     class Meta:
         model = Artwork
         fields = (
-            "title",
+            "name",
             "photo",
             "category",
             "texture",
+            "price",
             "content",
         )
 
@@ -21,8 +22,9 @@ class CreateArtworkForm(forms.ModelForm):
         if self.is_valid():
             return Artwork.objects.create(
                 artist=target_artist,
-                title=self.cleaned_data.get("title"),
+                name=self.cleaned_data.get("name"),
                 photo=self.cleaned_data.get("photo"),
+                price=self.cleaned_data.get("price"),
                 category=self.cleaned_data.get("category"),
                 texture=self.cleaned_data.get("texture"),
                 content=self.cleaned_data.get("content"),

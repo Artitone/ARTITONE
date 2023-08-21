@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     'taggit',
+    'paypal.standard.ipn',
 ]
 
 MIDDLEWARE = [
@@ -123,9 +124,13 @@ CHANNEL_LAYERS = {
 if environment.is_local:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        },
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "test_service",
+            "USER": "yifanwu",
+            "PASSWORD": "",
+            "HOST": "localhost",
+            "PORT": 5432,
+        }
     }
 else:
     DATABASES = {
@@ -203,11 +208,16 @@ if environment.is_aws:
 else:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+# ACCESS KEYS / API KEYS
 AWS_SES_DOMAIN = os.getenv("AWS_SES_DOMAIN")
 DEFAULT_FROM_EMAIL = os.getenv("AWS_SES_FROM_EMAIL")
 
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 GOOGLE_MAPS_SERVER_API_KEY = os.getenv("GOOGLE_MAPS_SERVER_API_KEY")
+
+# PAYMENT
+PAYPAL_TEST = True
+PAYPAL_SANDBOX_RECEIVER = "sb-uelul27134296@business.example.com"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not environment.is_production
