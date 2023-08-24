@@ -29,12 +29,12 @@ class ArtistSignUpView(CreateView):
         user = form.save()
         user.is_active = True
         user.save()
-        try:
-            activateEmail(self.request, user, form.cleaned_data.get("email"))
-        except Exception:
-            user.delete()
+        # try:
+        #     activateEmail(self.request, user, form.cleaned_data.get("email"))
+        # except Exception:
+        #     user.delete()
 
-            return redirect("signup")
+        #     return redirect("signup")
 
         return redirect("login")
 

@@ -11,7 +11,7 @@ id="artwork_form" enctype="multipart/form-data" action="{% url 'upload_artwork' 
     <button type="submit" id="edit-form-edit-btn" class="edit-form">upload</button>
 </form>
 {% else %}
-    <h2>{{ artwork.title }}</h2>
+    <h2>{{ artwork.name }}</h2>
     {% if artwork.photo %}
     <img src="{{ artwork.photo.url }}" height="100px" alt="Preview feature photo">
     {% endif %}

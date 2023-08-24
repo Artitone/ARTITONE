@@ -3,85 +3,84 @@
         "model": "artworks.Category",
         "pk": 1,
         "fields": {
-            "name": "Fine Arts"
+            "name": "Painting"
         }
     },
     {
         "model": "artworks.Category",
         "pk": 2,
         "fields": {
-            "parent": 1,
-            "name": "Sculpture"
+            "name": "Photograph"
         }
     },
     {
         "model": "artworks.Category",
         "pk": 3,
         "fields": {
-            "parent": 1,
-            "name": "Wall Arts"
+            "name": "Sculpture"
         }
     },
     {
         "model": "artworks.Category",
         "pk": 4,
         "fields": {
-            "name": "Decoration"
+            "name": "Wall Arts"
         }
     },
     {
         "model": "artworks.Category",
         "pk": 5,
         "fields": {
-            "parent": 4,
-            "name": "Glassware"
+            "name": "Decorative Trays"
         }
     },
     {
         "model": "artworks.Category",
         "pk": 6,
         "fields": {
-            "parent": 4,
-            "name": "Tableware"
+            "name": "Wall Hangings"
         }
     },
     {
         "model": "artworks.Category",
         "pk": 7,
         "fields": {
-            "parent": 4,
-            "name": "Textile"
+            "name": "Vases"
         }
     },
     {
         "model": "artworks.Category",
         "pk": 8,
         "fields": {
-            "name": "Furniture"
+            "name": "Rugs"
         }
     },
     {
         "model": "artworks.Category",
         "pk": 9,
         "fields": {
-            "parent": 8,
-            "name": "Table"
+            "name": "Curtain"
         }
     },
     {
         "model": "artworks.Category",
         "pk": 10,
         "fields": {
-            "parent": 8,
-            "name": "Chair"
+            "name": "Tables"
         }
     },
     {
         "model": "artworks.Category",
         "pk": 11,
         "fields": {
-            "parent": 8,
-            "name": "Lighting"
+            "name": "Chairs"
+        }
+    },
+    {
+        "model": "artworks.Category",
+        "pk": 12,
+        "fields": {
+            "name": "Cabinets"
         }
     }
 ]

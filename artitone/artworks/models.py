@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from profiles.models import Artist
 from taggit.managers import TaggableManager
+from taggit.models import ItemBase, TaggedItemBase
 
 # Create your models here.
 
@@ -32,6 +33,13 @@ def file_size(value):  # add this to some file where you can import it from
 
 def _post_photo_path(instance, filename):
     return f"artwork/{instance.artist.user.id}/{filename}"
+
+
+class TaggedColors(TaggedItemBase):
+    content_object = models.ForeignKey("Artwork", on_delete=models.CASCADE, null=True)
+
+class TaggedCustom(TaggedItemBase):
+    content_object = models.ForeignKey("Artwork", on_delete=models.CASCADE, null=True)
 
 
 class Artwork(models.Model):
@@ -65,7 +73,8 @@ class Artwork(models.Model):
     texture = models.CharField(
         max_length=2, choices=TEXTURE_CHOICES, blank=False, null=True
     )
-    tags = TaggableManager()
+    tags = TaggableManager(through=TaggedCustom, related_name="tags")
+    colors = TaggableManager(through=TaggedColors, related_name="colors")
     content = models.TextField(help_text="Caption your artwork", default="")
 
     def __str__(self):

@@ -34,23 +34,31 @@ def upload_artwork(request):
         form = CreateArtworkForm(request.POST, request.FILES)
         content = {"artwork_form": form, "is_tag_phase": False}
 
-        if "tags" not in post:
-            content["is_tag_phase"] = True
-            content["tags"] = extract_tags_from_image(form)
-            artwork = form.save(target_artist=artist_profile)
-            content["artwork"] = artwork
-            content["colors"] = artwork.get_dominant_color()
-            return render(
-                request,
-                "artworks/upload_artworks.html",
-                content,
-            )
-        else:
-            artwork_pk = post.getlist('artwork_pk')
-            tags = post.getlist('tags')
-            form.set_tags(artwork_pk, tags)
+        # if "tags" not in post:
+        #     content["is_tag_phase"] = True
+        #     content["tags"] = extract_tags_from_image(form)
+        #     artwork = form.save(target_artist=artist_profile)
+        #     content["artwork"] = artwork
+        #     content["colors"] = artwork.get_dominant_color()
+        #     return render(
+        #         request,
+        #         "artworks/upload_artworks.html",
+        #         content,
+        #     )
+        # else:
+        #     artwork_pk = post.getlist('artwork_pk')
+        #     tags = post.getlist('tags')
+        #     form.set_tags(artwork_pk, tags)
 
-            return redirect("my_artworks", pk=user.pk)
+        #     return redirect("my_artworks", pk=user.pk)
+        artwork = form.save(target_artist=artist_profile)
+        texture, tags = extract_tags_from_image(form)
+        colors = artwork.get_dominant_color()
+        set_texture(artwork, texture)
+        set_tags(artwork, tags)
+        set_color(artwork, colors)
+        return redirect("my_artworks", pk=user.pk)
+
     else:
         form = CreateArtworkForm()
         return render(
@@ -79,19 +87,30 @@ def update_tags(request, pk):
             {"artwork_form": form, "artist": artist_profile},
         )
 
+def set_texture(artwork, texture):
+    if texture == "Satin":
+        artwork.texture = Artwork.SATIN
+    elif texture == "Rough":
+        artwork.texture = Artwork.ROUGH
+    elif texture == "Matte":
+        artwork.texture = Artwork.MATTE
+    artwork.save()
 
-def set_tags(pk, tags):
-    artwork = Artwork.objects.get(pk=pk)
+def set_tags(artwork, tags):
     for tag in tags:
         artwork.tags.add(tag)
 
+def set_color(artwork, colors):
+    for color in colors:
+        artwork.colors.add(color)
+
 
 def extract_tags_from_image(form):
-    # image_name, bytes = form.get_image()
-    # labels = detect_labels(image_name, bytes)
+    image_name, bytes = form.get_image()
+    texture, labels = detect_labels(bytes)
 
-    # return labels
-    return ["label 1", "label 2", "label 3"]
+    return texture, labels
+    # return ["label 1", "label 2", "label 3"]
 
 
 def delete_artwork(request, pk):

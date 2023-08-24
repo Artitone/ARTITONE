@@ -12,7 +12,6 @@ class CreateArtworkForm(forms.ModelForm):
             "name",
             "photo",
             "category",
-            "texture",
             "price",
             "content",
         )
@@ -26,7 +25,6 @@ class CreateArtworkForm(forms.ModelForm):
                 photo=self.cleaned_data.get("photo"),
                 price=self.cleaned_data.get("price"),
                 category=self.cleaned_data.get("category"),
-                texture=self.cleaned_data.get("texture"),
                 content=self.cleaned_data.get("content"),
             )
         return None
@@ -36,4 +34,3 @@ class CreateArtworkForm(forms.ModelForm):
     
     def get_image(self):
         return "test", self.files.get("photo").file.getvalue()
-

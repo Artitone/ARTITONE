@@ -36,7 +36,6 @@ class ArtistCreationForm(UserCreationForm):
                 last_name=self.cleaned_data.get("last_name"),
                 photo=self.cleaned_data.get("photo"),
                 website=self.cleaned_data.get("website"),
-                description=self.cleaned_data.get("description"),
             )
             ArtistPaymentMethod.objects.create(
                 artist=artist,

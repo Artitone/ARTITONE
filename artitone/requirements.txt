@@ -13,4 +13,5 @@ django-paypal==2.0
 flake8==5.0.4
 scipy
 verify-email==2.4.3
-
+Pillow==9.3.0
+psycopg2-binary==2.9.5

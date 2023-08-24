@@ -15,6 +15,9 @@
     <h4>{% for tag in artwork.tags.all %}
     {{ tag.name }}
     {% endfor %}</h4>
+    {% for color in artwork.colors.all %}
+        <div style="background-color: {{ color.name }}; padding: 10px;"></div>
+    {% endfor %}
     <h4>Price: ${{ artwork.price }}</h4>
     
     <a href="{% url 'delete_artwork' artwork.pk %}"><button>delete</button></a>
