@@ -2845,7 +2845,7 @@ figure {
   .image {
     position: relative;
     bottom: 1px;
-    left: -393px;
+    /* left: -393px; */
   }
 
   .paragraph, .paragraph-2, .paragraph-3, .paragraph-4, .paragraph-5, .paragraph-6, .paragraph-7, .paragraph-8 {

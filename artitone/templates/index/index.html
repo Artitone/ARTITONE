@@ -20,7 +20,10 @@
         <h1 class="color-and-material">TEXTURE</h1>
       </div>
       <nav role="navigation" class="nav-menu-2 w-nav-menu">
-        <div class="text-block-14">Search______________</div>
+        <form id="searchbox" method="get" action="{% url 'home' %}">
+        <input type="image" alt="Submit" src="{% static 'images/search-p-500.png' %}" loading="lazy" width="20" height="20" sizes="(max-width: 991px) 100vw, (max-width: 1439px) 20px, 1vw" alt="" class="image">
+        <input id="search" type="text" name="keyword" placeholder="Search..." />
+        </form>
         <div class="text-block-13">Basket</div>
         <div data-hover="true" data-delay="0" data-w-id="4f86b435-b59c-f6d1-bb3a-b4de8bb7f5ca" class="dropdown-2 w-dropdown">
           <div class="w-dropdown-toggle">
@@ -37,7 +40,7 @@
               {% endif %}
             </div>
           </nav>
-        </div><img src="images/search.png" loading="lazy" width="20" height="20" srcset="images/search.png 500w, images/search.png 800w, images/search.png 1080w, images/search.png 1600w, images/search.png 2000w, images/search.png 2048w" sizes="(max-width: 991px) 100vw, (max-width: 1439px) 20px, 1vw" alt="" class="image">
+        </div>
       </nav>
     </div>
     <div class="menu-bg">
@@ -66,6 +69,7 @@
     </div>
   </div>
   <section class="hero-heading-center wf-section">
+    <form id="searchbox" method="get" action="{% url 'home' %}">
     <div class="container-7">
       <h1 class="centered-heading margin-bottom-32px">Dark Brown</h1>
       <div class="hero-wrapper">
@@ -75,12 +79,13 @@
         </div>
       </div>
       <div class="other-color">
-        <a href="#" class="red w-button"></a>
-        <a href="#" class="grey w-button"></a>
-        <a href="#" class="green w-button"></a>
-        <a href="#" class="blue w-button"></a>
+        <button href="#" alt="Submit" class="red w-button" name="color" value="modern"></button>
+        <button href="#" alt="Submit" class="grey w-button" name="color" value="scandinavian"></button>
+        <button href="#" alt="Submit" class="green w-button" name="color" value="minimalist"></button>
+        <button href="#" alt="Submit" class="blue w-button" name="color" value="bohemian"></button>
       </div>
     </div>
+    </form>
   </section>
   <div class="page-content">
     <div class="banner">
@@ -92,57 +97,35 @@
       <h2 class="centered-heading">Featured Items</h2>
       <p class="centered-subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt sagittis eros. Quisque quis euismod lorem.</p>
       <div class="team-grid">
+        {% for artwork in page_obj %}
         <div id="w-node-_3e79c595-1446-2844-74b2-cd547e217564-13ed569a" class="team-card">
-          <a href="#" class="button-2 w-button"></a>
-          <div class="team-member-name">Full Name</div>
-          <div class="team-member-position">Role at C<br>‍Previously: Company 1, Company 2</div>
-          <p class="paragraph-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <a href="#" class="button-2 w-button"><img src="{{artwork.photo.url}}" loading="lazy" width="100%" height="100%"></a>
+          <div class="team-member-name">{{ artwork.name }}</div>
+          <div class="team-member-position">$ {{ artwork.price }}</div>
+          <p class="paragraph-4">{{ artwork.content }}</p>
+          <a href="{% url 'purchase_artwork' artwork.pk %}"><button>purchase</button></a>
         </div>
-        <div id="w-node-ff8ec8c9-f140-1d05-c569-3d053f233df7-13ed569a" class="team-card">
-          <a href="#" class="button-2 w-button"></a>
-          <div class="team-member-name">Full Name</div>
-          <div class="team-member-position">Role at C<br>‍Previously: Company 1, Company 2</div>
-          <p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div id="w-node-_3e79c595-1446-2844-74b2-cd547e21756f-13ed569a" class="team-card">
-          <a href="#" class="button-2 w-button"></a>
-          <div class="team-member-name">Full Name</div>
-          <div class="team-member-position">Role at Company<br>Previously: Company 1, Company 2</div>
-          <p class="paragraph-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div id="w-node-_3e79c595-1446-2844-74b2-cd547e217579-13ed569a" class="team-card">
-          <a href="#" class="button-2 w-button"></a>
-          <div class="team-member-name">Full Name</div>
-          <div class="team-member-position">Role at Company<br>Previously: Company 1, Company 2</div>
-          <p class="paragraph-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div id="w-node-_3e79c595-1446-2844-74b2-cd547e217583-13ed569a" class="team-card">
-          <a href="#" class="button-2 w-button"></a>
-          <div class="team-member-name">Full Name</div>
-          <div class="team-member-position">Role at Company<br>Previously: Company 1, Company 2</div>
-          <p class="paragraph-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div id="w-node-_3e79c595-1446-2844-74b2-cd547e21758d-13ed569a" class="team-card">
-          <a href="#" class="button-2 w-button"></a>
-          <div class="team-member-name">Full Name</div>
-          <div class="team-member-position">Role at Company<br>Previously: Company 1, Company 2</div>
-          <p class="paragraph-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div id="w-node-_3e79c595-1446-2844-74b2-cd547e217597-13ed569a" class="team-card">
-          <a href="#" class="button-2 w-button"></a>
-          <div class="team-member-name">Full Name</div>
-          <div class="team-member-position">Role at Company<br>Previously: Company 1, Company 2</div>
-          <p class="paragraph-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div id="w-node-_9e32ca3c-9865-13b8-0429-79f727c4759e-13ed569a" class="team-card">
-          <a href="#" class="button-2 w-button"></a>
-          <div class="team-member-name">Full Name</div>
-          <div class="team-member-position">Role at Company<br>Previously: Company 1, Company 2</div>
-          <p class="paragraph-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
   <section class="footer-dark wf-section">
     <div class="container-3">
       <div class="footer-wrapper">

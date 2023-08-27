@@ -125,7 +125,7 @@ class Artist(models.Model):
     description = models.TextField(help_text="Introduce your self/artwork here", default="", blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.user_name
 
 
 class Customer(models.Model):
@@ -145,7 +145,7 @@ class Customer(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
-
+    user_name = models.CharField(max_length=200)
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     date_of_birth = models.DateField(blank=True, null=True)
@@ -153,7 +153,7 @@ class Customer(models.Model):
     description = models.TextField(help_text="Introduce yourself here.", default="")
 
     def __str__(self):
-        return self.name
+        return self.user_name
 
     @property
     def name(self):

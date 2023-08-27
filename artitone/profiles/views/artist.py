@@ -44,8 +44,6 @@ def view_my_artworks(request, pk):
     if user.is_artist:
         artist = Artist.objects.get(user=pk)
         artworks = Artwork.objects.filter(artist=artist)
-        for artwork in artworks:
-            print(artwork.tags.names())
         return render(
                 request,
                 "profiles/my_artworks.html",

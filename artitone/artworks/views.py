@@ -9,6 +9,7 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.urls import reverse
 
 from artworks.forms import CreateArtworkForm
+from artworks.forms import CustomPayPalPaymentsForm
 from artworks.models import Artwork
 from profiles.models import Artist
 from profiles.models import ArtistPaymentMethod
@@ -106,11 +107,11 @@ def set_color(artwork, colors):
 
 
 def extract_tags_from_image(form):
-    image_name, bytes = form.get_image()
-    texture, labels = detect_labels(bytes)
+    # image_name, bytes = form.get_image()
+    # texture, labels = detect_labels(bytes)
 
-    return texture, labels
-    # return ["label 1", "label 2", "label 3"]
+    # return texture, labels
+    return "Satin", ["label 1", "label 2", "label 3"]
 
 
 def delete_artwork(request, pk):
@@ -141,7 +142,7 @@ def purchase_artwork(request, pk, alert=None):
     }
 
     # Create the instance.
-    form = PayPalPaymentsForm(initial=paypal_dict)
+    form = CustomPayPalPaymentsForm(initial=paypal_dict)
     context = {"form": form, "alert": alert}
     return render(request, "payment.html", context)
 

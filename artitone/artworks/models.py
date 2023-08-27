@@ -47,7 +47,7 @@ class Artwork(models.Model):
 
     Attributes:
         artist: The owner of the post. Posts appear on this volunteer's profile.
-        title: post title.
+        name: post name.
         photo: post feature. Image field, required.
         tags: artwork tags, autogen+user add.
         content: post content.
@@ -78,7 +78,7 @@ class Artwork(models.Model):
     content = models.TextField(help_text="Caption your artwork", default="")
 
     def __str__(self):
-        return self.title
+        return self.name
 
     def get_dominant_color(self):
         return _get_dominant_color(self.photo.open())
