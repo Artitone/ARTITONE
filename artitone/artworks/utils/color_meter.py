@@ -116,6 +116,8 @@ def filter_by_color_pallate(pallate_name, artworks):
         artworks = _filter_by_pallate(BOHEMIAN, artworks)
     elif pallate_name == "industrial":
         artworks = _filter_by_pallate(INDUSTRIAL, artworks)
+    elif pallate_name == "contemporary":
+        artworks = _filter_by_pallate(CONTEMPORARY, artworks)
     else:
         print(f'Undefined pallate name {pallate_name}')
     print(pallate_name, artworks)
