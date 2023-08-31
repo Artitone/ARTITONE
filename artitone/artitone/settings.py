@@ -41,6 +41,7 @@ else:
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost",
     "http://127.0.0.1",
+    "https://166e-216-165-95-155.ngrok-free.app",
 ]
 _CSRF_TRUSTED_ORIGINS_CSV = os.getenv("CSRF_TRUSTED_ORIGINS_CSV")
 if _CSRF_TRUSTED_ORIGINS_CSV:
@@ -49,6 +50,7 @@ if _CSRF_TRUSTED_ORIGINS_CSV:
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "166e-216-165-95-155.ngrok-free.app",
 ]
 _ALLOWED_HOSTS_CSV = os.getenv("ALLOWED_HOSTS_CSV")
 if _ALLOWED_HOSTS_CSV:

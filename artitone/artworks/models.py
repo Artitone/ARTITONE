@@ -34,6 +34,15 @@ def file_size(value):  # add this to some file where you can import it from
 def _post_photo_path(instance, filename):
     return f"artwork/{instance.artist.user.id}/{filename}"
 
+def _post_picture_path(instance, filename):
+    return f"artwork/{instance.pk}/{filename}"
+
+
+class Picture(models.Model):
+    picture = models.ImageField(upload_to=_post_picture_path, blank=True, null=True, validators=[file_size])
+    def __str__(self):
+        return self.picture.url
+
 
 class TaggedColors(TaggedItemBase):
     content_object = models.ForeignKey("Artwork", on_delete=models.CASCADE, null=True)
@@ -55,9 +64,7 @@ class Artwork(models.Model):
 
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, blank=False)
     name = models.CharField(max_length=200)
-    photo = models.ImageField(
-        upload_to=_post_photo_path, blank=True, null=True, validators=[file_size]
-    )
+    pictures = models.ManyToManyField(Picture, blank=True, related_name="pictures")
     category = models.ForeignKey(
         Category, on_delete=models.DO_NOTHING, blank=True, null=True
     )
@@ -81,6 +88,7 @@ class Artwork(models.Model):
         return self.name
 
     def get_dominant_color(self):
-        return _get_dominant_color(self.photo.open())
+        picture = self.pictures.all()[0]
+        return _get_dominant_color(picture.picture.open())
         # or pass self.image.file, depending on your storage backend
         # We'll implement _get_dominant_color() below later

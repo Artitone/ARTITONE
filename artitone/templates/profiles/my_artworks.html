@@ -7,9 +7,9 @@
 {% for artwork in artworks %}
     <hr>
     <h2>{{ artwork.name }}</h2>
-    {% if artwork.photo %}
-    <img src="{{ artwork.photo.url }}" width="100px">
-    {% endif %}
+    {% with artwork.pictures.all|first as img %}
+        <img class="element" src="{{img}}" loading="lazy">
+    {% endwith %}
     <h3>{{ artwork.category }}</h3>
     <h3>{{ artwork.get_texture_display }}</h3>
     <h4>{% for tag in artwork.tags.all %}

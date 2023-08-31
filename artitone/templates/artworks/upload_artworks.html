@@ -5,16 +5,19 @@
 {% if not is_tag_phase %}
 <form method="post" class="edit-form" 
 id="artwork_form" enctype="multipart/form-data" action="{% url 'upload_artwork' %}">
-    <img id="photo_preview" src="#" alt="Preview feature photo" height="100px">
+    <img id="photo_preview_1" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="100px">
+    <img id="photo_preview_2" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="100px">
+    <img id="photo_preview_3" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="100px">
+    <img id="photo_preview_4" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="100px">
     {% csrf_token %}
     {{ artwork_form.as_p }}
     <button type="submit" id="edit-form-edit-btn" class="edit-form">upload</button>
 </form>
 {% else %}
     <h2>{{ artwork.name }}</h2>
-    {% if artwork.photo %}
-    <img src="{{ artwork.photo.url }}" height="100px" alt="Preview feature photo">
-    {% endif %}
+    {% with artwork.pictures.all|first as img %}
+        <img class="element" src="{{img}}" loading="lazy">
+    {% endwith %}
     <h3>{{ artwork.category }}</h3>
     <h3>{{ artwork.get_texture_display }}</h3>
     <form method="post" class="edit-form" 
@@ -33,10 +36,28 @@ id="artwork_form" enctype="multipart/form-data" action="{% url 'upload_artwork' 
 {% endif %}
 
 <script>
-    id_photo.onchange = evt => {
-        const [file] = id_photo.files
+    id_picture_1.onchange = evt => {
+        const [file] = id_picture_1.files
         if (file) {
-            photo_preview.src = URL.createObjectURL(file)
+            photo_preview_1.src = URL.createObjectURL(file)
+        }
+    }
+    id_picture_2.onchange = evt => {
+        const [file] = id_picture_2.files
+        if (file) {
+            photo_preview_2.src = URL.createObjectURL(file)
+        }
+    }
+    id_picture_3.onchange = evt => {
+        const [file] = id_picture_3.files
+        if (file) {
+            photo_preview_3.src = URL.createObjectURL(file)
+        }
+    }
+    id_picture_4.onchange = evt => {
+        const [file] = id_picture_4.files
+        if (file) {
+            photo_preview_4.src = URL.createObjectURL(file)
         }
     }
 </script>

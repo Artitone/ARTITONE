@@ -1,4 +1,5 @@
 import numpy as np
+# from rembg import remove
 from PIL import Image, PngImagePlugin
 import scipy
 import scipy.misc
@@ -84,7 +85,8 @@ def _get_dominant_color(image_file):
     """
 
     im = image_file
-    im = PngImagePlugin.PngImageFile(im)
+    im = remove_background(im)
+    # im = PngImagePlugin.PngImageFile(im)
     im = im.resize((150, 150))  # optional, to reduce time
     colors = sorted(im.getcolors(im.size[0]*im.size[1]), reverse=True)
     colors = [color for color in colors if color[1][3] > 250][:NUM_CLUSTERS]
@@ -104,8 +106,6 @@ def find_closet_colors(colors):
 
 
 def filter_by_color_pallate(pallate_name, artworks):
-    for artwork in artworks:
-        print(artwork.colors.all())
     if pallate_name == "modern":
         artworks = _filter_by_pallate(MODERN, artworks)
     elif pallate_name == "scandinavian":
@@ -120,7 +120,6 @@ def filter_by_color_pallate(pallate_name, artworks):
         artworks = _filter_by_pallate(CONTEMPORARY, artworks)
     else:
         print(f'Undefined pallate name {pallate_name}')
-    print(pallate_name, artworks)
     return artworks
 
 
@@ -129,3 +128,9 @@ def _filter_by_pallate(pallate, artworks):
     print(colors)
     artworks = artworks.filter(colors__name__in=colors)
     return artworks
+
+
+# def remove_background(image_file):
+#     im = Image.open(image_file)
+#     im = remove(im)
+#     return im
