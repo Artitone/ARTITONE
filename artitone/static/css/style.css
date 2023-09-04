@@ -182,7 +182,7 @@
   position: absolute;
   width: 183px;
   height: 513px;
-  top: 198px;
+  top: 188px;
   left: 39px;
 }
 
@@ -402,11 +402,10 @@
 }
 
 .menu .section-title {
-  position: absolute;
-  width: 530px;
+  position: relative;
   height: 103px;
   top: 0;
-  left: 437px;
+  margin-left: 437px;
 }
 
 .menu .text-wrapper-8 {
@@ -524,7 +523,6 @@
 
 .menu .footer {
   position: relative;
-  width: 960px;
   height: 161px;
   top: 100px;
   left: 240px;
@@ -738,10 +736,10 @@
   font-weight: 400;
   color: #333333;
   font-size: 14px;
-  text-align: center;
   letter-spacing: 0;
   line-height: 21px;
   white-space: nowrap;
+  margin-left: 400px;
 }
 
 .menu .nav {
@@ -805,13 +803,12 @@ nav.artitone-navbar {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 0px;
   top: 0;
 }
 
 .artitone-article {
-  top: 100px;
-  position: absolute;
+  position: relative;
   grid-column-gap: 64px;
   grid-row-gap: 10px;
   grid-template-rows: auto auto;
@@ -825,7 +822,7 @@ nav.artitone-navbar {
   padding-top: 70px;
 }
 
-button.artitone-btn {
+button.artitone-sidebar {
   background: none;
 	color: inherit;
 	border: none;
@@ -880,4 +877,172 @@ button.artitone-btn {
 a.artitone-nav-brand {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
+}
+
+.artitone-modal {
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.artitone-btn {
+  border: 1.2px solid;
+  border-radius: 0;
+  border-color: #000000;
+  width: 300px;
+  height: 50px;
+}
+
+button.artitone-btn {
+  border: 1.2px solid;
+  border-radius: 0;
+  border-color: #000000;
+  background-color: #ffffff;
+  color: #000000;
+  width: 300px;
+  height: 50px;
+}
+
+a.artitone-page-link {
+  border: 1.2px solid;
+  border-radius: 0;
+  border-color: #000000;
+  background-color: #ffffff;
+  color: #000000;
+  /* width: 50px; */
+  /* height: 50px; */
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+  border-radius: 0%;
+}
+
+.artitone-artist-bio {
+  position: relative;
+  margin-top: 20px;
+  width: 1400px;
+  display: grid;
+  grid-column-gap: 200px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  padding-bottom: 30px;
+  padding-left: 120px;
+}
+
+img.artitone-profile-photo {
+  width: 129px;
+  height: 129px;
+  margin-top: 50px;
+  margin-left: 38px;
+  border: 1px solid;
+  position: relative;
+  display: inline-block;
+  border-color: #000000;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.artitone-profile-name {
+  position: relative;
+  display: inline;
+  top: 45px;
+  left: 0px;
+  font-family: "Open Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.artitone-profile-username {
+  position: relative;
+  display: inline;
+  top: 45px;
+  left: 170px;
+  font-family: "Open Sans", Helvetica;
+  font-weight: 400;
+  color: var(--grey);
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.artitone-profile-description {
+  position: relative;
+  display: inline-block;
+  width: 500px;
+  grid-column: 2;
+  grid-row: 1;
+  margin-top: 45px;
+}
+
+.artitone-profile-description-title {
+  font-family: "Open Sans", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 19.2px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-bottom: 10px;
+}
+
+p.artitone-profile-description-content {
+  font-family: "Open Sans", Helvetica;
+  font-weight: 400;
+  color: var(--grey);
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+button.artitone-profile-follow {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  display: inline;
+  border: 1.2px solid;
+  border-color: #000000;
+  top: 110px;
+  left: 220px;
+  width: 172px;
+  height: 43px;
+  font-size: 19.2px;
+}
+
+hr.artitone-profile-hr {
+  border-top: 0.01em solid;
+  margin-left: 100px;
+  width: 1250px;
+  padding-bottom: 50px;
+  position: relative;
+}
+
+.artitone-profile-sort {
+  width: 1380px;
+  position: relative;
+  display: inline-flex;
+  justify-content: flex-end;
+  padding-left: 110px;
+}
+
+select.artitone-profile-select {
+  width: 200px;
+  border: none;
+  border-bottom: 1px solid #000000;
+  border-radius: 0%;
 }

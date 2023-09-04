@@ -51,14 +51,14 @@ def upload_artwork(request):
         #     tags = post.getlist('tags')
         #     form.set_tags(artwork_pk, tags)
 
-        #     return redirect("my_artworks", pk=user.pk)
+        #     return redirect("artist_profile_page", pk=user.pk)
         artwork = form.save(target_artist=artist_profile)
         texture, tags = extract_tags_from_image(form)
         colors = artwork.get_dominant_color()
         set_texture(artwork, texture)
         set_tags(artwork, tags)
         set_color(artwork, colors)
-        return redirect("my_artworks", pk=user.pk)
+        return redirect("artist_profile_page", pk=user.pk)
 
     else:
         form = CreateArtworkForm()
@@ -79,7 +79,7 @@ def update_tags(request, pk):
         tags = post.getlist('tags')
         set_tags(pk, tags)
 
-        return redirect("my_artworks", pk=user.pk)
+        return redirect("artist_profile_page", pk=user.pk)
     else:
         form = CreateArtworkForm()
         return render(
@@ -119,7 +119,7 @@ def delete_artwork(request, pk):
     if not user.is_artist:
         return redirect("home")
     Artwork.objects.filter(pk=pk).delete()
-    return redirect("my_artworks", pk=user.pk)
+    return redirect("artist_profile_page", pk=user.pk)
 
 
 def purchase_artwork(request, pk, alert=None):

@@ -1,7 +1,10 @@
+import logging
+
 from django.db import transaction
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.generic import CreateView
+from django.core.paginator import Paginator
 
 from profiles.forms.artist import ArtistCreationForm
 from profiles.models import User
@@ -10,6 +13,7 @@ from profiles.views.activate_email import activateEmail
 
 from artworks.models import Artwork
 
+logger = logging.getLogger("artitone")
 
 class ArtistSignUpView(CreateView):
     """Displays a form for Artists to sign up with."""
@@ -39,15 +43,33 @@ class ArtistSignUpView(CreateView):
         return redirect("login")
 
 
-def view_my_artworks(request, pk):
+def view_artist_profile(request, pk):
     user = request.user
     if user.is_artist:
         artist = Artist.objects.get(user=pk)
-        artworks = Artwork.objects.filter(artist=artist)
+        artwork_list = Artwork.objects.filter(artist=artist)
+        logger.error(request.GET)
+        sort_method = request.GET.get("sort")
+        if sort_method:
+            if sort_method == "newest":
+                artwork_list = artwork_list.order_by("-pubdate")
+            elif sort_method == "price_ltoh":
+                artwork_list = artwork_list.order_by("price")
+            elif sort_method == "price_htol":
+                artwork_list = artwork_list.order_by("-price")
+
+        paginator = Paginator(artwork_list, 12)  # Show 25 contacts per page.
+
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+
         return render(
                 request,
-                "profiles/my_artworks.html",
-                {"artworks": artworks},
+                "profiles/artist_profile_page.html",
+                {
+                    "artist": artist,
+                    "page_obj": page_obj,
+                },
             )
     else:
         return redirect("home")

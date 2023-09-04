@@ -4,7 +4,7 @@ from profiles.views.activate_email import activate
 from profiles.views.profile import ProfileView
 from profiles.views.profile import SignUpView
 from profiles.views.artist import ArtistSignUpView
-from profiles.views.artist import view_my_artworks
+from profiles.views.artist import view_artist_profile
 from profiles.views.customer import CustomerSignUpView
 
 
@@ -22,5 +22,5 @@ urlpatterns = [
         CustomerSignUpView.as_view(),
         name="customer_signup",
     ),
-    path("<int:pk>/my_artworks", view_my_artworks, name="my_artworks"),
+    path("<int:pk>/artist_profile_page", view_artist_profile, name="artist_profile_page"),
 ]

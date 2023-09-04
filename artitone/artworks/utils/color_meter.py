@@ -1,17 +1,30 @@
+import logging
+import os
+
+import cv2 as cv
 import numpy as np
-# from rembg import remove
-from PIL import Image, PngImagePlugin
 import scipy
-import scipy.misc
 import scipy.cluster
+import scipy.misc
+from sklearn.cluster import KMeans
+
+from artitone.settings import BASE_DIR
+
+# from rembg import remove
+
+
+logger = logging.getLogger("artitone_colormeter")
+
 
 def rgb2hex(rgb):
-    return '#%02x%02x%02x' % rgb
+    return "#%02x%02x%02x" % rgb
+
 
 def hex2rgb(hex):
-    hex = hex.lstrip('#')
+    hex = hex.lstrip("#")
     lv = len(hex)
-    return np.array([int(hex[i:i+lv//3], 16) for i in range(0, lv, lv//3)])
+    return np.array([int(hex[i : i + lv // 3], 16) for i in range(0, lv, lv // 3)])
+
 
 NUM_CLUSTERS = 5
 COLOR_PALETTE = [
@@ -83,24 +96,31 @@ def _get_dominant_color(image_file):
     """
     Take a file object and return the colour in hex code
     """
+    im = np.asarray(bytearray(image_file.read()), dtype="uint8")
+    im = cv.imdecode(im, cv.IMREAD_COLOR)
 
-    im = image_file
-    im = remove_background(im)
-    # im = PngImagePlugin.PngImageFile(im)
-    im = im.resize((150, 150))  # optional, to reduce time
-    colors = sorted(im.getcolors(im.size[0]*im.size[1]), reverse=True)
-    colors = [color for color in colors if color[1][3] > 250][:NUM_CLUSTERS]
+    im = cv.cvtColor(im, cv.COLOR_BGR2RGB)
+    im = cv.resize(
+        im, (150, 150), interpolation=cv.INTER_AREA
+    )  # optional, to reduce time
+
+    clt = KMeans(n_clusters=5)
+    clt = clt.fit(im.reshape(-1, 3))
+    colors = []
+    for pallate in clt.cluster_centers_:
+        colors.append(list(pallate))
     colors = find_closet_colors(colors)
     colors = list(dict.fromkeys(colors))
     colors = [rgb2hex(tuple(color)) for color in colors]
     return colors
 
+
 def find_closet_colors(colors):
     closest_palatte = []
     for c in colors:
-        color = np.array([c[1][0], c[1][1], c[1][2]])
-        distances = np.sqrt(np.sum((COLOR_PALETTE-color)**2,axis=1))
-        index_of_smallest = np.where(distances==np.amin(distances))
+        color = np.array([c[0], c[1], c[2]])
+        distances = np.sqrt(np.sum((COLOR_PALETTE - color) ** 2, axis=1))
+        index_of_smallest = np.where(distances == np.amin(distances))
         closest_palatte.append(tuple(COLOR_PALETTE[int(index_of_smallest[0])]))
     return closest_palatte
 
@@ -119,13 +139,12 @@ def filter_by_color_pallate(pallate_name, artworks):
     elif pallate_name == "contemporary":
         artworks = _filter_by_pallate(CONTEMPORARY, artworks)
     else:
-        print(f'Undefined pallate name {pallate_name}')
+        logger.error(f"Undefined pallate name {pallate_name}")
     return artworks
 
 
 def _filter_by_pallate(pallate, artworks):
     colors = [rgb2hex(tuple(color)) for color in pallate]
-    print(colors)
     artworks = artworks.filter(colors__name__in=colors)
     return artworks
 

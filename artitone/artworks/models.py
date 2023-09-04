@@ -35,7 +35,7 @@ def _post_photo_path(instance, filename):
     return f"artwork/{instance.artist.user.id}/{filename}"
 
 def _post_picture_path(instance, filename):
-    return f"artwork/{instance.pk}/{filename}"
+    return f"artwork/{instance.id}/{filename}"
 
 
 class Picture(models.Model):
@@ -83,12 +83,13 @@ class Artwork(models.Model):
     tags = TaggableManager(through=TaggedCustom, related_name="tags")
     colors = TaggableManager(through=TaggedColors, related_name="colors")
     content = models.TextField(help_text="Caption your artwork", default="")
+    pubdate = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
     def get_dominant_color(self):
         picture = self.pictures.all()[0]
-        return _get_dominant_color(picture.picture.open())
+        return _get_dominant_color(picture.picture)
         # or pass self.image.file, depending on your storage backend
         # We'll implement _get_dominant_color() below later

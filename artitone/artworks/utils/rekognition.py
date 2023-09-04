@@ -1,6 +1,9 @@
+import logging
 import os
 import boto3
 from .aws_rekognition import start_model, stop_model
+
+logger = logging.getLogger("artitone_rekognition")
 
 
 def detect_labels(bytes):
@@ -30,6 +33,6 @@ def detect_labels(bytes):
     labels = []
     # for label in texture_response['CustomLabels']:
     #     labels.append(label['Name'])
-    #     print(f"Label: {label['Name']} ({label['Confidence']})")
+    #     logger.debug(f"Label: {label['Name']} ({label['Confidence']})")
 
     return texture, labels

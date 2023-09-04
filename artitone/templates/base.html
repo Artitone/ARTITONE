@@ -27,12 +27,18 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               {% if user.is_authenticated %}
-                <a class="dropdown-item" href="{% url 'my_artworks' user.pk%}">Profile</a>
+                <a class="dropdown-item" href="{% url 'artist_profile_page' user.pk%}">Profile</a>
                 <a class="dropdown-item" href="{% url 'upload_artwork' %}">Upload Artwork</a>
                 <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
               {% else %}
-                <a class="dropdown-item" href="{% url 'login' %}">Log In</a>
-                <a class="dropdown-item" href="{% url 'signup' %}">Sign Up</a>
+                <button type="button" class="btn btn-dark dropdown-item" data-toggle="modal" data-target="#loginModal">
+                Log In
+                </button>
+                <!-- <a class="dropdown-item" href="{% url 'login' %}">Log In</a> -->
+                <button type="button" id="artitone-signup-btn" class="btn btn-dark dropdown-item" data-toggle="modal" data-target="#signupModal">
+                  Sign Up
+                </button>
+                <!-- <a class="dropdown-item" href="{% url 'signup' %}">Sign Up</a> -->
               {% endif %}
             </div>
           </li>
@@ -40,7 +46,7 @@
       </div>
       <form class="form-inline artitone-navitem" method="get" action="{% url 'home' %}">
           <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          <button class="btn btn-dark my-2 my-sm-0 artitone-btn" type="submit" style="width: 100px;">Search</button>
       </form>
     </nav>
     <div class="artitone-block-content">

@@ -7,6 +7,11 @@
         <div class="overlap-group">
           <div class="overlap">
             <div class="overlap-2">
+
+
+
+
+
               <div class="cotainter">
                 <form id="searchbox" method="get" action="{% url 'home' %}">
                 <div class="content">
@@ -25,62 +30,66 @@
                 <input type="submit" class="group-4 artitone-color-small" style="background:url({% static 'images/group-15.png' %}) no-repeat;background-size: 41px 41px;" name="color" value="minimalist" />
                 </form>
               </div>
+
+
+
+
               <div class="frame" id="artitone-frame" onmouseover="showMenu()" onmouseleave="hideMenu()">
                 <form id="searchbox" method="get" action="{% url 'home' %}">
                 <div class="new-arrivals">
                   <div class="home"><div class="home-2">
-                    <button class="artitone-btn" name="category" type="submit" value="New Arrivals">New Arrivals</button>
+                    <button class="artitone-sidebar" name="category" type="submit" value="New Arrivals">New Arrivals</button>
                   </div></div>
                 </div>
                 <div class="group-5">
                   <div class="photograph">
                     <div class="home"><div class="home-3">
-                      <button class="artitone-btn" name="category" type="submit" value="Photograph">Photograph</button>
+                      <button class="artitone-sidebar" name="category" type="submit" value="Photograph">Photograph</button>
                     </div></div>
                   </div>
                   <div class="painting">
                     <div class="home"><div class="home-3">
-                      <button class="artitone-btn" name="category" type="submit" value="Painting">Painting</button>
+                      <button class="artitone-sidebar" name="category" type="submit" value="Painting">Painting</button>
                     </div></div>
                   </div>
                   <div class="print">
                     <div class="home"><div class="home-3">
-                      <button class="artitone-btn" name="category" type="submit" value="Print">Print</button>
+                      <button class="artitone-sidebar" name="category" type="submit" value="Print">Print</button>
                     </div></div>
                   </div>
                   <div class="wall-arts">
                     <div class="home"><div class="home-3">
-                      <button class="artitone-btn" name="category" type="submit" value="Wall Arts">Wall Arts</button>
+                      <button class="artitone-sidebar" name="category" type="submit" value="Wall Arts">Wall Arts</button>
                     </div></div>
                   </div>
                   <div class="decorative-trays">
                     <div class="home"><div class="home-3">
-                      <button class="artitone-btn" name="category" type="submit" value="Trays">Trays</button>
+                      <button class="artitone-sidebar" name="category" type="submit" value="Trays">Trays</button>
                     </div></div>
                   </div>
                   <div class="wall-hangings">
                     <div class="home"><div class="home-3">
-                      <button class="artitone-btn" name="category" type="submit" value="Hangings">Hangings</button>
+                      <button class="artitone-sidebar" name="category" type="submit" value="Hangings">Hangings</button>
                     </div></div>
                   </div>
                   <div class="table">
                     <div class="home"><div class="home-3">
-                      <button class="artitone-btn" name="category" type="submit" value="Table">Table</button>
+                      <button class="artitone-sidebar" name="category" type="submit" value="Table">Table</button>
                     </div></div>
                   </div>
                   <div class="chair">
                     <div class="home"><div class="home-3">
-                      <button class="artitone-btn" name="category" type="submit" value="Chair">Chair</button>
+                      <button class="artitone-sidebar" name="category" type="submit" value="Chair">Chair</button>
                     </div></div>
                   </div>
                   <div class="cabinet">
                     <div class="home"><div class="home-3">
-                      <button class="artitone-btn" name="category" type="submit" value="Cabinets">Cabinets</button>
+                      <button class="artitone-sidebar" name="category" type="submit" value="Cabinets">Cabinets</button>
                     </div></div>
                   </div>
                   <div class="sculpture">
                     <div class="home"><div class="home-3">
-                      <button class="artitone-btn" name="category" type="submit" value="Sculpture">Sculpture</button>
+                      <button class="artitone-sidebar" name="category" type="submit" value="Sculpture">Sculpture</button>
                     </div></div>
                   </div>
                   <div class="text-wrapper-2">Fine Arts</div>
@@ -92,6 +101,10 @@
             </div>
           </div>
         </div>
+
+
+
+
         <div class="container">
           <div class="section-title">
             <div class="text-wrapper-8">Featured Items</div>
@@ -106,30 +119,41 @@
                 <img class="element" src="{{img}}" loading="lazy">
               {% endwith %}
               <div class="text-wrapper-9">{{ artwork.name }}</div>
-              <p class="text-wrapper-10">$ {{ artwork.price }}</p>
               <p class="text-wrapper-11">{{ artwork.content }}</p>
-              <a href="{% url 'purchase_artwork' artwork.pk %}"><button>purchase</button></a>
+              <p class="text-wrapper-10">$ {{ artwork.price }}</p>
+              <a href="{% url 'purchase_artwork' artwork.pk %}" class="btn btn-dark artitone-btn">purchase</a>
             </div>
             {% endfor %}
-            <div class="pagination">
-              <span class="step-links">
-                  {% if page_obj.has_previous %}
-                      <a href="?page=1">&laquo; first</a>
-                      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                  {% endif %}
-          
-                  <span class="current">
-                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                  </span>
-          
-                  {% if page_obj.has_next %}
-                      <a href="?page={{ page_obj.next_page_number }}">next</a>
-                      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                  {% endif %}
-              </span>
-            </div>
           </div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                  <li class="page-item"><a class="page-link artitone-page-link" href="?page=1">&laquo; first</a></li>
+                  <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+                {% else %}
+                  <li class="page-item disabled"><a class="page-link artitone-page-link">&laquo; first</a></li>
+                  <li class="page-item disabled"><a class="page-link artitone-page-link">previous</a></li>
+                {% endif %}
+                {% for page_num in page_obj.paginator.page_range %}
+                  {% if page_obj.number == page_num %}
+                  <li class="page-item active"><a class="page-link artitone-page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+                  {% else %}
+                  <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                  <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+                  <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+                {% else %}
+                  <li class="page-item disabled"><a class="page-link artitone-page-link">next</a></li>
+                  <li class="page-item disabled"><a class="page-link artitone-page-link">last &raquo;</a></li>
+                {% endif %}
+              </ul>
+          </nav>
         </div>
+
+
+
         <footer class="footer">
           <div class="column">
             <div class="logo-wrapper"><img class="logo-2" src="{% static 'images/logo.png' %}" /></div>
@@ -168,10 +192,161 @@
           </div>
           <img class="vector-2" src="{% static 'images/vector-3.svg' %}" />
           <img class="vector-3" src="{% static 'images/vector-3.svg' %}" />
-          <p class="text">Copyright © 2022 Company name</p>
+          <p class="text">Copyright © 2023 Artitone</p>
         </footer>
+
+
+
       </div>
       
     </div>
+    {% load crispy_forms_tags %}
+
+    <!-- This is the LOGIN form -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content artitone-modal">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Log In</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% if login_form.non_field_errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="mb-0">{{ login_form.non_field_errors }}</p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+          <form action="" method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+          <div class="modal-body">
+            <input type="hidden" id="form_type" name="type" value="login" />
+            {{ login_form.email|as_crispy_field }}
+            {{ login_form.password|as_crispy_field }}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-dark artitone-btn">Login</button>
+            <button type="button" class="btn btn-secondary artitone-btn" data-dismiss="modal">Close</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- This is the SIGNUP form -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content artitone-modal">
+          <div class="modal-header">
+            <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% if artist_signup_form.non_field_errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="mb-0">{{ artist_signup_form.non_field_errors }}</p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+          <div id="signup-choice" class="modal-body">
+            <h2>Sign up for a free account</h2>
+            <p class="lead">Select the type of account you want to create:</p>
+            <button id="customer-signup" class="btn btn-dark btn-lg artitone-btn" role="button">Customer</button>
+            <button id="artist-signup" class="btn btn-dark btn-lg artitone-btn" role="button">Artist</button>
+          </div>
+
+
+          <div id="artist-signup-form" style="display: none;">
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <div class="modal-body">
+                  <input type="hidden" name="next" value="{{ next }}">
+                  <input type="hidden" id="form_type" name="type" value="artist" />
+                  {{ artist_signup_form|crispy }}
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-dark artitone-btn">Sign Up</button>
+                </div>
+            </form>
+          </div>
+
+
+          <div id="customer-signup-form" style="display: none;">
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <div class="modal-body">
+                  <input type="hidden" name="next" value="{{ next }}">
+                  <input type="hidden" id="form_type" name="type" value="customer" />
+                  {{ customer_signup_form|crispy }}
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-dark artitone-btn">Sign Up</button>
+                </div>
+            </form>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    {% if login_form.non_field_errors %}
+    <script>
+      $(document).ready(function() {
+        $("#loginModal").modal('show');
+      });
+    </script>
+    {% endif %}
+    {% if signup_form.non_field_errors %}
+    <script>
+      $(document).ready(function() {
+        $("#signupModal").modal('show');
+      });
+    </script>
+    {% endif %}
+    {% if artist_signup_form.errors %}
+    <script>
+      $(document).ready(function() {
+        $("#signupModal").modal('show');
+        $("#artist-signup-form").show();
+        $("#customer-signup-form").hide();
+        $("#signup-choice").hide();
+      });
+    </script>
+    {% endif %}
+    {% if customer_signup_form.errors %}
+    <script>
+      $(document).ready(function() {
+        $("#signupModal").modal('show');
+        $("#artist-signup-form").hide();
+        $("#customer-signup-form").show();
+        $("#signup-choice").hide();
+      });
+    </script>
+    {% endif %}
+    <script>
+
+      $("button#artist-signup").click(function(){
+        $("#artist-signup-form").show();
+        $("#customer-signup-form").hide();
+        $("#signup-choice").hide();
+      });
+      $("button#customer-signup").click(function(){
+        $("#artist-signup-form").hide();
+        $("#customer-signup-form").show();
+        $("#signup-choice").hide();
+      });
+      $("#artitone-signup-btn").click(function(){
+        $("#artist-signup-form").hide();
+        $("#customer-signup-form").hide();
+        $("#signup-choice").show();
+      });
+    </script>
   </body>
 {% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="artitone-artist-bio">
+        {% if artist.photo %}
+            <img class="artitone-profile-photo" src="{{artist.photo.url}}" alt="profile pic"/>
+        {% endif %}
+        <div class="artitone-profile-name">
+            {{ artist.first_name }}, {{ artist.last_name }}
+        </div>
+        <div class="artitone-profile-username">
+            @{{ artist.user_name }}
+        </div>
+        <button class="artitone-profile-follow artitone-btn">Follow</button>
+        
+        <div class="artitone-profile-description">
+            <div class="artitone-profile-description-title">Bio</div>
+            <p class="artitone-profile-description-content">Email: {{ user.email }}</p>
+            <p class="artitone-profile-description-content">{{ artist.description }}</p>
+        </div>
+    </div>
+
+    <div class="artitone-profile-sort">
+        <form id="searchbox" method="get" action="{% url 'artist_profile_page' user.pk%}">
+            Sort:
+            <select name="sort" class="form-control artitone-profile-select" onchange="this.form.submit()">
+                <option value="newest">Newest</option>
+                <option value="price_ltoh">Price-low to high</option>
+                <option value="price_htol">Price-high to low</option>
+            </select>
+        </form>
+    </div>
+
+    <hr class="artitone-profile-hr">
+
+    <div class="artitone-article">
+        {% for artwork in page_obj %}
+        <div class="artitone-article-item">
+        {% with artwork.pictures.all|first as img %}
+            <img class="element" src="{{img}}" loading="lazy" width="300px">
+        {% endwith %}
+        <div class="text-wrapper-9">{{ artwork.name }}</div>
+        <p class="text-wrapper-11">{{ artwork.content }}</p>
+        <p class="text-wrapper-10">$ {{ artwork.price }}</p>
+        <!-- <h4>{% for tag in artwork.tags.all %}
+            {{ tag.name }}
+        {% endfor %}</h4> -->
+        {% for color in artwork.colors.all %}
+            <div style="background-color: {{ color.name }}; padding: 10px;"></div>
+        {% endfor %}
+        <!-- <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn">delete</a> -->
+        <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn">delete</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+              <li class="page-item"><a class="page-link artitone-page-link" href="?page=1">&laquo; first</a></li>
+              <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+            {% else %}
+              <li class="page-item disabled"><a class="page-link artitone-page-link">&laquo; first</a></li>
+              <li class="page-item disabled"><a class="page-link artitone-page-link">previous</a></li>
+            {% endif %}
+            {% for page_num in page_obj.paginator.page_range %}
+              {% if page_obj.number == page_num %}
+              <li class="page-item active"><a class="page-link artitone-page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+              {% else %}
+              <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+              <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+              <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+            {% else %}
+              <li class="page-item disabled"><a class="page-link artitone-page-link">next</a></li>
+              <li class="page-item disabled"><a class="page-link artitone-page-link">last &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+{% endblock %}

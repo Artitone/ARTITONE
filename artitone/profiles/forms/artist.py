@@ -1,15 +1,45 @@
 import logging
 
 from django import forms
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import UsernameField
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 
+from artitone.utils import resize_image
 from profiles.models import Artist
 from profiles.models import ArtistPaymentMethod
 from profiles.models import User
 from profiles.models import UserType
 
+class UserLoginForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(UserLoginForm, self).__init__(*args, **kwargs)
+
+    email = UsernameField(widget=forms.EmailInput(
+        attrs={'class': 'form-control', 'placeholder': '', 'id': 'login-email'}))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': '',
+            'id': 'login-pwd',
+        }
+    ))
+    
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=email, password=password)
+        if not user or not user.is_active:
+            raise forms.ValidationError("Sorry, that login was invalid. Please try again.")
+        return self.cleaned_data
+
+    def login(self, request):
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=email, password=password)
+        return user
 
 class ArtistCreationForm(UserCreationForm):
     user_name = forms.CharField(required=True)
@@ -27,6 +57,7 @@ class ArtistCreationForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.type = UserType.ARTIST
+        resize_image(self.cleaned_data.get("photo"), height=200, width=200)
         if commit:
             user.save()
             artist = Artist.objects.create(

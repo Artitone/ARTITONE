@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import logging
 from pathlib import Path
 from artitone.environment import environment
 
@@ -225,11 +226,15 @@ PAYPAL_SANDBOX_RECEIVER = "sb-uelul27134296@business.example.com"
 DEBUG = not environment.is_production
 
 if DEBUG:
+    logging.basicConfig(level=logging.DEBUG)
+
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
     TEMPLATES[0].get("OPTIONS", {}).get("context_processors", []).append(
         "django.template.context_processors.debug"
     )
+else:
+    logging.basicConfig(level=logging.ERROR)
 
 
 # Static files (CSS, JavaScript, Images)

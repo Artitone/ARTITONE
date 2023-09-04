@@ -1,15 +1,16 @@
-import io
-from PIL import Image
+import logging
 # from rembg import remove
 
 from django import forms
 from django.db import transaction
 from paypal.standard.forms import PayPalPaymentsForm
 
+from artitone.utils import resize_image
 from artworks.models import Artwork
 from artworks.models import Picture
 from artworks.models import file_size
 
+logger = logging.getLogger("artitone")
 
 class CreateArtworkForm(forms.ModelForm):
     """This is the form used for creating a new post for volunteer gallery."""
@@ -29,7 +30,7 @@ class CreateArtworkForm(forms.ModelForm):
     @transaction.atomic
     def save(self, target_artist):
         if self.is_valid():
-            # self.crop_image()
+            resize_image(self.cleaned_data.get("picture_1"), height=500)
             picture_1 = Picture.objects.create(picture=self.cleaned_data.get("picture_1"))
             artwork = Artwork.objects.create(
                 artist=target_artist,
@@ -40,12 +41,15 @@ class CreateArtworkForm(forms.ModelForm):
             )
             artwork.pictures.add(picture_1)
             if self.cleaned_data['picture_2']:
+                resize_image(self.cleaned_data.get("picture_2"), height=500)
                 picture_2 = Picture.objects.create(picture=self.cleaned_data.get("picture_2"))
                 artwork.pictures.add(picture_2)
             if self.cleaned_data['picture_3']:
+                resize_image(self.cleaned_data.get("picture_3"), height=500)
                 picture_3 = Picture.objects.create(picture=self.cleaned_data.get("picture_3"))
                 artwork.pictures.add(picture_3)
             if self.cleaned_data['picture_4']:
+                resize_image(self.cleaned_data.get("picture_4"), height=500)
                 picture_4 = Picture.objects.create(picture=self.cleaned_data.get("picture_4"))
                 artwork.pictures.add(picture_4)
         return artwork
@@ -55,13 +59,6 @@ class CreateArtworkForm(forms.ModelForm):
     
     def get_image(self):
         return "test", self.files.get("picture_1").file.getvalue()
-    
-    # def crop_image(self):
-    #     im = Image.open(self.files.get("picture_1").file)
-    #     im = remove(im)
-    #     imgByteArr = io.BytesIO()
-    #     im.save(imgByteArr, format='PNG')
-    #     self.files.get("picture_1").file = imgByteArr
 
 
 class CustomPayPalPaymentsForm(PayPalPaymentsForm):
