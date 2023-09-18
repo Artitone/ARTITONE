@@ -13,8 +13,8 @@ artitone/media/*
 **/.elasticbeanstalk/
 .vscode/settings.json
 artitone/map/urls.py
-migrations
-**/migrations
+# migrations
+# **/migrations
 db.sqlite3
 **/cache
 **/.pg_service.conf
