@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from profiles.models import Artist
 from taggit.managers import TaggableManager
-from taggit.models import ItemBase, TaggedItemBase
+from taggit.models import TaggedItemBase
 
 # Create your models here.
 
@@ -33,18 +33,23 @@ def file_size(value):  # add this to some file where you can import it from
 def _post_photo_path(instance, filename):
     return f"artwork/{instance.artist.user.id}/{filename}"
 
+
 def _post_picture_path(instance, filename):
     return f"artwork/{instance.id}/{filename}"
 
 
 class Picture(models.Model):
-    picture = models.ImageField(upload_to=_post_picture_path, blank=True, null=True, validators=[file_size])
+    picture = models.ImageField(
+        upload_to=_post_picture_path, blank=True, null=True, validators=[file_size]
+    )
+
     def __str__(self):
         return self.picture.url
 
 
 class TaggedColors(TaggedItemBase):
     content_object = models.ForeignKey("Artwork", on_delete=models.CASCADE, null=True)
+
 
 class TaggedCustom(TaggedItemBase):
     content_object = models.ForeignKey("Artwork", on_delete=models.CASCADE, null=True)
@@ -62,8 +67,16 @@ class Artwork(models.Model):
     """
 
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, blank=False)
-    title = models.CharField(max_length=200, help_text="Include keywords that buyers would use to search for your item.")
-    pictures = models.ManyToManyField(Picture, blank=True, related_name="pictures", help_text="Requirement:\n 1 on white background.")
+    title = models.CharField(
+        max_length=200,
+        help_text="Include keywords that buyers would use to search for your item.",
+    )
+    pictures = models.ManyToManyField(
+        Picture,
+        blank=True,
+        related_name="pictures",
+        help_text="Requirement:\n 1 on white background.",
+    )
     category = models.ForeignKey(
         Category, on_delete=models.DO_NOTHING, blank=True, null=True
     )

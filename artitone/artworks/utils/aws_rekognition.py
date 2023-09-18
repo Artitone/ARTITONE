@@ -1,7 +1,5 @@
 import logging
 
-import boto3
-
 logger = logging.getLogger("artitone_aws_rekognition")
 
 
@@ -11,7 +9,7 @@ def start_model(session, project_arn, model_arn, version_name, min_inference_uni
     try:
         # Start the model
         logger.debug("Starting model: " + model_arn)
-        response = client.start_project_version(
+        _ = client.start_project_version(
             ProjectVersionArn=model_arn, MinInferenceUnits=min_inference_units
         )
         # Wait for the model to be in the running state

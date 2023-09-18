@@ -71,11 +71,10 @@ class CreateArtworkForm(forms.ModelForm):
     @transaction.atomic
     def save(self, target_artist):
         if self.is_valid():
-
             resize_image(self.cleaned_data.get("picture_1"), height=500)
             texture, tags = self.extract_tags_from_image()
             colors = self.get_dominant_color()
-            
+
             picture_1 = Picture.objects.create(
                 picture=self.cleaned_data.get("picture_1")
             )

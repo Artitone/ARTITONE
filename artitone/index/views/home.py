@@ -18,7 +18,9 @@ def home(request):
     login_form = UserLoginForm(None, prefix="login")
     artist_signup_form = ArtistCreationForm(None, prefix="artist")
     customer_signup_form = CustomerCreationForm(None, prefix="customer")
-    logger.debug(f'============================\n {request.GET}\n\n {request.POST}\n=================================')
+    logger.debug(
+        f"============================\n {request.GET}\n\n {request.POST}\n================================="
+    )
     filter = parse_search_filter(request.GET)
     artwork_list = filter.search()
     paginator = Paginator(artwork_list, 12)  # Show 25 contacts per page.
@@ -34,9 +36,11 @@ def home(request):
                 user = login_form.login(request)
                 if user:
                     login(request, user)
-                    return redirect('home')
+                    return redirect("home")
         elif form_type == "artist":
-            artist_signup_form = ArtistCreationForm(request.POST, request.FILES, prefix="artist")
+            artist_signup_form = ArtistCreationForm(
+                request.POST, request.FILES, prefix="artist"
+            )
             if artist_signup_form.is_valid():
                 user = artist_signup_form.save()
                 user.is_active = False
@@ -46,14 +50,16 @@ def home(request):
                 except Exception:
                     user.delete()
 
-                return redirect('home')
+                return redirect("home")
         elif form_type == "customer":
-            customer_signup_form = CustomerCreationForm(request.POST, request.FILES, prefix="customer")
+            customer_signup_form = CustomerCreationForm(
+                request.POST, request.FILES, prefix="customer"
+            )
             if customer_signup_form.is_valid():
                 user = customer_signup_form.save()
                 user.is_active = False
                 user.save()
-                return redirect('home')
+                return redirect("home")
 
     return render(
         request,

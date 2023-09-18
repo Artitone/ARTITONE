@@ -22,5 +22,7 @@ urlpatterns = [
         CustomerSignUpView.as_view(),
         name="customer_signup",
     ),
-    path("<int:pk>/artist_profile_page", view_artist_profile, name="artist_profile_page"),
+    path(
+        "<int:pk>/artist_profile_page", view_artist_profile, name="artist_profile_page"
+    ),
 ]

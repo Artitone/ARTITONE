@@ -1,14 +1,8 @@
 import logging
-import os
 
 import cv2 as cv
 import numpy as np
-import scipy
-import scipy.cluster
-import scipy.misc
 from sklearn.cluster import KMeans
-
-from artitone.settings import BASE_DIR
 
 # from rembg import remove
 

@@ -4,6 +4,7 @@ from artworks.models import Artwork
 from artworks.models import Category
 from artworks.utils.color_meter import filter_by_color_pallate
 
+
 class Filter:
     def __init__(self, category=None, color=None, keyword=None):
         self.category = category
@@ -16,7 +17,7 @@ class Filter:
             "color": self.color,
             "keyword": self.keyword,
         }
-    
+
     def search(self):
         artworks = Artwork.objects.all()
         if self.category is not None:
@@ -25,8 +26,7 @@ class Filter:
             artworks = filter_by_color_pallate(self.color, artworks)
         if self.keyword is not None:
             artworks = artworks.filter(
-                Q(title__icontains=self.keyword) |
-                Q(content__icontains=self.keyword)
+                Q(title__icontains=self.keyword) | Q(content__icontains=self.keyword)
             )
             # artworks = artworks.filter(tags__name__in=self.keyword)
         return artworks
@@ -59,8 +59,10 @@ def parse_search_filter(post):
     )
     return filter
 
+
 def category_is_valid(category):
     return category
+
 
 def color_is_valid(color):
     return color

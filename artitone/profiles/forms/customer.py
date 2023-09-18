@@ -73,7 +73,11 @@ class CustomerChangeForm(UserChangeForm):
             "photo",
             "description",
         )
-        widgets = {"date_of_birth": forms.DateInput(attrs={"type": "date", "max": date.today()})}
+        widgets = {
+            "date_of_birth": forms.DateInput(
+                attrs={"type": "date", "max": date.today()}
+            )
+        }
 
     @transaction.atomic
     def save(self, commit=True):

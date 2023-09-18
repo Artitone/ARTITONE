@@ -15,6 +15,7 @@ from artworks.models import Artwork
 
 logger = logging.getLogger("artitone")
 
+
 class ArtistSignUpView(CreateView):
     """Displays a form for Artists to sign up with."""
 
@@ -64,12 +65,12 @@ def view_artist_profile(request, pk):
         page_obj = paginator.get_page(page_number)
 
         return render(
-                request,
-                "profiles/artist_profile_page.html",
-                {
-                    "artist": artist,
-                    "page_obj": page_obj,
-                },
-            )
+            request,
+            "profiles/artist_profile_page.html",
+            {
+                "artist": artist,
+                "page_obj": page_obj,
+            },
+        )
     else:
         return redirect("home")

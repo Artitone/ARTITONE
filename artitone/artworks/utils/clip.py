@@ -4,7 +4,6 @@ import ssl
 import clip
 import numpy as np
 import torch
-from PIL import Image
 
 ssl._create_default_https_context = ssl._create_unverified_context
 logger = logging.getLogger("artitone_CLIP")

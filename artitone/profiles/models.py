@@ -122,7 +122,9 @@ class Artist(models.Model):
     last_name = models.CharField(max_length=200, blank=True, null=True)
     photo = models.ImageField(upload_to=_profile_photo_path, blank=True, null=True)
     website = models.CharField(max_length=200, default="")
-    description = models.TextField(help_text="Introduce your self/artwork here", default="", blank=True, null=True)
+    description = models.TextField(
+        help_text="Introduce your self/artwork here", default="", blank=True, null=True
+    )
 
     def __str__(self):
         return self.user_name
@@ -180,4 +182,3 @@ class ArtistPaymentMethod(models.Model):
     )
 
     business_email = models.EmailField(max_length=254)
-

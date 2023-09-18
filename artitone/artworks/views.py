@@ -1,13 +1,12 @@
 import logging
 import time
 
-import boto3
 from artworks.forms import CreateArtworkForm, CustomPayPalPaymentsForm
 from artworks.models import Artwork
-from artworks.utils.rekognition import detect_labels
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from paypal.standard.forms import PayPalPaymentsForm
+
+# from paypal.standard.forms import PayPalPaymentsForm
 from profiles.models import Artist, ArtistPaymentMethod
 
 logger = logging.getLogger("artitone")

@@ -1,7 +1,8 @@
 import logging
 import os
 import boto3
-from .aws_rekognition import start_model, stop_model
+
+# from .aws_rekognition import start_model, stop_model
 
 logger = logging.getLogger("artitone_rekognition")
 
@@ -13,10 +14,10 @@ def detect_labels(bytes):
         region_name=os.getenv("AWS_S3_REGION_NAME"),
     )
 
-    project_arn = os.getenv("AWS_REKOGNITION_PROJECT_ARN")
+    # project_arn = os.getenv("AWS_REKOGNITION_PROJECT_ARN")
     texture_model_arn = os.getenv("AWS_REKOGNITION_MODEL_ARN")
-    version_name = os.getenv("AWS_REKOGNITION_VERSION_NAME")
-    min_inference_units = 1
+    # version_name = os.getenv("AWS_REKOGNITION_VERSION_NAME")
+    # min_inference_units = 1
     # start_model(session, project_arn, model_arn, version_name, min_inference_units)
 
     client = session.client("rekognition")

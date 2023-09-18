@@ -15,33 +15,42 @@ from profiles.models import UserType
 
 logger = logging.getLogger("artitone")
 
+
 class UserLoginForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
 
-    email = UsernameField(widget=forms.EmailInput(
-        attrs={'class': 'form-control', 'placeholder': '', 'id': 'login-email'}))
-    password = forms.CharField(widget=forms.PasswordInput(
-        attrs={
-            'class': 'form-control',
-            'placeholder': '',
-            'id': 'login-pwd',
-        }
-    ))
-    
+    email = UsernameField(
+        widget=forms.EmailInput(
+            attrs={"class": "form-control", "placeholder": "", "id": "login-email"}
+        )
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "",
+                "id": "login-pwd",
+            }
+        )
+    )
+
     def clean(self):
-        email = self.cleaned_data.get('email')
-        password = self.cleaned_data.get('password')
+        email = self.cleaned_data.get("email")
+        password = self.cleaned_data.get("password")
         user = authenticate(username=email, password=password)
         if not user or not user.is_active:
-            raise forms.ValidationError("Sorry, that login was invalid. Please try again.")
+            raise forms.ValidationError(
+                "Sorry, that login was invalid. Please try again."
+            )
         return self.cleaned_data
 
     def login(self, request):
-        email = self.cleaned_data.get('email')
-        password = self.cleaned_data.get('password')
+        email = self.cleaned_data.get("email")
+        password = self.cleaned_data.get("password")
         user = authenticate(username=email, password=password)
         return user
+
 
 class ArtistCreationForm(UserCreationForm):
     user_name = forms.CharField(required=True)

@@ -29,6 +29,7 @@ class SignUpView(TemplateView):
 
     template_name = "registration/signup.html"
 
+
 @method_decorator([login_required], name="dispatch")
 class ProfileView(DetailView):
     """Displays a user's profile and additional type specific information."""
@@ -74,10 +75,16 @@ class ProfileView(DetailView):
                         {
                             "email": associated_user.email,
                             "user": associated_user,
-                            "domain": AWS_SES_DOMAIN if AWS_SES_DOMAIN else "127.0.0.1:8000",
+                            "domain": AWS_SES_DOMAIN
+                            if AWS_SES_DOMAIN
+                            else "127.0.0.1:8000",
                             "site_name": "VolunCHEER",
-                            "uid": urlsafe_base64_encode(force_bytes(associated_user.pk)),
-                            "token": default_token_generator.make_token(associated_user),
+                            "uid": urlsafe_base64_encode(
+                                force_bytes(associated_user.pk)
+                            ),
+                            "token": default_token_generator.make_token(
+                                associated_user
+                            ),
                             "protocol": "https" if request.is_secure() else "http",
                         },
                     )
@@ -118,7 +125,9 @@ def profile_update(request, userid):
         profile = get_object_or_404(Artist, pk=request.user)
         form = ArtistChangeForm(request.POST, request.FILES, instance=profile)
     else:
-        raise ValueError("profile_update: user must either a volunteer or an organizaiton.")
+        raise ValueError(
+            "profile_update: user must either a volunteer or an organizaiton."
+        )
     form.save()
     return redirect("home")
 
