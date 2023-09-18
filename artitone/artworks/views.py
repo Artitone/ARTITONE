@@ -1,21 +1,16 @@
+import logging
+import time
+
 import boto3
-import time  
-
-from decimal import Decimal
-
-from django.shortcuts import redirect
-from django.shortcuts import render
-from paypal.standard.forms import PayPalPaymentsForm
-from django.urls import reverse
-
-from artworks.forms import CreateArtworkForm
-from artworks.forms import CustomPayPalPaymentsForm
+from artworks.forms import CreateArtworkForm, CustomPayPalPaymentsForm
 from artworks.models import Artwork
-from profiles.models import Artist
-from profiles.models import ArtistPaymentMethod
 from artworks.utils.rekognition import detect_labels
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from paypal.standard.forms import PayPalPaymentsForm
+from profiles.models import Artist, ArtistPaymentMethod
 
-
+logger = logging.getLogger("artitone")
 # Create your views here.
 
 
@@ -24,7 +19,8 @@ def upload_artwork(request):
     user = request.user
     if not user.is_artist:
         return redirect("home")
-     
+
+    form = CreateArtworkForm(None)
     artist_profile = Artist.objects.get(pk=user)
 
     if request.method == "POST":
@@ -33,85 +29,16 @@ def upload_artwork(request):
         request.POST = post
 
         form = CreateArtworkForm(request.POST, request.FILES)
-        content = {"artwork_form": form, "is_tag_phase": False}
 
-        # if "tags" not in post:
-        #     content["is_tag_phase"] = True
-        #     content["tags"] = extract_tags_from_image(form)
-        #     artwork = form.save(target_artist=artist_profile)
-        #     content["artwork"] = artwork
-        #     content["colors"] = artwork.get_dominant_color()
-        #     return render(
-        #         request,
-        #         "artworks/upload_artworks.html",
-        #         content,
-        #     )
-        # else:
-        #     artwork_pk = post.getlist('artwork_pk')
-        #     tags = post.getlist('tags')
-        #     form.set_tags(artwork_pk, tags)
-
-        #     return redirect("artist_profile_page", pk=user.pk)
         artwork = form.save(target_artist=artist_profile)
-        texture, tags = extract_tags_from_image(form)
-        colors = artwork.get_dominant_color()
-        set_texture(artwork, texture)
-        set_tags(artwork, tags)
-        set_color(artwork, colors)
-        return redirect("artist_profile_page", pk=user.pk)
+        if artwork:
+            return redirect("artist_profile_page", pk=user.pk)
 
-    else:
-        form = CreateArtworkForm()
-        return render(
-            request,
-            "artworks/upload_artworks.html",
-            {"artwork_form": form, "artist": artist_profile},
-        )
-
-
-def update_tags(request, pk):
-    """update new Tags and save it to the database."""
-    user = request.user
-    if not user.is_artist:
-        return redirect("home")
-    if request.method == "POST":
-        post = request.POST.copy()
-        tags = post.getlist('tags')
-        set_tags(pk, tags)
-
-        return redirect("artist_profile_page", pk=user.pk)
-    else:
-        form = CreateArtworkForm()
-        return render(
-            request,
-            "artworks/upload_artworks.html",
-            {"artwork_form": form, "artist": artist_profile},
-        )
-
-def set_texture(artwork, texture):
-    if texture == "Satin":
-        artwork.texture = Artwork.SATIN
-    elif texture == "Rough":
-        artwork.texture = Artwork.ROUGH
-    elif texture == "Matte":
-        artwork.texture = Artwork.MATTE
-    artwork.save()
-
-def set_tags(artwork, tags):
-    for tag in tags:
-        artwork.tags.add(tag)
-
-def set_color(artwork, colors):
-    for color in colors:
-        artwork.colors.add(color)
-
-
-def extract_tags_from_image(form):
-    # image_name, bytes = form.get_image()
-    # texture, labels = detect_labels(bytes)
-
-    # return texture, labels
-    return "Satin", ["label 1", "label 2", "label 3"]
+    return render(
+        request,
+        "artworks/upload_artworks.html",
+        {"artwork_form": form, "artist": artist_profile},
+    )
 
 
 def delete_artwork(request, pk):
@@ -133,11 +60,15 @@ def purchase_artwork(request, pk, alert=None):
     paypal_dict = {
         "business": payment_method.business_email,
         "amount": artwork.price,
-        "item_name": artwork.name,
-        "invoice": str(artist.pk)+str(artwork.pk)+str(time_stamp),
-        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
-        "return": request.build_absolute_uri(reverse('purchase_success', kwargs={'pk':artwork.pk})),
-        "cancel_return": request.build_absolute_uri(reverse('purchase_fail', kwargs={'pk':artwork.pk})),
+        "item_name": artwork.title,
+        "invoice": str(artist.pk) + str(artwork.pk) + str(time_stamp),
+        "notify_url": request.build_absolute_uri(reverse("paypal-ipn")),
+        "return": request.build_absolute_uri(
+            reverse("purchase_success", kwargs={"pk": artwork.pk})
+        ),
+        "cancel_return": request.build_absolute_uri(
+            reverse("purchase_fail", kwargs={"pk": artwork.pk})
+        ),
         "custom": "premium_plan",  # Custom command to correlate to some function later (optional)
     }
 

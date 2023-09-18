@@ -1,4 +1,3 @@
-from artworks.utils.color_meter import _get_dominant_color
 from django.core.exceptions import ValidationError
 from django.db import models
 from profiles.models import Artist
@@ -63,8 +62,8 @@ class Artwork(models.Model):
     """
 
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, blank=False)
-    name = models.CharField(max_length=200)
-    pictures = models.ManyToManyField(Picture, blank=True, related_name="pictures")
+    title = models.CharField(max_length=200, help_text="Include keywords that buyers would use to search for your item.")
+    pictures = models.ManyToManyField(Picture, blank=True, related_name="pictures", help_text="Requirement:\n 1 on white background.")
     category = models.ForeignKey(
         Category, on_delete=models.DO_NOTHING, blank=True, null=True
     )
@@ -86,10 +85,4 @@ class Artwork(models.Model):
     pubdate = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
-        return self.name
-
-    def get_dominant_color(self):
-        picture = self.pictures.all()[0]
-        return _get_dominant_color(picture.picture)
-        # or pass self.image.file, depending on your storage backend
-        # We'll implement _get_dominant_color() below later
+        return self.title

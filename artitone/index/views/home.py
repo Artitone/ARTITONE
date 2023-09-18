@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render
 from index.views.search import parse_search_filter
 from profiles.forms.artist import ArtistCreationForm, UserLoginForm
 from profiles.forms.customer import CustomerCreationForm
+from profiles.views.activate_email import activateEmail
 
 logger = logging.getLogger("artitone")
 
@@ -38,14 +39,19 @@ def home(request):
             artist_signup_form = ArtistCreationForm(request.POST, request.FILES, prefix="artist")
             if artist_signup_form.is_valid():
                 user = artist_signup_form.save()
-                user.is_active = True
+                user.is_active = False
                 user.save()
+                try:
+                    activateEmail(request, user, user.email)
+                except Exception:
+                    user.delete()
+
                 return redirect('home')
         elif form_type == "customer":
             customer_signup_form = CustomerCreationForm(request.POST, request.FILES, prefix="customer")
             if customer_signup_form.is_valid():
                 user = customer_signup_form.save()
-                user.is_active = True
+                user.is_active = False
                 user.save()
                 return redirect('home')
 

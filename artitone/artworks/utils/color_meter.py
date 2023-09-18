@@ -96,7 +96,7 @@ def _get_dominant_color(image_file):
     """
     Take a file object and return the colour in hex code
     """
-    im = np.asarray(bytearray(image_file.read()), dtype="uint8")
+    im = np.asarray(bytearray(image_file.file.getvalue()), dtype="uint8")
     im = cv.imdecode(im, cv.IMREAD_COLOR)
 
     im = cv.cvtColor(im, cv.COLOR_BGR2RGB)

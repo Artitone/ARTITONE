@@ -1,18 +1,35 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
 
 {% if not is_tag_phase %}
+<div class="artitone-upload-body">
+<div class="artitone-h2">Product Information</div>
 <form method="post" class="edit-form" 
 id="artwork_form" enctype="multipart/form-data" action="{% url 'upload_artwork' %}">
-    <img id="photo_preview_1" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="100px">
-    <img id="photo_preview_2" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="100px">
-    <img id="photo_preview_3" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="100px">
-    <img id="photo_preview_4" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="100px">
     {% csrf_token %}
-    {{ artwork_form.as_p }}
-    <button type="submit" id="edit-form-edit-btn" class="edit-form">upload</button>
+    {{ artwork_form|crispy }}
+
+    <div class="artitone-preview-images">
+        <img id="photo_preview_1" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="200px">
+        <img id="photo_preview_2" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="200px">
+        <img id="photo_preview_3" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="200px">
+        <img id="photo_preview_4" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="200px">
+    </div>
+    <br>
+    <button type="submit" id="edit-form-edit-btn" class="edit-form btn btn-dark artitone-btn">upload</button>
+
 </form>
+
+
+</div>
+
+
+
+
+
+
 {% else %}
     <h2>{{ artwork.name }}</h2>
     {% with artwork.pictures.all|first as img %}

@@ -13,6 +13,8 @@ from profiles.models import ArtistPaymentMethod
 from profiles.models import User
 from profiles.models import UserType
 
+logger = logging.getLogger("artitone")
+
 class UserLoginForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
@@ -57,7 +59,8 @@ class ArtistCreationForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.type = UserType.ARTIST
-        resize_image(self.cleaned_data.get("photo"), height=200, width=200)
+        if self.cleaned_data.get("photo"):
+            resize_image(self.cleaned_data.get("photo"), height=200, width=200)
         if commit:
             user.save()
             artist = Artist.objects.create(

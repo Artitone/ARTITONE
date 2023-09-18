@@ -121,7 +121,9 @@
               <div class="text-wrapper-9">{{ artwork.name }}</div>
               <p class="text-wrapper-11">{{ artwork.content }}</p>
               <p class="text-wrapper-10">$ {{ artwork.price }}</p>
-              <a href="{% url 'purchase_artwork' artwork.pk %}" class="btn btn-dark artitone-btn">purchase</a>
+              {% if user.is_customer %}
+                <a href="{% url 'purchase_artwork' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">purchase</a>
+              {% endif %}
             </div>
             {% endfor %}
           </div>

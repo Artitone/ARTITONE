@@ -37,7 +37,7 @@
         {% for artwork in page_obj %}
         <div class="artitone-article-item">
         {% with artwork.pictures.all|first as img %}
-            <img class="element" src="{{img}}" loading="lazy" width="300px">
+            <img class="element" src="{{img}}" loading="lazy" width="240px">
         {% endwith %}
         <div class="text-wrapper-9">{{ artwork.name }}</div>
         <p class="text-wrapper-11">{{ artwork.content }}</p>
@@ -49,7 +49,7 @@
             <div style="background-color: {{ color.name }}; padding: 10px;"></div>
         {% endfor %}
         <!-- <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn">delete</a> -->
-        <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn">delete</a>
+        <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">delete</a>
         </div>
         {% endfor %}
     </div>
