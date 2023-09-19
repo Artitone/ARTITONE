@@ -24,6 +24,7 @@ runs:
         path: ./artitone/coverage.xml
         publish: true
         diff: true
+        token: ${{ github.token }}
         diff-branch: main
     # - name: Report Coverage to Coveralls
     #   if: ${{ success() }}
