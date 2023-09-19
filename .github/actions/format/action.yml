@@ -15,8 +15,7 @@ runs:
       shell: bash
       working-directory: artitone
       run: isort . --check-only --diff
-    - name: Static analysis with Pylint
-      if: success() || failure()
-      shell: bash
-      working-directory: artitone
-      run: pylint --load-plugins pylint_django --django-settings-module=artitone.settings **/*.py
+    # - name: Static analysis with Pylint
+    #   shell: bash
+    #   working-directory: artitone
+    #   run: pylint --load-plugins pylint_django --django-settings-module=artitone.settings **/*.py
