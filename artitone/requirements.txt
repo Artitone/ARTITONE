@@ -12,6 +12,7 @@ django-widget-tweaks==1.4.12
 django_debug_toolbar==3.8.1
 django-paypal==2.0
 flake8==5.0.4
+isort==5.11.5
 scipy
 verify-email==2.4.3
 Pillow==9.3.0

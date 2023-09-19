@@ -94,9 +94,7 @@ def _get_dominant_color(image_file):
     im = cv.imdecode(im, cv.IMREAD_COLOR)
 
     im = cv.cvtColor(im, cv.COLOR_BGR2RGB)
-    im = cv.resize(
-        im, (150, 150), interpolation=cv.INTER_AREA
-    )  # optional, to reduce time
+    im = cv.resize(im, (150, 150), interpolation=cv.INTER_AREA)  # optional, to reduce time
 
     clt = KMeans(n_clusters=5)
     clt = clt.fit(im.reshape(-1, 3))

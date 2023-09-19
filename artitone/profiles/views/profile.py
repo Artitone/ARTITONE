@@ -13,15 +13,15 @@ from django.utils.decorators import method_decorator
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.views.generic import DetailView
+from django.views.generic import TemplateView
 
+from artitone.settings import AWS_SES_DOMAIN
+from artitone.settings import DEFAULT_FROM_EMAIL
 from profiles.forms.artist import ArtistChangeForm
 from profiles.forms.customer import CustomerChangeForm
 from profiles.models import Artist
-from profiles.models import User
 from profiles.models import Customer
-from artitone.settings import AWS_SES_DOMAIN
-from artitone.settings import DEFAULT_FROM_EMAIL
-from django.views.generic import TemplateView
+from profiles.models import User
 
 
 class SignUpView(TemplateView):
@@ -75,16 +75,10 @@ class ProfileView(DetailView):
                         {
                             "email": associated_user.email,
                             "user": associated_user,
-                            "domain": AWS_SES_DOMAIN
-                            if AWS_SES_DOMAIN
-                            else "127.0.0.1:8000",
+                            "domain": AWS_SES_DOMAIN if AWS_SES_DOMAIN else "127.0.0.1:8000",
                             "site_name": "VolunCHEER",
-                            "uid": urlsafe_base64_encode(
-                                force_bytes(associated_user.pk)
-                            ),
-                            "token": default_token_generator.make_token(
-                                associated_user
-                            ),
+                            "uid": urlsafe_base64_encode(force_bytes(associated_user.pk)),
+                            "token": default_token_generator.make_token(associated_user),
                             "protocol": "https" if request.is_secure() else "http",
                         },
                     )
@@ -125,9 +119,7 @@ def profile_update(request, userid):
         profile = get_object_or_404(Artist, pk=request.user)
         form = ArtistChangeForm(request.POST, request.FILES, instance=profile)
     else:
-        raise ValueError(
-            "profile_update: user must either a volunteer or an organizaiton."
-        )
+        raise ValueError("profile_update: user must either a volunteer or an organizaiton.")
     form.save()
     return redirect("home")
 

@@ -1,17 +1,16 @@
 import logging
 
+from django.core.paginator import Paginator
 from django.db import transaction
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.generic import CreateView
-from django.core.paginator import Paginator
-
-from profiles.forms.artist import ArtistCreationForm
-from profiles.models import User
-from profiles.models import Artist
-from profiles.views.activate_email import activateEmail
 
 from artworks.models import Artwork
+from profiles.forms.artist import ArtistCreationForm
+from profiles.models import Artist
+from profiles.models import User
+from profiles.views.activate_email import activateEmail
 
 logger = logging.getLogger("artitone")
 

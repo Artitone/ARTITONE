@@ -1,5 +1,6 @@
 import logging
 import os
+
 import boto3
 
 # from .aws_rekognition import start_model, stop_model

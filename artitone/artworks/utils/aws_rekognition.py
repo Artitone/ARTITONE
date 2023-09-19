@@ -14,9 +14,7 @@ def start_model(session, project_arn, model_arn, version_name, min_inference_uni
         )
         # Wait for the model to be in the running state
         project_version_running_waiter = client.get_waiter("project_version_running")
-        project_version_running_waiter.wait(
-            ProjectArn=project_arn, VersionNames=[version_name]
-        )
+        project_version_running_waiter.wait(ProjectArn=project_arn, VersionNames=[version_name])
 
         # Get the running status
         describe_response = client.describe_project_versions(

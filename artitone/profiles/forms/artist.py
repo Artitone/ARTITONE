@@ -2,9 +2,9 @@ import logging
 
 from django import forms
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import UsernameField
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UsernameField
 from django.db import transaction
 
 from artitone.utils import resize_image
@@ -40,9 +40,7 @@ class UserLoginForm(forms.Form):
         password = self.cleaned_data.get("password")
         user = authenticate(username=email, password=password)
         if not user or not user.is_active:
-            raise forms.ValidationError(
-                "Sorry, that login was invalid. Please try again."
-            )
+            raise forms.ValidationError("Sorry, that login was invalid. Please try again.")
         return self.cleaned_data
 
     def login(self, request):

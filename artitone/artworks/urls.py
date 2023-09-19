@@ -1,10 +1,10 @@
 from django.urls import path
 
-from artworks.views import upload_artwork
 from artworks.views import delete_artwork
 from artworks.views import purchase_artwork
-from artworks.views import purchase_success
 from artworks.views import purchase_fail
+from artworks.views import purchase_success
+from artworks.views import upload_artwork
 
 urlpatterns = [
     path("", upload_artwork, name="upload_artwork"),

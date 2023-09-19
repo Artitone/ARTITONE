@@ -1,13 +1,17 @@
 import logging
 import time
 
-from artworks.forms import CreateArtworkForm, CustomPayPalPaymentsForm
-from artworks.models import Artwork
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
+from django.shortcuts import render
 from django.urls import reverse
 
+from artworks.forms import CreateArtworkForm
+from artworks.forms import CustomPayPalPaymentsForm
+from artworks.models import Artwork
+
 # from paypal.standard.forms import PayPalPaymentsForm
-from profiles.models import Artist, ArtistPaymentMethod
+from profiles.models import Artist
+from profiles.models import ArtistPaymentMethod
 
 logger = logging.getLogger("artitone")
 # Create your views here.
@@ -16,7 +20,7 @@ logger = logging.getLogger("artitone")
 def upload_artwork(request):
     """create a new Artwork and save it to the database."""
     user = request.user
-    if not user.is_artist:
+    if user.is_anonymous or not user.is_artist:
         return redirect("home")
 
     form = CreateArtworkForm(None)
@@ -27,6 +31,11 @@ def upload_artwork(request):
         post.update({"artist": artist_profile})
         request.POST = post
 
+        logger.debug(
+            f"""\n==============UPLOAD_ARTWORK==============\n
+            {request.POST}\n{request.FILES}\n
+            ========================================"""
+        )
         form = CreateArtworkForm(request.POST, request.FILES)
 
         artwork = form.save(target_artist=artist_profile)

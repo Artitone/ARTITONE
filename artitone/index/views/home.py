@@ -2,9 +2,12 @@ import logging
 
 from django.contrib.auth import login
 from django.core.paginator import Paginator
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
+from django.shortcuts import render
+
 from index.views.search import parse_search_filter
-from profiles.forms.artist import ArtistCreationForm, UserLoginForm
+from profiles.forms.artist import ArtistCreationForm
+from profiles.forms.artist import UserLoginForm
 from profiles.forms.customer import CustomerCreationForm
 from profiles.views.activate_email import activateEmail
 
@@ -19,7 +22,7 @@ def home(request):
     artist_signup_form = ArtistCreationForm(None, prefix="artist")
     customer_signup_form = CustomerCreationForm(None, prefix="customer")
     logger.debug(
-        f"============================\n {request.GET}\n\n {request.POST}\n================================="
+        f"============================\n {request.GET}\n\n================================="
     )
     filter = parse_search_filter(request.GET)
     artwork_list = filter.search()
@@ -38,9 +41,7 @@ def home(request):
                     login(request, user)
                     return redirect("home")
         elif form_type == "artist":
-            artist_signup_form = ArtistCreationForm(
-                request.POST, request.FILES, prefix="artist"
-            )
+            artist_signup_form = ArtistCreationForm(request.POST, request.FILES, prefix="artist")
             if artist_signup_form.is_valid():
                 user = artist_signup_form.save()
                 user.is_active = False

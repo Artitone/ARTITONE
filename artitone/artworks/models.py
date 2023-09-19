@@ -1,8 +1,9 @@
 from django.core.exceptions import ValidationError
 from django.db import models
-from profiles.models import Artist
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase
+
+from profiles.models import Artist
 
 # Create your models here.
 
@@ -77,9 +78,7 @@ class Artwork(models.Model):
         related_name="pictures",
         help_text="Requirement:\n 1 on white background.",
     )
-    category = models.ForeignKey(
-        Category, on_delete=models.DO_NOTHING, blank=True, null=True
-    )
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, blank=True, null=True)
     price = models.FloatField(default=0)
     SATIN = "SA"
     MATTE = "MA"
@@ -89,9 +88,7 @@ class Artwork(models.Model):
         (MATTE, "Matte"),
         (ROUGH, "Rough"),
     ]
-    texture = models.CharField(
-        max_length=2, choices=TEXTURE_CHOICES, blank=False, null=True
-    )
+    texture = models.CharField(max_length=2, choices=TEXTURE_CHOICES, blank=False, null=True)
     tags = TaggableManager(through=TaggedCustom, related_name="tags")
     colors = TaggableManager(through=TaggedColors, related_name="colors")
     content = models.TextField(help_text="Caption your artwork", default="")
