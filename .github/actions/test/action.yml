@@ -18,10 +18,17 @@ runs:
       run: |
         coverage run --source "." manage.py test
         coverage xml -i
-    - name: Report Coverage to Coveralls
-      if: ${{ success() }}
-      uses: coverallsapp/github-action@v2
+    - name: Produce the coverage report
+      uses: insightsengineering/coverage-action@v2
       with:
-        base-path: artitone
-        github-token: ${{ github.token }}
-        path-to-lcov: artitone/coverage.lcov
+        path: ./artitone/coverage.xml
+        publish: true
+        diff: true
+        diff-branch: main
+    # - name: Report Coverage to Coveralls
+    #   if: ${{ success() }}
+    #   uses: coverallsapp/github-action@v2
+    #   with:
+    #     base-path: artitone
+    #     github-token: ${{ github.token }}
+    #     path-to-lcov: artitone/coverage.lcov

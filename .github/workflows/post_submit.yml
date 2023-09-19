@@ -47,12 +47,3 @@ jobs:
         uses: ./.github/actions/format
       - name: Test Python
         uses: ./.github/actions/test
-
-      - name: Produce the coverage report
-        uses: insightsengineering/coverage-action@v2
-        with:
-          path: ./artitone/coverage.xml
-          threshold: 85
-          publish: true
-          diff: true
-          diff-branch: main
