@@ -76,7 +76,7 @@ class ProfileView(DetailView):
                             "email": associated_user.email,
                             "user": associated_user,
                             "domain": AWS_SES_DOMAIN if AWS_SES_DOMAIN else "127.0.0.1:8000",
-                            "site_name": "VolunCHEER",
+                            "site_name": "ARTITONE",
                             "uid": urlsafe_base64_encode(force_bytes(associated_user.pk)),
                             "token": default_token_generator.make_token(associated_user),
                             "protocol": "https" if request.is_secure() else "http",

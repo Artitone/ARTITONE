@@ -1,0 +1,2 @@
+[MASTER]
+ignore-patterns=^00.*\.py$,^test_.*\.py$
