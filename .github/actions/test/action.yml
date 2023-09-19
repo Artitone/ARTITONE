@@ -17,19 +17,11 @@ runs:
       working-directory: artitone
       run: |
         coverage run --source "." manage.py test
-        coverage xml -i
-    - name: Produce the coverage report
-      uses: insightsengineering/coverage-action@v2
+        coverage lcov --ignore-errors
+    - name: Report Coverage to Coveralls
+      if: ${{ success() }}
+      uses: coverallsapp/github-action@v2
       with:
-        path: ./artitone/coverage.xml
-        publish: true
-        diff: true
-        token: ${{ github.token }}
-        diff-branch: main
-    # - name: Report Coverage to Coveralls
-    #   if: ${{ success() }}
-    #   uses: coverallsapp/github-action@v2
-    #   with:
-    #     base-path: artitone
-    #     github-token: ${{ github.token }}
-    #     path-to-lcov: artitone/coverage.lcov
+        base-path: artitone
+        github-token: ${{ github.token }}
+        path-to-lcov: artitone/coverage.lcov
