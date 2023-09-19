@@ -1,5 +1,6 @@
 boto3
 black==23.1.0
+coverage==7.2.1
 crispy-bootstrap5==0.7
 Django==3.2.8
 django-crispy-forms==2.0
