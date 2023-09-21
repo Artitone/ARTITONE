@@ -37,6 +37,7 @@ def activateEmail(request, user, to_email):
             "protocol": "https" if request.is_secure() else "http",
         },
     )
+    logger.critical(f"{message}")
     try:
         send_mail(
             subject,

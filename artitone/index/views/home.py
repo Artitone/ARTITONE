@@ -22,7 +22,7 @@ def home(request):
     artist_signup_form = ArtistCreationForm(None, prefix="artist")
     customer_signup_form = CustomerCreationForm(None, prefix="customer")
     logger.debug(
-        f"============================\n {request.GET}\n\n================================="
+        f"============================\n {request.GET}\n{request.POST}\n================================="
     )
     filter = parse_search_filter(request.GET)
     artwork_list = filter.search()
