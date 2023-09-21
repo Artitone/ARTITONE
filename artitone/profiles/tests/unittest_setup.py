@@ -16,9 +16,7 @@ from profiles.models import UserType
 class TestCase(test.TestCase):
     def setUp(self):
         super().setUp()
-        self.admin = User.objects.create_superuser(
-            email="admin@admin.com", password="admin"
-        )
+        self.admin = User.objects.create_superuser(email="admin@admin.com", password="admin")
         self.user = get_user_model().objects.create_user(
             email="vangogh@gmail.com",
             password="where_is_my_ear",

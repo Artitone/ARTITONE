@@ -26,10 +26,10 @@ class Filter:
             artworks = filter_by_color_pallate(self.color, artworks)
         if self.keyword is not None:
             artworks = artworks.filter(
-                Q(title__icontains=self.keyword) | Q(content__icontains=self.keyword) |
-                Q(tags__name__icontains=self.keyword)
+                Q(title__icontains=self.keyword)
+                | Q(content__icontains=self.keyword)
+                | Q(tags__name__icontains=self.keyword)
             )
-            # artworks = artworks.filter(tags__name__in=self.keyword)
         return artworks
 
 

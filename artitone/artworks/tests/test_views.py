@@ -8,8 +8,8 @@ from artitone.settings import BASE_DIR
 from artworks.models import Artwork
 from artworks.models import Category
 from artworks.tests.unittest_setup import TestCase
-from artworks.views import upload_artwork
 from artworks.views import delete_artwork
+from artworks.views import upload_artwork
 
 
 class ArtworksTest(TestCase):

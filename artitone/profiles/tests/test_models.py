@@ -1,5 +1,5 @@
-from profiles.tests.unittest_setup import TestCase
 from profiles.models import UserType
+from profiles.tests.unittest_setup import TestCase
 
 
 class UserTest(TestCase):
