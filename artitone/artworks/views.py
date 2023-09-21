@@ -53,7 +53,10 @@ def delete_artwork(request, pk):
     user = request.user
     if not user.is_artist:
         return redirect("home")
-    Artwork.objects.filter(pk=pk).delete()
+    artworks = Artwork.objects.filter(pk=pk)
+    for artwork in artworks:
+        if artwork.artist == Artist.objects.get(pk=user):
+            artwork.delete()
     return redirect("artist_profile_page", pk=user.pk)
 
 

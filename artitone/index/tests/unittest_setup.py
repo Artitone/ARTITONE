@@ -31,6 +31,8 @@ class TestCase(test.TestCase):
             last_name="Gogh",
         )
         self.category = Category.objects.create(name="Painting")
+        self.category2 = Category.objects.create(name="Sculpture")
+        self.category3 = Category.objects.create(name="Wall Arts")
         self.title = "Starry Night"
         self.price = 999.99
         self.texture = Artwork.SATIN
@@ -44,7 +46,16 @@ class TestCase(test.TestCase):
                 ).read(),
             )
         )
+        self.picture2 = Picture.objects.create(
+            picture=SimpleUploadedFile(
+                name="test_images/test_artwork_2.png",
+                content=open(
+                    os.path.join(BASE_DIR, "static/test_images/test_artwork_2.png"), "rb"
+                ).read(),
+            )
+        )
         self.artist.photo = self.picture
+
         self.artwork = Artwork.objects.create(
             artist=self.artist,
             title=self.title,
@@ -54,8 +65,20 @@ class TestCase(test.TestCase):
             content=self.content,
         )
         self.artwork.pictures.add(self.picture)
-        self.artwork.tags.add("Minimalism")
+        self.artwork.tags.add("minimalism")
         self.artwork.colors.add("#ffffff")
+
+        self.artwork2 = Artwork.objects.create(
+            artist=self.artist,
+            title="Artwork2",
+            category=self.category2,
+            price=self.price,
+            texture=Artwork.MATTE,
+            content="Lalalala",
+        )
+        self.artwork2.pictures.add(self.picture2)
+        self.artwork2.tags.add("modern")
+        self.artwork2.colors.add("#000000")
 
     def tearDown(self):
         super().tearDown()

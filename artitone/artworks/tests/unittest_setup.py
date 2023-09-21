@@ -16,13 +16,16 @@ from profiles.models import UserType
 class TestCase(test.TestCase):
     def setUp(self):
         super().setUp()
-        self.admin = User.objects.create_superuser(email="admin@admin.com", password="admin")
+        self.admin = User.objects.create_superuser(
+            email="admin@admin.com", password="admin"
+        )
+        self.user = get_user_model().objects.create_user(
+            email="vangogh@gmail.com",
+            password="where_is_my_ear",
+            type=UserType.ARTIST,
+        )
         self.artist = Artist.objects.create(
-            user=get_user_model().objects.create_user(
-                email="vangogh@gmail.com",
-                password="where_is_my_ear",
-                type=UserType.ARTIST,
-            ),
+            user=self.user,
             user_name="Van Gogh",
             first_name="Vincint",
             last_name="Gogh",

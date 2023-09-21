@@ -9,6 +9,7 @@ from artworks.models import Artwork
 from artworks.models import Category
 from artworks.tests.unittest_setup import TestCase
 from artworks.views import upload_artwork
+from artworks.views import delete_artwork
 
 
 class ArtworksTest(TestCase):
@@ -47,3 +48,9 @@ class ArtworksTest(TestCase):
         response = upload_artwork(request)
         self.assertIn(response.status_code, [200, 302])
         self.assertEqual(len(Artwork.objects.all()), 2)
+
+    def test_delete_artwork(self):
+        rf = RequestFactory().get(f"/{self.artwork.pk}/upload_artwork")
+        rf.user = self.user
+        delete_artwork(rf, self.artwork.pk)
+        self.assertEqual(len(Artwork.objects.all()), 0)

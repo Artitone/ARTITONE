@@ -1,4 +1,4 @@
-from artworks.tests.unittest_setup import TestCase
+from profiles.tests.unittest_setup import TestCase
 from profiles.models import UserType
 
 
