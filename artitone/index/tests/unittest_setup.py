@@ -52,7 +52,7 @@ class TestCase(test.TestCase):
                 ).read(),
             )
         )
-        self.artist.photo = self.picture
+        self.artist.photo = self.picture.picture
 
         self.artwork = Artwork.objects.create(
             artist=self.artist,

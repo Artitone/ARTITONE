@@ -80,4 +80,52 @@
         </ul>
     </nav>
 
+
+
+    <button type="button" class="btn btn-dark dropdown-item" data-toggle="modal" data-target="#editModal">
+        Edit Profile
+    </button>
+
+    {% load crispy_forms_tags %}
+
+    <!-- This is the Artist Profile Edit form -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content artitone-modal">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% if artist_change_form.non_field_errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="mb-0">{{ artist_change_form.non_field_errors }}</p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+          <form action="" method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+          <div class="modal-body">
+            <input type="hidden" id="form_type" name="type" value="artist_change" />
+            {{ artist_change_form|crispy }}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-dark artitone-btn">Save</button>
+            <button type="button" class="btn btn-secondary artitone-btn" data-dismiss="modal">Close</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {% if artist_change_form.non_field_errors %}
+    <script>
+      $(document).ready(function() {
+        $("#editModal").modal('show');
+      });
+    </script>
+    {% endif %}
 {% endblock %}

@@ -89,6 +89,7 @@ class ArtistChangeForm(UserChangeForm):
     """This form is for edit Artist profile."""
 
     password = None
+    paypal_email = forms.EmailField(required=False)
 
     class Meta(UserChangeForm.Meta):
         model = Artist
@@ -113,6 +114,10 @@ class ArtistChangeForm(UserChangeForm):
             artist.website = self.cleaned_data.get("website")
             artist.description = self.cleaned_data.get("description")
             artist.save()
+            if self.cleaned_data.get("paypal_email") != "":
+                payment = ArtistPaymentMethod.objects.get(artist=artist)
+                payment.business_email = self.cleaned_data.get("paypal_email")
+                payment.save()
         else:
             logger = logging.getLogger(__name__)
             logger.error(self.errors)

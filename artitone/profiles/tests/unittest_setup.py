@@ -9,6 +9,7 @@ from artworks.models import Artwork
 from artworks.models import Category
 from artworks.models import Picture
 from profiles.models import Artist
+from profiles.models import ArtistPaymentMethod
 from profiles.models import User
 from profiles.models import UserType
 
@@ -42,7 +43,7 @@ class TestCase(test.TestCase):
                 ).read(),
             )
         )
-        self.artist.photo = self.picture
+        self.artist.photo = self.picture.picture
         self.artwork = Artwork.objects.create(
             artist=self.artist,
             title=self.title,
@@ -54,6 +55,10 @@ class TestCase(test.TestCase):
         self.artwork.pictures.add(self.picture)
         self.artwork.tags.add("Minimalism")
         self.artwork.colors.add("#ffffff")
+
+        self.payment = ArtistPaymentMethod.objects.create(
+            artist=self.artist, business_email="gogh@vincent.com"
+        )
 
     def tearDown(self):
         super().tearDown()
