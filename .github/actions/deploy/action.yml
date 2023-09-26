@@ -2,6 +2,7 @@ name: Deploy to AWS
 description: Deploys an application to AWS
 inputs:
   app-name:
+    default: artitone
     description: The name of the application to deploy
     required: true
   platform:
