@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2>Sign up for a free account</h2>
-  <p class="lead">Select the type of account you want to create:</p>
-  <a href="{% url 'customer_signup' %}" class="btn btn-dark btn-lg" role="button">Customer</a>
-  <a href="{% url 'artist_signup' %}" class="btn btn-dark btn-lg" role="button">Artist</a>
-  <script>
-    $(function() {
-      var user_auth = "{{user.is_authenticated}}";
-      console.log(user_auth)
-      if (user_auth == "True") {
-        var url= "{% url 'home' %}";
-        window.location = url;
-      }
+<div style="    display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+    <h2>Sign up for a free account</h2>
+    <p class="lead">Select the type of account you want to create:</p>
+    <a href="{% url 'customer_signup' %}" class="btn btn-dark btn-lg" role="button">Customer</a>
+    <a href="{% url 'artist_signup' %}" class="btn btn-dark btn-lg" role="button">Artist/Designer</a>
+</div>
+
+<script>
+    $(function () {
+        var user_auth = "{{user.is_authenticated}}";
+        console.log(user_auth)
+        if (user_auth == "True") {
+            var url = "{% url 'home' %}";
+            window.location = url;
+        }
     });
-  </script>
+</script>
 {% endblock %}
