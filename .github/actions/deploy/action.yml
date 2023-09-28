@@ -2,6 +2,7 @@ name: Deploy to AWS
 description: Deploys an application to AWS
 inputs:
   app-name:
+    default: artitone
     description: The name of the application to deploy
     required: true
   platform:
@@ -18,7 +19,7 @@ runs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
-        role-to-assume: arn:aws:iam::141376400952:role/Github-eb-deploy-${{ github.ref_name }}
+        role-to-assume: arn:aws:iam::141376400952:role/Github-eb-deploy
         aws-region: ${{ inputs.region }}
     - name: Get Timestamp for Versioning
       shell: bash
@@ -32,5 +33,5 @@ runs:
       working-directory: artitone
       run: |
         eb init ${{ inputs.app-name }} --region ${{ inputs.region }} --platform ${{ inputs.platform }}
-        eb deploy ${{ inputs.app-name }}-${{ github.ref_name }}-v2 --label ${{ inputs.app-name}}_${{ github.ref_name }}_${{ steps.timestamp.outputs.TIMESTAMP }}
+        eb deploy ${{ inputs.app-name }}-dev --label ${{ inputs.app-name}}_${{ github.ref_name }}_${{ steps.timestamp.outputs.TIMESTAMP }}
         
