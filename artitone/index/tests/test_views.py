@@ -9,7 +9,7 @@ from artitone.settings import BASE_DIR
 from artworks.models import Picture
 from index.tests.unittest_setup import TestCase
 from index.views.home import home
-from profiles.models import Artist
+from profiles.models.artist import Artist
 
 
 class IndexTest(TestCase):

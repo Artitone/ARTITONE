@@ -1,4 +1,4 @@
-from profiles.models import UserType
+from profiles.models.user import UserType
 from profiles.tests.unittest_setup import TestCase
 
 

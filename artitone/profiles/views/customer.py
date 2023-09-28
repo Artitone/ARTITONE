@@ -1,9 +1,12 @@
 from django.db import transaction
 from django.shortcuts import redirect
+from django.shortcuts import render
 from django.views.generic import CreateView
 
+from artworks.models import Artwork
 from profiles.forms.customer import CustomerCreationForm
-from profiles.models import User
+from profiles.models.user import User
+from profiles.models.customer import Customer
 from profiles.views.activate_email import activateEmail
 
 
@@ -34,3 +37,31 @@ class CustomerSignUpView(CreateView):
             return redirect("signup")
 
         return redirect("login")
+
+
+def view_basket(request, pk):
+    user = request.user
+    if user.is_anonymous or not user.is_customer:
+        return redirect("home")
+    
+    customer = Customer.objects.get(pk=user)
+    page_obj = customer.basket.all()
+
+    return render(
+        request,
+        "profiles/customer_basket.html",
+        {
+            "page_obj": page_obj,
+        },
+    )
+
+
+def add_to_basket(request, artwork_pk):
+    user = request.user
+    if user.is_anonymous or not user.is_customer:
+        return redirect("home")
+    
+    customer = Customer.objects.get(pk=user)
+    artwork = Artwork.objects.get(pk=artwork_pk)
+    customer.basket.add(artwork)
+    return redirect("basket", pk=customer.pk)

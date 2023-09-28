@@ -8,9 +8,9 @@ from artitone.settings import BASE_DIR
 from artworks.models import Artwork
 from artworks.models import Category
 from artworks.models import Picture
-from profiles.models import Artist
-from profiles.models import User
-from profiles.models import UserType
+from profiles.models.artist import Artist
+from profiles.models.user import User
+from profiles.models.user import UserType
 
 
 class TestCase(test.TestCase):

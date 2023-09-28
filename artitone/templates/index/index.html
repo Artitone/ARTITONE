@@ -122,7 +122,8 @@
               <p class="text-wrapper-11">{{ artwork.content }}</p>
               <p class="text-wrapper-10">$ {{ artwork.price }}</p>
               {% if user.is_customer %}
-                <a href="{% url 'purchase_artwork' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">purchase</a>
+                <a href="{% url 'purchase_artwork' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">Purchase</a>
+                <a href="{% url 'add_to_basket' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">Add To Basket</a>
               {% endif %}
             </div>
             {% endfor %}

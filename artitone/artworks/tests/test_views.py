@@ -6,6 +6,7 @@ from django.urls import reverse
 
 from artitone.settings import BASE_DIR
 from artworks.models import Artwork
+from artworks.models import IndustrialModel
 from artworks.models import Category
 from artworks.tests.unittest_setup import TestCase
 from artworks.views import delete_artwork
@@ -42,11 +43,44 @@ class ArtworksTest(TestCase):
                 os.path.join(BASE_DIR, "static/test_images/test_artwork.png"), "rb"
             ).read(),
         )
-        print(Category.objects.all())
+
         request.user = self.artist.user
 
         response = upload_artwork(request)
         self.assertIn(response.status_code, [200, 302])
+        self.assertEqual(len(Artwork.objects.all()), 2)
+
+    def test_upload_artwork_with_3d_model(self):
+        rf = RequestFactory()
+        request = rf.post(
+            "/artworks/upload_artwork",
+            {
+                "title": "Sunflower",
+                "category": self.category.pk,
+                "price": 666.66,
+                "content": "flowerrr!",
+            },
+        )
+        request.FILES["picture_1"] = SimpleUploadedFile(
+            name="test_images/test_artwork.png",
+            content=open(
+                os.path.join(BASE_DIR, "static/test_images/test_artwork.png"), "rb"
+            ).read(),
+        )
+        request.FILES["model"] = SimpleUploadedFile(
+            name="test_images/8.skp",
+            content=open(
+                os.path.join(BASE_DIR, "static/test_images/8.skp"), "rb"
+            ).read(),
+        )
+
+        request.user = self.artist.user
+
+        response = upload_artwork(request)
+        self.assertIn(response.status_code, [200, 302])
+        artwork = Artwork.objects.get(title="Sunflower")
+        model = IndustrialModel.objects.get(artwork=artwork)
+        self.assertIsNotNone(model.model)
         self.assertEqual(len(Artwork.objects.all()), 2)
 
     def test_delete_artwork(self):
@@ -54,3 +88,4 @@ class ArtworksTest(TestCase):
         rf.user = self.user
         delete_artwork(rf, self.artwork.pk)
         self.assertEqual(len(Artwork.objects.all()), 0)
+        self.assertEqual(len(IndustrialModel.objects.all()), 0)

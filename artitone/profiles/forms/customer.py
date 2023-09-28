@@ -8,9 +8,9 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import transaction
 
-from profiles.models import Customer
-from profiles.models import User
-from profiles.models import UserType
+from profiles.models.customer import Customer
+from profiles.models.user import User
+from profiles.models.user import UserType
 
 _is_alpha = RegexValidator(
     regex=r"^[a-zA-Z]+$",
@@ -19,6 +19,7 @@ _is_alpha = RegexValidator(
 
 
 class CustomerCreationForm(UserCreationForm):
+    user_name = forms.CharField(required=True)
     first_name = forms.CharField(required=True, validators=[_is_alpha])
     last_name = forms.CharField(required=True, validators=[_is_alpha])
     date_of_birth = forms.DateField(
@@ -39,6 +40,7 @@ class CustomerCreationForm(UserCreationForm):
             user.save()
             Customer.objects.create(
                 user=user,
+                user_name=self.cleaned_data.get("user_name"),
                 first_name=self.cleaned_data.get("first_name"),
                 last_name=self.cleaned_data.get("last_name"),
                 date_of_birth=self.cleaned_data.get("date_of_birth"),

@@ -9,8 +9,8 @@ from django.views.generic import CreateView
 from artworks.models import Artwork
 from profiles.forms.artist import ArtistChangeForm
 from profiles.forms.artist import ArtistCreationForm
-from profiles.models import Artist
-from profiles.models import User
+from profiles.models.artist import Artist
+from profiles.models.user import User
 from profiles.views.activate_email import activateEmail
 
 logger = logging.getLogger("artitone")

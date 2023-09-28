@@ -4,7 +4,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 from artitone.settings import BASE_DIR
 from profiles.forms.artist import ArtistChangeForm
-from profiles.models import ArtistPaymentMethod
+from profiles.models.artist import ArtistPaymentMethod
 from profiles.tests.unittest_setup import TestCase
 
 

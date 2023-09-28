@@ -6,12 +6,14 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from artworks.forms import CreateArtworkForm
+from artworks.forms import CreateIndustrialModelForm
 from artworks.forms import CustomPayPalPaymentsForm
 from artworks.models import Artwork
+from artworks.models import IndustrialModel
 
 # from paypal.standard.forms import PayPalPaymentsForm
-from profiles.models import Artist
-from profiles.models import ArtistPaymentMethod
+from profiles.models.artist import Artist
+from profiles.models.artist import ArtistPaymentMethod
 
 logger = logging.getLogger("artitone")
 # Create your views here.
@@ -24,6 +26,7 @@ def upload_artwork(request):
         return redirect("home")
 
     form = CreateArtworkForm(None)
+    model_form = CreateIndustrialModelForm(None)
     artist_profile = Artist.objects.get(pk=user)
 
     if request.method == "POST":
@@ -36,16 +39,28 @@ def upload_artwork(request):
             {request.POST}\n{request.FILES}\n
             ========================================"""
         )
+        model_form = CreateIndustrialModelForm(request.POST, request.FILES)
         form = CreateArtworkForm(request.POST, request.FILES)
 
         artwork = form.save(target_artist=artist_profile)
+            
         if artwork:
+            model = model_form.save(artwork_pk=artwork.pk)
+            logger.critical(
+                f"""\n==============3D_MODEL==============\n
+                {model}\n
+                ========================================"""
+            )
             return redirect("artist_profile_page", pk=user.pk)
 
     return render(
         request,
         "artworks/upload_artworks.html",
-        {"artwork_form": form, "artist": artist_profile},
+        {
+            "artwork_form": form,
+            "model_form": model_form,
+            "artist": artist_profile,
+        },
     )
 
 

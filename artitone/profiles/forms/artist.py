@@ -8,10 +8,10 @@ from django.contrib.auth.forms import UsernameField
 from django.db import transaction
 
 from artitone.utils import resize_image
-from profiles.models import Artist
-from profiles.models import ArtistPaymentMethod
-from profiles.models import User
-from profiles.models import UserType
+from profiles.models.artist import Artist
+from profiles.models.artist import ArtistPaymentMethod
+from profiles.models.user import User
+from profiles.models.user import UserType
 
 logger = logging.getLogger("artitone")
 

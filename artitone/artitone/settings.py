@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "taggit",
     "paypal.standard.ipn",
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -249,3 +250,11 @@ else:
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+FILE_UPLOAD_HANDLERS = [
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+]
+
+# Default file upload memory size 10M
+FILE_UPLOAD_MAX_MEMORY_SIZE = 1024*1024*30

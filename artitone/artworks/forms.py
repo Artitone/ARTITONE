@@ -9,6 +9,7 @@ from paypal.standard.forms import PayPalPaymentsForm
 
 from artitone.utils import resize_image
 from artworks.models import Artwork
+from artworks.models import IndustrialModel
 from artworks.models import Picture
 from artworks.models import file_size
 from artworks.utils.clip import clip_predict_label
@@ -18,7 +19,7 @@ logger = logging.getLogger("artitone")
 
 
 class CreateArtworkForm(forms.ModelForm):
-    """This is the form used for creating a new post for volunteer gallery."""
+    """This is the form used for creating a new artwork."""
 
     picture_1 = forms.ImageField(
         widget=forms.ClearableFileInput(attrs={"class": "artitone-image-upload form-control"}),
@@ -51,18 +52,16 @@ class CreateArtworkForm(forms.ModelForm):
         )
         widgets = {
             "category": forms.Select(attrs={"class": "form-control artitone-profile-select"}),
-            "price": forms.NumberInput(attrs={"class": "artitone-artworks-price", "min": 0}),
+            "price": forms.NumberInput(attrs={"class": "artitone-artworks-price", "min": 50, "max": 2000}),
             "content": forms.Textarea(attrs={"class": "form-control artitone-artworks-content"}),
         }
 
     @transaction.atomic
     def save(self, target_artist):
         if self.is_valid():
-            resize_image(self.cleaned_data.get("picture_1"), height=500)
             texture, tags = self.extract_tags_from_image()
             colors = self.get_dominant_color()
-
-            picture_1 = Picture.objects.create(picture=self.cleaned_data.get("picture_1"))
+            picture_1 = Picture.objects.create(picture=resize_image(self.cleaned_data.get("picture_1"), height=500))
             artwork = Artwork.objects.create(
                 artist=target_artist,
                 title=self.cleaned_data.get("title"),
@@ -138,3 +137,29 @@ def set_color(artwork, colors):
 class CustomPayPalPaymentsForm(PayPalPaymentsForm):
     def get_html_submit_element(self):
         return """<button type="submit">Continue on PayPal website</button>"""
+
+
+class CreateIndustrialModelForm(forms.ModelForm):
+    """This is the form used for creating a new 3d model files attached to an artwork."""
+
+    class Meta:
+        model = IndustrialModel
+        fields = (
+            "model",
+            "texture",
+        )
+
+    @transaction.atomic
+    def save(self, artwork_pk):
+        try:
+            artwork = Artwork.objects.get(pk=artwork_pk)
+        except Artwork.DoesNotExist:
+            return None
+        if self.is_valid():
+            model = IndustrialModel.objects.create(
+                model=self.cleaned_data.get("model"),
+                texture=self.cleaned_data.get("texture"),
+            )
+            artwork.model = model
+            artwork.save()
+            return model

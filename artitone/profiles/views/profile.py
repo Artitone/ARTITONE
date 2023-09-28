@@ -19,9 +19,9 @@ from artitone.settings import AWS_SES_DOMAIN
 from artitone.settings import DEFAULT_FROM_EMAIL
 from profiles.forms.artist import ArtistChangeForm
 from profiles.forms.customer import CustomerChangeForm
-from profiles.models import Artist
-from profiles.models import Customer
-from profiles.models import User
+from profiles.models.artist import Artist
+from profiles.models.customer import Customer
+from profiles.models.user import User
 
 
 class SignUpView(TemplateView):
