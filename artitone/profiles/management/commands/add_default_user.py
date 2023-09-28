@@ -11,5 +11,6 @@ class Command(BaseCommand):
     help = "Loads missing categories."
 
     def handle(self, *args, **options):
-        User.objects.create_superuser(email="admin@admin.com", password="admin")
+        if not User.objects.filter(email="admin@admin.com").exists():
+            User.objects.create_superuser(email="admin@admin.com", password="admin")
 
