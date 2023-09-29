@@ -23,7 +23,7 @@
       </a>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and user.is_customer %}
           <li class="nav-item artitone-navitem">
             <a class="nav-link" href="{% url 'basket' user.pk%}">Basket</a>
           </li>
