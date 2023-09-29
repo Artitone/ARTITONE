@@ -16,6 +16,7 @@ def _profile_photo_path(instance, filename):
         raise ValueError(f"unsupported user type {instance.user.type}")
     return f"{prefix}/{instance.user.id}/{filename}"
 
+
 class UserType(models.IntegerChoices):
     """Container for all possible user types."""
 

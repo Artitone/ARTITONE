@@ -4,8 +4,8 @@ from profiles.views.activate_email import activate
 from profiles.views.artist import ArtistSignUpView
 from profiles.views.artist import view_artist_profile
 from profiles.views.customer import CustomerSignUpView
-from profiles.views.customer import view_basket
 from profiles.views.customer import add_to_basket
+from profiles.views.customer import view_basket
 from profiles.views.profile import ProfileView
 from profiles.views.profile import SignUpView
 

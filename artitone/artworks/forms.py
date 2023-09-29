@@ -52,7 +52,9 @@ class CreateArtworkForm(forms.ModelForm):
         )
         widgets = {
             "category": forms.Select(attrs={"class": "form-control artitone-profile-select"}),
-            "price": forms.NumberInput(attrs={"class": "artitone-artworks-price", "min": 50, "max": 2000}),
+            "price": forms.NumberInput(
+                attrs={"class": "artitone-artworks-price", "min": 50, "max": 2000}
+            ),
             "content": forms.Textarea(attrs={"class": "form-control artitone-artworks-content"}),
         }
 
@@ -61,7 +63,9 @@ class CreateArtworkForm(forms.ModelForm):
         if self.is_valid():
             texture, tags = self.extract_tags_from_image()
             colors = self.get_dominant_color()
-            picture_1 = Picture.objects.create(picture=resize_image(self.cleaned_data.get("picture_1"), height=500))
+            picture_1 = Picture.objects.create(
+                picture=resize_image(self.cleaned_data.get("picture_1"), height=500)
+            )
             artwork = Artwork.objects.create(
                 artist=target_artist,
                 title=self.cleaned_data.get("title"),

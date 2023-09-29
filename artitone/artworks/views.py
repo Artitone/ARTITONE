@@ -43,7 +43,7 @@ def upload_artwork(request):
         form = CreateArtworkForm(request.POST, request.FILES)
 
         artwork = form.save(target_artist=artist_profile)
-            
+
         if artwork:
             model = model_form.save(artwork_pk=artwork.pk)
             logger.critical(

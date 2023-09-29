@@ -76,7 +76,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "taggit",
     "paypal.standard.ipn",
-    'django_cleanup.apps.CleanupConfig',
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 MIDDLEWARE = [
@@ -257,4 +257,4 @@ FILE_UPLOAD_HANDLERS = [
 ]
 
 # Default file upload memory size 10M
-FILE_UPLOAD_MAX_MEMORY_SIZE = 1024*1024*30
+FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 30

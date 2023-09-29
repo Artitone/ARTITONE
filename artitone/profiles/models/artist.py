@@ -28,7 +28,7 @@ class Artist(models.Model):
 
     def __str__(self):
         return self.user_name
-    
+
 
 class ArtistPaymentMethod(models.Model):
     """The ArtistPaymentMethod type.

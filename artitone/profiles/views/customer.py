@@ -5,8 +5,8 @@ from django.views.generic import CreateView
 
 from artworks.models import Artwork
 from profiles.forms.customer import CustomerCreationForm
-from profiles.models.user import User
 from profiles.models.customer import Customer
+from profiles.models.user import User
 from profiles.views.activate_email import activateEmail
 
 
@@ -43,7 +43,7 @@ def view_basket(request, pk):
     user = request.user
     if user.is_anonymous or not user.is_customer:
         return redirect("home")
-    
+
     customer = Customer.objects.get(pk=user)
     page_obj = customer.basket.all()
 
@@ -60,7 +60,7 @@ def add_to_basket(request, artwork_pk):
     user = request.user
     if user.is_anonymous or not user.is_customer:
         return redirect("home")
-    
+
     customer = Customer.objects.get(pk=user)
     artwork = Artwork.objects.get(pk=artwork_pk)
     customer.basket.add(artwork)

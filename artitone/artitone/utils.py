@@ -1,8 +1,10 @@
-import os
 from io import BytesIO
+import os
+
 from PIL import Image as PilImage
 from django.core.files.base import ContentFile
-from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.uploadedfile import TemporaryUploadedFile
 
 
 def resize_image(image, height, width=None):
@@ -21,7 +23,7 @@ def resize_image(image, height, width=None):
     if isinstance(image, InMemoryUploadedFile):
         pil_image = PilImage.open(image.file)
         img_format = os.path.splitext(image.name)[1][1:].upper()
-        img_format = 'JPEG' if img_format == 'JPG' else img_format
+        img_format = "JPEG" if img_format == "JPG" else img_format
 
         if pil_image.width > max_width or pil_image.height > max_height:
             pil_image.thumbnail(size)

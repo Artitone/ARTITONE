@@ -6,8 +6,8 @@ from django.urls import reverse
 
 from artitone.settings import BASE_DIR
 from artworks.models import Artwork
-from artworks.models import IndustrialModel
 from artworks.models import Category
+from artworks.models import IndustrialModel
 from artworks.tests.unittest_setup import TestCase
 from artworks.views import delete_artwork
 from artworks.views import upload_artwork
@@ -69,9 +69,7 @@ class ArtworksTest(TestCase):
         )
         request.FILES["model"] = SimpleUploadedFile(
             name="test_images/8.skp",
-            content=open(
-                os.path.join(BASE_DIR, "static/test_images/8.skp"), "rb"
-            ).read(),
+            content=open(os.path.join(BASE_DIR, "static/test_images/8.skp"), "rb").read(),
         )
 
         request.user = self.artist.user
