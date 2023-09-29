@@ -10,6 +10,7 @@ from artworks.models import Picture
 from index.tests.unittest_setup import TestCase
 from index.views.home import home
 from profiles.models.artist import Artist
+from profiles.models.customer import Customer
 
 
 class IndexTest(TestCase):
@@ -110,6 +111,19 @@ class ProfileTest(TestCase):
         user = auth.get_user(self.client)
         self.assertEqual(user.is_authenticated, True)
 
+    def test_customer_login_popup(self):
+        user = auth.get_user(self.client)
+        self.assertEqual(user.is_authenticated, False)
+        data = {
+            "type": "login",
+            "login-email": "picasso@gmail.com",
+            "login-password": "p_i_c_a_s_s_o",
+        }
+        response = self.client.post(reverse("home"), data)
+        self.assertIn(response.status_code, [200, 302])
+        user = auth.get_user(self.client)
+        self.assertEqual(user.is_authenticated, True)
+
     def test_artist_signup_popup(self):
         """Test artist signup popups, create an artist user,
         active it and test if it can be logged in."""
@@ -151,6 +165,50 @@ class ProfileTest(TestCase):
             "type": "login",
             "login-email": artist_email,
             "login-password": artist_password,
+        }
+        _ = self.client.post(reverse("home"), data)
+        user = auth.get_user(self.client)
+        self.assertEqual(user.is_authenticated, True)
+
+    def test_customer_signup_popup(self):
+        """Test costomer signup popups, create an customer user,
+        active it and test if it can be logged in."""
+
+        customer_email = "davinci@gmail.com"
+        customer_password = "can_you_draw_egg"
+        customer_user_name = "davinci"
+        customer_first_name = "Leonardo"
+        customer_last_name = "Vinci"
+        customer_date_of_birth = "1999-02-07"
+        customer_photo = Picture.objects.create(
+            picture=SimpleUploadedFile(
+                name="test_images/test_artwork.png",
+                content=open(
+                    os.path.join(BASE_DIR, "static/test_images/test_artwork.png"), "rb"
+                ).read(),
+            )
+        )
+        data = {
+            "type": "customer",
+            "customer-email": customer_email,
+            "customer-password1": customer_password,
+            "customer-password2": customer_password,
+            "customer-user_name": customer_user_name,
+            "customer-first_name": customer_first_name,
+            "customer-last_name": customer_last_name,
+            "customer-date_of_birth": customer_date_of_birth,
+            "customer-photo": customer_photo,
+        }
+        _ = self.client.post(reverse("home"), data)
+        self.assertEqual(Customer.objects.all().count(), 2)
+        new_artist = Customer.objects.get(user_name=customer_user_name)
+        self.assertEqual(new_artist.user.is_active, False)
+        new_artist.user.is_active = True
+        new_artist.user.save()
+        data = {
+            "type": "login",
+            "login-email": customer_email,
+            "login-password": customer_password,
         }
         _ = self.client.post(reverse("home"), data)
         user = auth.get_user(self.client)

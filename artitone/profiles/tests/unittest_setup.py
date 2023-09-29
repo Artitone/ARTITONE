@@ -10,6 +10,7 @@ from artworks.models import Category
 from artworks.models import Picture
 from profiles.models.artist import Artist
 from profiles.models.artist import ArtistPaymentMethod
+from profiles.models.customer import Customer
 from profiles.models.user import User
 from profiles.models.user import UserType
 
@@ -28,6 +29,17 @@ class TestCase(test.TestCase):
             user_name="Van Gogh",
             first_name="Vincint",
             last_name="Gogh",
+        )
+        self.c_user = get_user_model().objects.create_user(
+            email="picasso@gmail.com",
+            password="p_i_c_a_s_s_o",
+            type=UserType.CUSTOMER,
+        )
+        self.customer = Customer.objects.create(
+            user=self.c_user,
+            user_name="P.Picasso",
+            first_name="Pablo",
+            last_name="Picasso",
         )
         self.category = Category.objects.create(name="Painting")
         self.title = "Starry Night"
