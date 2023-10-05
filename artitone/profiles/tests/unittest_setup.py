@@ -40,6 +40,7 @@ class TestCase(test.TestCase):
             user_name="P.Picasso",
             first_name="Pablo",
             last_name="Picasso",
+            date_of_birth="1999-02-07",
         )
         self.category = Category.objects.create(name="Painting")
         self.title = "Starry Night"
@@ -56,6 +57,7 @@ class TestCase(test.TestCase):
             )
         )
         self.artist.photo = self.picture.picture
+        self.customer.photo = self.picture.picture
         self.artwork = Artwork.objects.create(
             artist=self.artist,
             title=self.title,
