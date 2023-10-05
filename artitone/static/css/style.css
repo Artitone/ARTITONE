@@ -1,15 +1,17 @@
 .menu {
     background-color: #ffffff;
+    display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 100vh;           /* 100% of the viewport height */
-    width: 100vw;            /* 100% of the viewport width */
 }
 
 .menu .div {
     background-color: #ffffff;
     width: 100%;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .menu .overlap-group {
@@ -31,7 +33,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     position: relative;
-    height: 765px;
+    height: 100vh;
     left: 0;
     display: inline-block;
 }
@@ -72,6 +74,7 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+    margin-top: 10px;
 }
 
 .menu .group {
@@ -82,18 +85,16 @@
 
 .menu .actions {
     width: fit-content;
-    height: 44px;
-    margin-top: 20px;
 }
 
 .menu .button {
+    all: unset;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 44px;
-    background-color: #ffffff;
+    border: 1px solid #000000;  /* Ensure this comes after `all: unset;` */
     border-radius: 20px;
-    all: unset;
     box-sizing: border-box;
     padding: 0 20px;
 }
@@ -113,14 +114,6 @@
     font-size: 0;
 }
 
-.menu .img {
-    position: absolute;
-    width: 41px;
-    height: 41px;
-    top: 238px;
-    left: 0;
-}
-
 .menu .title-copy-goes {
     font-family: "Open Sans", Helvetica;
     font-weight: 400;
@@ -136,28 +129,18 @@
     display: block;
 }
 
-.menu .group-2 {
-    position: absolute;
-    width: 41px;
-    height: 41px;
-    top: 238px;
-    left: 60px;
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* two columns of equal width */
+    gap: 10px; /* adjust as per your spacing preference */
+    margin-top: 10px;
 }
 
-.menu .group-3 {
-    position: absolute;
-    width: 41px;
-    height: 41px;
-    top: 301px;
-    left: 0;
-}
-
-.menu .group-4 {
-    position: absolute;
-    width: 41px;
-    height: 41px;
-    top: 301px;
-    left: 60px;
+.artitone-color-small {
+    width: 100%;
+    height: 41px; /* assuming you want to keep the height to match your background-size */
+    border: none;
+    cursor: pointer;
 }
 
 .frame {
@@ -410,19 +393,19 @@
 }
 
 .menu .container {
-    display: flex;          /* Use Flexbox */
+    display: flex; /* Use Flexbox */
     position: relative;
-    top: 80px;
     max-width: inherit;
+    margin-top: 50px;
     flex-direction: column; /* Stack the children vertically */
-    align-items: center;    /* Center children horizontally */
+    align-items: center; /* Center children horizontally */
     justify-content: flex-start; /* Align children to the top */
 }
 
 .menu .section-title {
     display: flex;
-    flex-direction: column;  /* Stack the children vertically */
-    align-items: center;     /* Center children horizontally */
+    flex-direction: column; /* Stack the children vertically */
+    align-items: center; /* Center children horizontally */
 }
 
 .menu .text-wrapper-8 {
@@ -539,8 +522,18 @@
 
 .menu .footer {
     position: relative;
-    height:10%;
-    background-color: transparent;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: start; /* To ensure they align at the top */
+    flex-wrap: wrap; /* Ensures the items wrap onto the next line on smaller screens */
+    font-family: Arial, sans-serif;
+}
+
+.menu .content-2 {
+    flex: 0.15;
+    box-sizing: border-box; /* Ensures padding is included in the element's total width */
+
 }
 
 .menu .column {
@@ -555,39 +548,12 @@
 }
 
 .menu .logo-2 {
-    position: absolute;
-    /* width: 141px; */
     height: 25px;
     top: 20px;
-    left: 100px;
     object-fit: cover;
 }
 
-.menu .small-columns {
-    position: absolute;
-    width: 600px;
-    height: 161px;
-    top: 0;
-    left: 260px;
-}
-
-.menu .content-wrapper {
-    position: absolute;
-    width: 179px;
-    height: 116px;
-    top: 16px;
-    left: 0;
-}
-
-.menu .content-2 {
-    position: relative;
-    height: 116px;
-}
-
 .menu .text-wrapper-12 {
-    position: absolute;
-    width: 179px;
-    top: -1px;
     left: 0;
     font-family: "Inter", Helvetica;
     font-weight: 700;
@@ -597,41 +563,8 @@
     line-height: 21px;
 }
 
-.menu .footer-links {
-    width: 179px;
-    height: 79px;
-}
 
 .menu .link {
-    width: 179px;
-    top: -1px;
-    position: absolute;
-    left: 0;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #212121;
-    font-size: 14px;
-    letter-spacing: 0;
-    line-height: 21px;
-}
-
-.menu .link-2 {
-    width: 179px;
-    top: 28px;
-    position: absolute;
-    left: 0;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #212121;
-    font-size: 14px;
-    letter-spacing: 0;
-    line-height: 21px;
-}
-
-.menu .link-3 {
-    width: 179px;
-    top: 57px;
-    position: absolute;
     left: 0;
     font-family: "Inter", Helvetica;
     font-weight: 400;
@@ -649,92 +582,12 @@
     left: 211px;
 }
 
-.menu .content-3 {
-    position: relative;
-    height: 145px;
-}
-
-.menu .footer-links-2 {
-    height: 108px;
-    width: 179px;
-}
-
-.menu .link-4 {
-    width: 179px;
-    top: 86px;
-    position: absolute;
-    left: 0;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #212121;
-    font-size: 14px;
-    letter-spacing: 0;
-    line-height: 21px;
-}
-
-.menu .column-2 {
-    position: absolute;
-    width: 179px;
-    height: 87px;
-    top: 16px;
-    left: 421px;
-}
-
-.menu .content-4 {
-    position: relative;
-    height: 87px;
-}
-
-.menu .footer-links-3 {
-    height: 50px;
-    width: 179px;
-}
-
-.menu .link-5 {
-    top: -1px;
-    white-space: nowrap;
-    position: absolute;
-    left: 0;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #212121;
-    font-size: 14px;
-    letter-spacing: 0;
-    line-height: 21px;
-}
-
-.menu .link-6 {
-    top: 28px;
-    white-space: nowrap;
-    position: absolute;
-    left: 0;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #212121;
-    font-size: 14px;
-    letter-spacing: 0;
-    line-height: 21px;
-}
-
-
-.menu .vector-2 {
-    left: 0;
-    position: relative;
-    height: 1px;
-    padding-left: 100px;
-}
-
 .menu .vector-3 {
-    top: 130px;
-    left: 0;
-    position: relative;
-    height: 1px;
-    padding-left: 100px;
+ width: 60%;
 }
 
 .menu .text {
     position: relative;
-    top: 121px;
     font-family: "Inter", Helvetica;
     font-weight: 400;
     color: #333333;
@@ -742,7 +595,6 @@
     letter-spacing: 0;
     line-height: 21px;
     white-space: nowrap;
-    text-align: center;
 }
 
 .menu .nav {
@@ -847,8 +699,8 @@ nav.artitone-navbar {
 button.artitone-sidebar {
     background: none;
     color: inherit;
-    border: none;
     padding: 0;
+    border: none;
     font: inherit;
     cursor: pointer;
     outline: inherit;
