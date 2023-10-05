@@ -9,10 +9,9 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import logging
 import os
+import logging
 from pathlib import Path
-
 from artitone.environment import environment
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -128,13 +127,9 @@ CHANNEL_LAYERS = {
 if environment.is_local:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "test_service",
-            "USER": "yifanwu",
-            "PASSWORD": "",
-            "HOST": "localhost",
-            "PORT": 5432,
-        }
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        },
     }
 else:
     DATABASES = {

@@ -23,39 +23,37 @@
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
               <form id="searchbox" method="get" action="{% url 'home' %}">
                 <div class="overlap-group">
-                  
                     <div class="cotainter">
                         <div class="content">
                             <button type="submit" class="group"
                                     style="background:url({% static 'images/group-12-1.png' %}) no-repeat;border:none;background-size: 83px 83px;"
                                     name="color" value="modern"></button>
                             <p class="p-lorem-ipsum-dolor">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt
-                                sagittis eros.
-                                Quisque quis euismod lorem. Etiam sodales ac felis id interdum.
+                                Classic Simplicity
                             </p>
                         </div>
                         <div class="actions">
                             <button class="button">
                                 <div class="text-wrapper">Explore</div>
                             </button>
+                            <div class="input-grid">
+                                <input type="submit" class="img artitone-color-small"
+                                       style="background:url({% static 'images/group-12.png' %}) no-repeat;background-size: 41px 41px;"
+                                       name="color" value="bohemian"/>
+                                <input type="submit" class="group-2 artitone-color-small"
+                                       style="background:url({% static 'images/group-13.png' %}) no-repeat;background-size: 41px 41px;"
+                                       name="color" value="industrial"/>
+                                <input type="submit" class="group-3 artitone-color-small"
+                                       style="background:url({% static 'images/group-14.png' %}) no-repeat;background-size: 41px 41px;"
+                                       name="color" value="contemporary"/>
+                                <input type="submit" class="group-4 artitone-color-small"
+                                       style="background:url({% static 'images/group-15.png' %}) no-repeat;background-size: 41px 41px;"
+                                       name="color" value="minimalist"/>
+                            </div>
                         </div>
-                        <input type="submit" class="img artitone-color-small"
-                               style="background:url({% static 'images/group-12.png' %}) no-repeat;background-size: 41px 41px;"
-                               name="color" value="bohemian"/>
-                        <input type="submit" class="group-2 artitone-color-small"
-                               style="background:url({% static 'images/group-13.png' %}) no-repeat;background-size: 41px 41px;"
-                               name="color" value="industrial"/>
-                        <input type="submit" class="group-3 artitone-color-small"
-                               style="background:url({% static 'images/group-14.png' %}) no-repeat;background-size: 41px 41px;"
-                               name="color" value="contemporary"/>
-                        <input type="submit" class="group-4 artitone-color-small"
-                               style="background:url({% static 'images/group-15.png' %}) no-repeat;background-size: 41px 41px;"
-                               name="color" value="minimalist"/>
                     </div>
-                  
                 </div>
-              </form>
+            </form>
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <div class="overlap-group2">
@@ -67,8 +65,9 @@
                             </div>
                             <p class="p-lorem-ipsum-dolor">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt
-                                sagittis eros. Quisque
-                                quis euismod lorem. Etiam sodales ac felis id interdum.
+                                sagittis eros.
+                                Quisque quis euismod lorem. Etiam sodales ac felis id interdum.
+
                             </p>
                         </div>
                         <div class="actions">
@@ -254,47 +253,41 @@
             </nav>
         </div>
 
-
+        <div style="display: flex; justify-content: center; align-items: center;flex-direction: row;">
+            <img class="vector-3" src="{% static 'images/vector-3.svg' %}">
+        </div>
         <footer class="footer">
-                <div class="column">
-                    <div class="logo-wrapper"><img class="logo-2" src="{% static 'images/logo.png' %}"/></div>
+            <div class="logo-wrapper"><img class="logo-2" src="{% static 'images/logo.png' %}"/></div>
+            <div class="content-2">
+                <div class="text-wrapper-12">COMPANY</div>
+                <div class="footer-links">
+                    <div class="link">How it works</div>
+                    <div class="link">Pricing</div>
+                    <div class="link">Demo</div>
                 </div>
-                <div class="small-columns">
-                    <div class="content-wrapper">
-                        <div class="content-2">
-                            <div class="text-wrapper-12">COMPANY</div>
-                            <div class="footer-links">
-                                <div class="link">How it works</div>
-                                <div class="link-2">Pricing</div>
-                                <div class="link-3">Demo</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="div-wrapper">
-                        <div class="content-3">
-                            <div class="text-wrapper-12">RESOURCES</div>
-                            <div class="footer-links-2">
-                                <p class="link">Blog post name goes here</p>
-                                <p class="link-2">Blog post name goes here</p>
-                                <p class="link-3">Blog post name goes here</p>
-                                <div class="link-4">See all resources</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column-2">
-                        <div class="content-4">
-                            <div class="text-wrapper-12">ABOUT</div>
-                            <div class="footer-links-3">
-                                <div class="link-5">Terms &amp; Conditions</div>
-                                <div class="link-6">Privacy Policy</div>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="content-2">
+                <div class="text-wrapper-12">RESOURCES</div>
+                <div class="footer-links-2">
+                    <p class="link">Blog post name goes here</p>
+                    <p class="link">Blog post name goes here</p>
+                    <p class="link">Blog post name goes here</p>
+                    <div class="link">See all resources</div>
                 </div>
-            <img class="vector-2" src="{% static 'images/vector-3.svg' %}"/>
-            <img class="vector-3" src="{% static 'images/vector-3.svg' %}"/>
-            <p class="text">Copyright © 2023 Artitone</p>
+            </div>
+            <div class="content-2">
+                <div class="text-wrapper-12">ABOUT</div>
+                <div class="footer-links-3">
+                    <div class="link">Terms &amp; Conditions</div>
+                    <div class="link">Privacy Policy</div>
+                </div>
+            </div>
         </footer>
+
+        <div style="display: flex; justify-content: center; align-items: center;flex-direction: column;">
+            <img class="vector-3" src="{% static 'images/vector-3.svg' %}">
+            <p class="text">Copyright © 2023 Artitone</p>
+        </div>
     </div>
 </div>
 {% load crispy_forms_tags %}
