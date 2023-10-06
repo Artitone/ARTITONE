@@ -69,6 +69,7 @@ class CustomerChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = Customer
         fields = (
+            "user_name",
             "first_name",
             "last_name",
             "date_of_birth",
@@ -83,20 +84,21 @@ class CustomerChangeForm(UserChangeForm):
         customer = Customer.objects.get(pk=user)
 
         if self.is_valid():
-            Customer.first_name = self.cleaned_data.get("first_name")
-            Customer.last_name = self.cleaned_data.get("last_name")
-            Customer.date_of_birth = self.cleaned_data.get("date_of_birth")
-            Customer.photo = self.cleaned_data.get("photo")
-            Customer.description = self.cleaned_data.get("description")
-            Customer.save()
+            customer.user_name = self.cleaned_data.get("user_name")
+            customer.first_name = self.cleaned_data.get("first_name")
+            customer.last_name = self.cleaned_data.get("last_name")
+            customer.date_of_birth = self.cleaned_data.get("date_of_birth")
+            customer.photo = self.cleaned_data.get("photo")
+            customer.description = self.cleaned_data.get("description")
+            customer.save()
         else:
             logger = logging.getLogger(__name__)
             logger.error(self.errors)
 
     def clean(self):
-        super(CustomerChangeForm, self).clean()
-        date_of_birth = self.cleaned_data.get("date_of_birth")
+        cleaned_data = super(CustomerChangeForm, self).clean()
+        date_of_birth = cleaned_data.get("date_of_birth")
         today = date.today()
         if date_of_birth > today:
             raise ValidationError("Date of birth must be in the past")
-        return self.cleaned_data
+        return cleaned_data
