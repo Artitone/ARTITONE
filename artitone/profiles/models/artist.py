@@ -21,7 +21,7 @@ class Artist(models.Model):
     first_name = models.CharField(max_length=200, blank=True, null=True)
     last_name = models.CharField(max_length=200, blank=True, null=True)
     photo = models.ImageField(upload_to=_profile_photo_path, blank=True, null=True)
-    website = models.CharField(max_length=200, default="")
+    website = models.CharField(max_length=200, default="", blank=True, null=True)
     description = models.TextField(
         help_text="Introduce your self/artwork here", default="", blank=True, null=True
     )
