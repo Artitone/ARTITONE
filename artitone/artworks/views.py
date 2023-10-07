@@ -15,7 +15,7 @@ from artworks.models import IndustrialModel
 from profiles.models.artist import Artist
 from profiles.models.artist import ArtistPaymentMethod
 
-logger = logging.getLogger("artitone")
+logger = logging.getLogger(__name__)
 # Create your views here.
 
 

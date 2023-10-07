@@ -5,6 +5,7 @@ from profiles.views.artist import ArtistSignUpView
 from profiles.views.artist import view_artist_profile
 from profiles.views.customer import CustomerSignUpView
 from profiles.views.customer import add_to_basket
+from profiles.views.customer import follow_artist
 from profiles.views.customer import view_basket
 from profiles.views.profile import ProfileView
 from profiles.views.profile import SignUpView
@@ -26,4 +27,5 @@ urlpatterns = [
     path("<int:pk>/artist_profile_page", view_artist_profile, name="artist_profile_page"),
     path("<int:pk>/basket", view_basket, name="basket"),
     path("add_to_basket/<int:artwork_pk>/", add_to_basket, name="add_to_basket"),
+    path("follow_artist/<int:artist_pk>/", follow_artist, name="follow_artist"),
 ]

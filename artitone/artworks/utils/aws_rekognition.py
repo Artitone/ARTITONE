@@ -1,6 +1,6 @@
 import logging
 
-logger = logging.getLogger("artitone_aws_rekognition")
+logger = logging.getLogger(__name__)
 
 
 def start_model(session, project_arn, model_arn, version_name, min_inference_units):

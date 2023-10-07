@@ -15,7 +15,7 @@ from artworks.models import file_size
 from artworks.utils.clip import clip_predict_label
 from artworks.utils.color_meter import _get_dominant_color
 
-logger = logging.getLogger("artitone")
+logger = logging.getLogger(__name__)
 
 
 class CreateArtworkForm(forms.ModelForm):

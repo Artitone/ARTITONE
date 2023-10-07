@@ -1,3 +1,6 @@
+from functools import wraps
+import logging
+
 from django.db import transaction
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -5,9 +8,27 @@ from django.views.generic import CreateView
 
 from artworks.models import Artwork
 from profiles.forms.customer import CustomerCreationForm
+from profiles.models.artist import Artist
 from profiles.models.customer import Customer
+from profiles.models.following import UserFollowing
+from profiles.models.following import follow
+from profiles.models.following import unfollow
 from profiles.models.user import User
 from profiles.views.activate_email import activateEmail
+
+logger = logging.getLogger(__name__)
+
+
+def customers_only(function):
+    @wraps(function)
+    def wrap(request, *args, **kwargs):
+        user = request.user
+        if user.is_anonymous or not user.is_customer:
+            return redirect("home")
+        else:
+            return function(request, *args, **kwargs)
+
+    return wrap
 
 
 class CustomerSignUpView(CreateView):
@@ -39,12 +60,9 @@ class CustomerSignUpView(CreateView):
         return redirect("login")
 
 
+@customers_only
 def view_basket(request, pk):
-    user = request.user
-    if user.is_anonymous or not user.is_customer:
-        return redirect("home")
-
-    customer = Customer.objects.get(pk=user)
+    customer = Customer.objects.get(pk=request.user)
     page_obj = customer.basket.all()
 
     return render(
@@ -56,12 +74,23 @@ def view_basket(request, pk):
     )
 
 
+@customers_only
 def add_to_basket(request, artwork_pk):
-    user = request.user
-    if user.is_anonymous or not user.is_customer:
-        return redirect("home")
-
-    customer = Customer.objects.get(pk=user)
+    customer = Customer.objects.get(pk=request.user)
     artwork = Artwork.objects.get(pk=artwork_pk)
     customer.basket.add(artwork)
     return redirect("basket", pk=customer.pk)
+
+
+@customers_only
+def follow_artist(request, artist_pk):
+    customer = Customer.objects.get(pk=request.user)
+    artist = Artist.objects.get(pk=artist_pk)
+
+    if customer.following.filter(following_user_id=artist):
+        unfollowing = unfollow(customer, artist)
+        logger.debug(f"{customer} unfollows {artist}: {unfollowing}")
+    else:
+        following = follow(customer, artist)
+        logger.debug(f"{customer} follows {artist}: {following}")
+    return redirect("artist_profile_page", pk=artist_pk)

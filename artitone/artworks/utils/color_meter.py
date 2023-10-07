@@ -7,7 +7,7 @@ from sklearn.cluster import KMeans
 # from rembg import remove
 
 
-logger = logging.getLogger("artitone_colormeter")
+logger = logging.getLogger(__name__)
 
 
 def rgb2hex(rgb):

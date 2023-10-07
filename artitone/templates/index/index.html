@@ -205,6 +205,7 @@
                     {% with artwork.pictures.all|first as img %}
                     <img class="element" src="{{ img }}" loading="lazy">
                     {% endwith %}
+                    Artist: <a href="{% url 'artist_profile_page' artwork.artist.pk %}">{{ artwork.artist.first_name }}, {{ artwork.artist.last_name }}</a>
                     <div class="text-wrapper-9">{{ artwork.name }}</div>
                     <p class="text-wrapper-11">{{ artwork.content }}</p>
                     <p class="text-wrapper-10">$ {{ artwork.price }}</p>

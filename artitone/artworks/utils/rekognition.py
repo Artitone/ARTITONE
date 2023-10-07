@@ -5,7 +5,7 @@ import boto3
 
 # from .aws_rekognition import start_model, stop_model
 
-logger = logging.getLogger("artitone_rekognition")
+logger = logging.getLogger(__name__)
 
 
 def detect_labels(bytes):

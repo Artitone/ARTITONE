@@ -6,7 +6,7 @@ import numpy as np
 import torch
 
 ssl._create_default_https_context = ssl._create_unverified_context
-logger = logging.getLogger("artitone_CLIP")
+logger = logging.getLogger(__name__)
 
 device = "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)

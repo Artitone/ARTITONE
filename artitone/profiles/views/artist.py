@@ -13,7 +13,7 @@ from profiles.models.artist import Artist
 from profiles.models.user import User
 from profiles.views.activate_email import activateEmail
 
-logger = logging.getLogger("artitone")
+logger = logging.getLogger(__name__)
 
 
 class ArtistSignUpView(CreateView):
@@ -46,7 +46,7 @@ class ArtistSignUpView(CreateView):
 
 def view_artist_profile(request, pk):
     user = request.user
-    if user.is_artist:
+    if user.is_authenticated:
         artist = Artist.objects.get(user=pk)
         artist_change_form = ArtistChangeForm(None, instance=artist, prefix="artist")
         artwork_list = Artwork.objects.filter(artist=artist)
@@ -78,6 +78,7 @@ def view_artist_profile(request, pk):
             request,
             "profiles/artist_profile_page.html",
             {
+                "user": user,
                 "artist": artist,
                 "page_obj": page_obj,
                 "artist_change_form": artist_change_form,

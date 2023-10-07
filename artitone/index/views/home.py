@@ -11,7 +11,7 @@ from profiles.forms.artist import UserLoginForm
 from profiles.forms.customer import CustomerCreationForm
 from profiles.views.activate_email import activateEmail
 
-logger = logging.getLogger("artitone")
+logger = logging.getLogger(__name__)
 
 
 def home(request):

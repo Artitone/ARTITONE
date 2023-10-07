@@ -11,17 +11,21 @@
         <div class="artitone-profile-username">
             @{{ artist.user_name }}
         </div>
-        <button class="artitone-profile-follow artitone-btn">Follow</button>
+        {% if user.is_customer %}
+        <a href="{% url 'follow_artist' artist.pk%}">
+          <button class="artitone-profile-follow artitone-btn">Follow</button>
+        </a>
+        {% endif %}
         
         <div class="artitone-profile-description">
             <div class="artitone-profile-description-title">Bio</div>
-            <p class="artitone-profile-description-content">Email: {{ user.email }}</p>
+            <p class="artitone-profile-description-content">Email: {{ artist.user.email }}</p>
             <p class="artitone-profile-description-content">{{ artist.description }}</p>
         </div>
     </div>
 
     <div class="artitone-profile-sort">
-        <form id="searchbox" method="get" action="{% url 'artist_profile_page' user.pk%}">
+        <form id="searchbox" method="get" action="{% url 'artist_profile_page' artist.pk%}">
             Sort:
             <select name="sort" class="form-control artitone-profile-select" onchange="this.form.submit()">
                 <option value="newest">Newest</option>
