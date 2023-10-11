@@ -10,6 +10,7 @@ from artworks.models import Artwork
 from profiles.forms.artist import ArtistChangeForm
 from profiles.forms.artist import ArtistCreationForm
 from profiles.models.artist import Artist
+from profiles.models.customer import Customer
 from profiles.models.user import User
 from profiles.views.activate_email import activateEmail
 
@@ -50,7 +51,7 @@ def view_artist_profile(request, pk):
         artist = Artist.objects.get(user=pk)
         artist_change_form = ArtistChangeForm(None, instance=artist, prefix="artist")
         artwork_list = Artwork.objects.filter(artist=artist)
-        logger.error(request.POST)
+        logger.debug(request.POST)
         if request.method == "GET":
             sort_method = request.GET.get("sort")
             if sort_method:
@@ -69,10 +70,16 @@ def view_artist_profile(request, pk):
                 if artist_change_form.is_valid():
                     artist_change_form.save()
 
-        paginator = Paginator(artwork_list, 12)  # Show 25 contacts per page.
+        paginator = Paginator(artwork_list, 12)
 
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
+
+        customer_is_following = False
+        if user.is_customer:
+            customer = Customer.objects.get(pk=user)
+            if customer.following.filter(following_user_id=artist):
+                customer_is_following = True
 
         return render(
             request,
@@ -80,6 +87,7 @@ def view_artist_profile(request, pk):
             {
                 "user": user,
                 "artist": artist,
+                "customer_is_following": customer_is_following,
                 "page_obj": page_obj,
                 "artist_change_form": artist_change_form,
             },

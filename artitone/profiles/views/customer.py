@@ -88,9 +88,9 @@ def follow_artist(request, artist_pk):
     artist = Artist.objects.get(pk=artist_pk)
 
     if customer.following.filter(following_user_id=artist):
-        unfollowing = unfollow(customer, artist)
-        logger.debug(f"{customer} unfollows {artist}: {unfollowing}")
+        unfollow(customer, artist)
+        logger.debug(f"{customer} unfollows {artist}")
     else:
         following = follow(customer, artist)
-        logger.debug(f"{customer} follows {artist}: {following}")
+        logger.debug(f"customer follows artist: {following}")
     return redirect("artist_profile_page", pk=artist_pk)
