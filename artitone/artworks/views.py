@@ -77,8 +77,10 @@ def delete_artwork(request, pk):
 
 def purchase_artwork(request, pk, alert=None):
     user = request.user
-    artist = Artist.objects.get(pk=user)
+    if not user.is_customer:
+        return redirect("home")
     artwork = Artwork.objects.get(pk=pk)
+    artist = artwork.artist
     payment_method = ArtistPaymentMethod.objects.get(pk=artist)
 
     # What you want the button to do.
