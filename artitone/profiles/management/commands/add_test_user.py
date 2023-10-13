@@ -3,6 +3,7 @@
 from django.core.management.base import BaseCommand
 
 from profiles.models.artist import Artist
+from profiles.models.artist import ArtistPaymentMethod
 from profiles.models.customer import Customer
 
 # JSON model type representations.
@@ -20,7 +21,7 @@ class Command(BaseCommand):
         password = "test1_Test2_test3"
 
         if not User.objects.filter(email=artist_email).exists():
-            Artist.objects.create(
+            artist = Artist.objects.create(
                 user=User.objects.create_user(
                     email=artist_email,
                     password=password,
@@ -28,6 +29,10 @@ class Command(BaseCommand):
                     type=UserType.ARTIST,
                 ),
                 user_name="test_artist",
+            )
+            ArtistPaymentMethod.objects.create(
+                business_email="sb-uelul27134296-1@business.example.com",
+                artist=artist,
             )
             self.stdout.write(self.style.SUCCESS("Successfully created test artist."))
         else:

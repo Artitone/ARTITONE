@@ -65,11 +65,13 @@ def view_basket(request, pk):
     customer = Customer.objects.get(pk=request.user)
     page_obj = customer.basket.all()
 
+    orders = customer.orders.all()
     return render(
         request,
         "profiles/customer_basket.html",
         {
             "page_obj": page_obj,
+            "orders": orders,
         },
     )
 

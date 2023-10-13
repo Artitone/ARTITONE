@@ -4,22 +4,28 @@
 
 <div class="artitone-article">
     {% for artwork in page_obj %}
-    <div class="artitone-article-item">
-    {% with artwork.pictures.all|first as img %}
-        <img class="element" src="{{img}}" loading="lazy" width="240px">
-    {% endwith %}
-    <div class="text-wrapper-9">{{ artwork.name }}</div>
-    <p class="text-wrapper-11">{{ artwork.content }}</p>
-    <p class="text-wrapper-10">$ {{ artwork.price }}</p>
-    <!-- <h4>{% for tag in artwork.tags.all %}
-        {{ tag.name }}
-    {% endfor %}</h4> -->
-    {% for color in artwork.colors.all %}
-        <div style="background-color: {{ color.name }}; padding: 10px;"></div>
-    {% endfor %}
-    <!-- <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn">delete</a> -->
-    <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">delete</a>
-    </div>
+        <div class="artitone-article-item">
+        {% with artwork.pictures.all|first as img %}
+            <img class="element" src="{{img}}" loading="lazy" width="240px">
+        {% endwith %}
+        <div class="text-wrapper-9">{{ artwork.name }}</div>
+        <p class="text-wrapper-11">{{ artwork.content }}</p>
+        <p class="text-wrapper-10">$ {{ artwork.price }}</p>
+        <!-- <h4>{% for tag in artwork.tags.all %}
+            {{ tag.name }}
+        {% endfor %}</h4> -->
+        {% for color in artwork.colors.all %}
+            <div style="background-color: {{ color.name }}; padding: 10px;"></div>
+        {% endfor %}
+        <!-- <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn">delete</a> -->
+        <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">delete</a>
+        </div>
     {% endfor %}
 </div>
+    {% for order in orders %}
+        <hr>
+        <h4>ID: {{ order.id }}</h4>
+        <p>Timestamp: {{ order.timestamp }}<br>
+        Price: {{ order.get_total_price }}</p>
+    {% endfor %}
 {% endblock %}
