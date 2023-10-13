@@ -1,4 +1,3 @@
-from django.test.client import RequestFactory
 from django.urls import reverse
 
 from profiles.tests.unittest_setup import TestCase

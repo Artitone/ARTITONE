@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     "profiles.apps.ProfilesConfig",
     "index.apps.IndexConfig",
     "artworks.apps.ArtworksConfig",
+    "purchases.apps.PurchasesConfig",
     # External applications
     "crispy_forms",
     "crispy_bootstrap5",
