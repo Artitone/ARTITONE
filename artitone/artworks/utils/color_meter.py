@@ -2,10 +2,8 @@ import logging
 
 import cv2 as cv
 import numpy as np
-from sklearn.cluster import KMeans
-
 from rembg import remove
-
+from sklearn.cluster import KMeans
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +22,6 @@ NUM_CLUSTERS = 5
 COLOR_PALETTE = [
     # We would like to discard this color for remove background
     hex2rgb("#00ff00"),
-
     # Here are the color pallates we would like to use
     hex2rgb("#ffffff"),
     hex2rgb("#d9d9d9"),
@@ -98,9 +95,7 @@ def _get_dominant_color(image_file):
     im = cv.imdecode(im, cv.IMREAD_COLOR)
 
     im = cv.cvtColor(im, cv.COLOR_BGR2RGB)
-    im = cv.resize(
-        im, (150, 150), interpolation=cv.INTER_AREA
-    )  # optional, to reduce time
+    im = cv.resize(im, (150, 150), interpolation=cv.INTER_AREA)  # optional, to reduce time
     im = remove(im)
     im = cv.cvtColor(im, cv.COLOR_RGBA2RGB)
     mask = cv.inRange(im, np.array([0, 0, 0]), np.array([1, 1, 1]))
