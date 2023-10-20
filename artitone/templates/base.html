@@ -70,5 +70,155 @@
         document.getElementById("artitone-frame").style.display = "none";
       }
     </script>
+
+
+    <!-- This is the LOGIN form -->
+    {% load crispy_forms_tags %}
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content artitone-modal">
+          <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Log In</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          {% if login_form.non_field_errors %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <p class="mb-0">{{ login_form.non_field_errors }}</p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          {% endif %}
+          <form action="" method="post" enctype="multipart/form-data" novalidate>
+              {% csrf_token %}
+              <div class="modal-body">
+                  <input type="hidden" id="form_type" name="type" value="login"/>
+                  {{ login_form.email|as_crispy_field }}
+                  {{ login_form.password|as_crispy_field }}
+              </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-dark artitone-btn">Login</button>
+                  <button type="button" class="btn btn-secondary artitone-btn" data-dismiss="modal">Close</button>
+              </div>
+          </form>
+      </div>
+    </div>
+    </div>
+
+    <!-- This is the SIGNUP form -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content artitone-modal">
+          <div class="modal-header">
+              <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          {% if artist_signup_form.non_field_errors %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <p class="mb-0">{{ artist_signup_form.non_field_errors }}</p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          {% endif %}
+          <div id="signup-choice" class="modal-body"
+                style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+              <h2>Sign up for a free account</h2>
+              <p class="lead">Select the type of account you want to create:</p>
+              <button id="customer-signup" class="btn btn-dark btn-lg artitone-btn" role="button">Customer
+              </button>
+              <button id="artist-signup" class="btn btn-dark btn-lg artitone-btn" role="button">Artist/Designer
+              </button>
+          </div>
+
+          <div id="artist-signup-form" style="display: none;">
+              <form method="post" enctype="multipart/form-data" novalidate>
+                  {% csrf_token %}
+                  <div class="modal-body">
+                      <input type="hidden" name="next" value="{{ next }}">
+                      <input type="hidden" id="form_type" name="type" value="artist"/>
+                      {{ artist_signup_form|crispy }}
+                  </div>
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-dark artitone-btn">Sign Up</button>
+                  </div>
+              </form>
+          </div>
+
+          <div id="customer-signup-form" style="display: none;">
+              <form method="post" enctype="multipart/form-data" novalidate>
+                  {% csrf_token %}
+                  <div class="modal-body">
+                      <input type="hidden" name="next" value="{{ next }}">
+                      <input type="hidden" id="form_type" name="type" value="customer"/>
+                      {{ customer_signup_form|crispy }}
+                  </div>
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-dark artitone-btn">Sign Up</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+    </div>
+    </div>
+
+    {% if login_form.non_field_errors %}
+    <script>
+    $(document).ready(function () {
+      $("#loginModal").modal('show');
+    });
+    </script>
+    {% endif %}
+    {% if signup_form.non_field_errors %}
+    <script>
+    $(document).ready(function () {
+      $("#signupModal").modal('show');
+    });
+    </script>
+    {% endif %}
+    {% if artist_signup_form.errors %}
+    <script>
+    $(document).ready(function () {
+      $("#signupModal").modal('show');
+      $("#artist-signup-form").show();
+      $("#customer-signup-form").hide();
+      $("#signup-choice").hide();
+    });
+    </script>
+    {% endif %}
+    {% if customer_signup_form.errors %}
+    <script>
+    $(document).ready(function () {
+      $("#signupModal").modal('show');
+      $("#artist-signup-form").hide();
+      $("#customer-signup-form").show();
+      $("#signup-choice").hide();
+    });
+    </script>
+    {% endif %}
+    <script>
+
+    $("button#artist-signup").click(function () {
+      $("#artist-signup-form").show();
+      $("#customer-signup-form").hide();
+      $("#signup-choice").hide();
+    });
+    $("button#customer-signup").click(function () {
+      $("#artist-signup-form").hide();
+      $("#customer-signup-form").show();
+      $("#signup-choice").hide();
+    });
+    $("#artitone-signup-btn").click(function () {
+      $("#artist-signup-form").hide();
+      $("#customer-signup-form").hide();
+      $("#signup-choice").show();
+    });
+    </script>
   </body>
 </html>
