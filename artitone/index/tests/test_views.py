@@ -91,6 +91,27 @@ class IndexTest(TestCase):
         artworks = response.context["page_obj"].object_list
         self.assertEqual(len(artworks), 0)
 
+    def test_search_by_texture(self):
+        data = {}
+        response = self.client.get(reverse("home"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 2)
+
+        data["texture"] = "MA"
+        response = self.client.get(reverse("home"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 1)
+
+        data["texture"] = "RO"
+        response = self.client.get(reverse("home"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 0)
+
+        data["texture"] = "SA"
+        response = self.client.get(reverse("home"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 1)
+
 
 class ProfileTest(TestCase):
     def setUp(self):
