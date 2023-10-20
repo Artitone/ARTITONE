@@ -59,7 +59,9 @@
             <div style="background-color: {{ color.name }}; padding: 10px;"></div>
         {% endfor %}
         <!-- <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn">delete</a> -->
-        <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">delete</a>
+        {% if user.is_artist or user.is_admin %}
+          <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">delete</a>
+        {% endif %}
         </div>
         {% endfor %}
     </div>
