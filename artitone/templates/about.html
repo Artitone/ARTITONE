@@ -122,62 +122,6 @@
                    Welcome to Artitone, your go-to destination for an innovative art and decor shopping experience. Our intuitive search engine effortlessly matches you with the perfect decor options based on your existing room furnishings, making the process of buying and selling decorative art easier than ever before. Not only do we cater to decor enthusiasts, but we're also committed to empowering emerging artists and designers. Through our platform, they can monetize their creative endeavors, helping them continue to chase their artistic dreams.
                 </p>
             </div>
-            <div style="text-align: left; width: 100%;">
-                <p style="margin: 0; padding: 0; font-size: 36px;">Trending Now</p>
-            </div>
-            <div class="artitone-article">
-                {% for artwork in page_obj %}
-                <div class="artitone-article-item">
-                    {% with artwork.pictures.all|first as img %}
-                    <img class="element" src="{{ img }}" loading="lazy">
-                    {% endwith %}
-                    Artist: <a href="{% url 'artist_profile_page' artwork.artist.pk %}">{{ artwork.artist.first_name }}, {{ artwork.artist.last_name }}</a>
-                    <div class="text-wrapper-9">{{ artwork.name }}</div>
-                    <p class="text-wrapper-11">{{ artwork.content }}</p>
-                    <p class="text-wrapper-10">$ {{ artwork.price }}</p>
-                    {% if user.is_customer %}
-                    <a href="{% url 'purchase_artwork' artwork.pk %}" class="btn btn-dark artitone-btn"
-                       style="width: 240px;">purchase</a>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-            <nav aria-label="Page navigation" style="display: flex; justify-content: center; align-items: center;">
-                <ul class="pagination">
-                    {% if page_obj.has_previous %}
-                    <li class="page-item"><a class="page-link artitone-page-link" href="?page=1">&laquo;
-                        first</a></li>
-                    <li class="page-item"><a class="page-link artitone-page-link"
-                                             href="?page={{ page_obj.previous_page_number }}">previous</a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled"><a class="page-link artitone-page-link">&laquo; first</a>
-                    </li>
-                    <li class="page-item disabled"><a class="page-link artitone-page-link">previous</a></li>
-                    {% endif %}
-                    {% for page_num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == page_num %}
-                    <li class="page-item active"><a class="page-link artitone-page-link"
-                                                    href="?page={{ page_num }}">{{ page_num }}</a></li>
-                    {% else %}
-                    <li class="page-item"><a class="page-link artitone-page-link"
-                                             href="?page={{ page_num }}">{{ page_num }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    {% if page_obj.has_next %}
-                    <li class="page-item"><a class="page-link artitone-page-link"
-                                             href="?page={{ page_obj.next_page_number }}">next</a></li>
-                    <li class="page-item"><a class="page-link artitone-page-link"
-                                             href="?page={{ page_obj.paginator.num_pages }}">last
-                        &raquo;</a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled"><a class="page-link artitone-page-link">next</a></li>
-                    <li class="page-item disabled"><a class="page-link artitone-page-link">last &raquo;</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav>
         </div>
 
         <div style="display: flex; justify-content: center; align-items: center;flex-direction: row;">

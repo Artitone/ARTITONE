@@ -1,11 +1,9 @@
 import logging
 
 from django.contrib.auth import login
-from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.shortcuts import render
 
-from index.views.search import parse_search_filter
 from profiles.forms.artist import ArtistCreationForm
 from profiles.forms.artist import UserLoginForm
 from profiles.forms.customer import CustomerCreationForm
@@ -19,15 +17,6 @@ def about(request):
     login_form = UserLoginForm(None, prefix="login")
     artist_signup_form = ArtistCreationForm(None, prefix="artist")
     customer_signup_form = CustomerCreationForm(None, prefix="customer")
-    logger.debug(
-        f"============================\n {request.GET}\n{request.POST}\n================================="
-    )
-    filter = parse_search_filter(request.GET)
-    artwork_list = filter.search()
-    paginator = Paginator(artwork_list, 12)  # Show 25 contacts per page.
-
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
 
     if request.method == "POST":
         form_type = request.POST["type"]
@@ -74,7 +63,6 @@ def about(request):
         request,
         "about.html",
         {
-            "page_obj": page_obj,
             "login_form": login_form,
             "artist_signup_form": artist_signup_form,
             "customer_signup_form": customer_signup_form,
