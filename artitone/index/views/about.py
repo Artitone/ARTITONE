@@ -1,4 +1,3 @@
-from django.shortcuts import render
 import logging
 
 from django.contrib.auth import login
@@ -13,6 +12,8 @@ from profiles.forms.customer import CustomerCreationForm
 from profiles.views.activate_email import activateEmail
 
 logger = logging.getLogger(__name__)
+
+
 def about(request):
     """Directs the user to their home page."""
     login_form = UserLoginForm(None, prefix="login")
@@ -69,9 +70,13 @@ def about(request):
 
                 return redirect("home")
 
-    return render(request, 'about.html',
+    return render(
+        request,
+        "about.html",
         {
             "page_obj": page_obj,
             "login_form": login_form,
             "artist_signup_form": artist_signup_form,
-            "customer_signup_form": customer_signup_form,})
+            "customer_signup_form": customer_signup_form,
+        },
+    )
