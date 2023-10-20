@@ -358,3 +358,99 @@ class AboutTest(TestCase):
         _ = self.client.post(reverse("about"), data)
         user = auth.get_user(self.client)
         self.assertEqual(user.is_authenticated, True)
+
+
+class ShopInterfaceTest(TestCase):
+    def test_about(self):
+        response = self.client.get(reverse("shop_interface"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_search_by_keyword(self):
+        data = {}
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 2)
+
+        data["keyword"] = "Artwork"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 1)
+
+        data["keyword"] = "lala"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 1)
+
+        data["keyword"] = "lalaLalala"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 0)
+
+    def test_search_by_tags(self):
+        data = {}
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 2)
+
+        data["keyword"] = "Minimalism"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 1)
+
+        data["keyword"] = "Minimalist"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 0)
+
+    def test_search_by_color_pallete(self):
+        data = {}
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 2)
+
+        data["color"] = "modern"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 1)
+
+        data["color"] = "contemporary"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 0)
+
+    def test_search_by_category(self):
+        data = {}
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 2)
+
+        data["category"] = "Sculpture"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 1)
+
+        data["category"] = "Wall Arts"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 0)
+
+    def test_search_by_texture(self):
+        data = {}
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 2)
+
+        data["texture"] = "MA"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 1)
+
+        data["texture"] = "RO"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 0)
+
+        data["texture"] = "SA"
+        response = self.client.get(reverse("shop_interface"), data)
+        artworks = response.context["page_obj"].object_list
+        self.assertEqual(len(artworks), 1)

@@ -53,7 +53,7 @@
           </li>
         </ul>
       </div>
-      <form class="form-inline artitone-navitem" method="get" action="{% url 'home' %}">
+      <form class="form-inline artitone-navitem" method="get" action="{% url 'shop_interface' %}">
           <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="Search" aria-label="Search">
           <button class="btn btn-dark my-2 my-sm-0 artitone-btn" type="submit" style="width: 100px;">Search</button>
       </form>
@@ -72,6 +72,7 @@
     </script>
 
 
+  {% if not user.is_authenticated %}
     <!-- This is the LOGIN form -->
     {% load crispy_forms_tags %}
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
@@ -220,5 +221,6 @@
       $("#signup-choice").show();
     });
     </script>
+  {% endif %}
   </body>
 </html>
