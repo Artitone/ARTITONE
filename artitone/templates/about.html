@@ -4,84 +4,7 @@
 <body>
 <div class="menu">
     <div class="div">
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"
-            style="z-index: 1000; position: absolute; left: 45%">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-home-tab" data-toggle="pill"
-                        data-target="#pills-home"
-                        type="button" role="tab" aria-controls="pills-home" aria-selected="true">Color
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-profile-tab" data-toggle="pill"
-                        data-target="#pills-profile"
-                        type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Texture
-                </button>
-            </li>
-        </ul>
-        <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-              <form id="searchbox" method="get" action="{% url 'home' %}">
-                <div class="overlap-group">
-                    <div class="cotainter">
-                        <div class="content">
-                            <button type="submit" class="group"
-                                    style="background:url({% static 'images/group-12-1.png' %}) no-repeat;border:none;background-size: 83px 83px;"
-                                    name="color" value="modern"></button>
-                            <p class="p-lorem-ipsum-dolor">
-                                Classic Simplicity
-                            </p>
-                        </div>
-                        <div class="actions">
-                            <button class="button">
-                                <div class="text-wrapper">Explore</div>
-                            </button>
-                            <div class="input-grid">
-                                <input type="submit" class="img artitone-color-small"
-                                       style="background:url({% static 'images/group-12.png' %}) no-repeat;background-size: 41px 41px;"
-                                       name="color" value="bohemian"/>
-                                <input type="submit" class="group-2 artitone-color-small"
-                                       style="background:url({% static 'images/group-13.png' %}) no-repeat;background-size: 41px 41px;"
-                                       name="color" value="industrial"/>
-                                <input type="submit" class="group-3 artitone-color-small"
-                                       style="background:url({% static 'images/group-14.png' %}) no-repeat;background-size: 41px 41px;"
-                                       name="color" value="contemporary"/>
-                                <input type="submit" class="group-4 artitone-color-small"
-                                       style="background:url({% static 'images/group-15.png' %}) no-repeat;background-size: 41px 41px;"
-                                       name="color" value="minimalist"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            </div>
-            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <div class="overlap-group2">
-                    <div class="cotainter">
-                        <div class="content">
-                            <div class="parallel-container">
-                                <div class="title-copy-goes">Rough</div>
-                                <img class="rectangle" src="{% static 'images/rectangle-2-1.png' %}"/>
-                            </div>
-                            <p class="p-lorem-ipsum-dolor">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt
-                                sagittis eros.
-                                Quisque quis euismod lorem. Etiam sodales ac felis id interdum.
-
-                            </p>
-                        </div>
-                        <div class="actions">
-                            <button class="button">
-                                <div class="text-wrapper">Explore</div>
-                            </button>
-                        </div>
-                        <div class="frame-6">
-                            <img class="rectangle-2" src="{% static 'images/rectangle-2.png' %}"/>
-                            <img class="rectangle-3" src="{% static 'images/rectangle-3.png' %}"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="overlap-group" style="height: 50vh">
         </div>
         <div class="frame" id="artitone-frame" onmouseover="showMenu()" onmouseleave="hideMenu()">
             <form id="searchbox" method="get" action="{% url 'home' %}">
@@ -194,67 +117,11 @@
 
         <div class="container">
             <div class="section-title">
-                <div class="text-wrapper-8">Featured Items</div>
-                <p style="width: 75%; text-align: center;">
-                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt sagittis eros.
+                <div class="text-wrapper-8" style="margin-bottom: 10px">We Provide Not Just Art.</div>
+                <p style="width: 75%; text-align: center; font-size: 25px">
+                   Welcome to Artitone, your go-to destination for an innovative art and decor shopping experience. Our intuitive search engine effortlessly matches you with the perfect decor options based on your existing room furnishings, making the process of buying and selling decorative art easier than ever before. Not only do we cater to decor enthusiasts, but we're also committed to empowering emerging artists and designers. Through our platform, they can monetize their creative endeavors, helping them continue to chase their artistic dreams.
                 </p>
             </div>
-            <div style="text-align: left; width: 100%;">
-                <p style="margin: 0; padding: 0; font-size: 36px;">Trending Now</p>
-            </div>
-            <div class="artitone-article">
-                {% for artwork in page_obj %}
-                <div class="artitone-article-item">
-                    {% with artwork.pictures.all|first as img %}
-                    <img class="element" src="{{ img }}" loading="lazy">
-                    {% endwith %}
-                    Artist: <a href="{% url 'artist_profile_page' artwork.artist.pk %}">{{ artwork.artist.first_name }}, {{ artwork.artist.last_name }}</a>
-                    <div class="text-wrapper-9">{{ artwork.name }}</div>
-                    <p class="text-wrapper-11">{{ artwork.content }}</p>
-                    <p class="text-wrapper-10">$ {{ artwork.price }}</p>
-                    {% if user.is_customer %}
-                    <a href="{% url 'purchase_artwork' artwork.pk %}" class="btn btn-dark artitone-btn"
-                       style="width: 240px;">purchase</a>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-            <nav aria-label="Page navigation" style="display: flex; justify-content: center; align-items: center;">
-                <ul class="pagination">
-                    {% if page_obj.has_previous %}
-                    <li class="page-item"><a class="page-link artitone-page-link" href="?page=1">&laquo;
-                        first</a></li>
-                    <li class="page-item"><a class="page-link artitone-page-link"
-                                             href="?page={{ page_obj.previous_page_number }}">previous</a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled"><a class="page-link artitone-page-link">&laquo; first</a>
-                    </li>
-                    <li class="page-item disabled"><a class="page-link artitone-page-link">previous</a></li>
-                    {% endif %}
-                    {% for page_num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == page_num %}
-                    <li class="page-item active"><a class="page-link artitone-page-link"
-                                                    href="?page={{ page_num }}">{{ page_num }}</a></li>
-                    {% else %}
-                    <li class="page-item"><a class="page-link artitone-page-link"
-                                             href="?page={{ page_num }}">{{ page_num }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    {% if page_obj.has_next %}
-                    <li class="page-item"><a class="page-link artitone-page-link"
-                                             href="?page={{ page_obj.next_page_number }}">next</a></li>
-                    <li class="page-item"><a class="page-link artitone-page-link"
-                                             href="?page={{ page_obj.paginator.num_pages }}">last
-                        &raquo;</a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled"><a class="page-link artitone-page-link">next</a></li>
-                    <li class="page-item disabled"><a class="page-link artitone-page-link">last &raquo;</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav>
         </div>
 
         <div style="display: flex; justify-content: center; align-items: center;flex-direction: row;">
@@ -263,9 +130,9 @@
         <footer class="footer">
             <div class="logo-wrapper"><img class="logo-2" src="{% static 'images/logo.png' %}"/></div>
             <div class="content-2">
-                <div class="text-wrapper-12" >ABOUT</div>
+                <div class="text-wrapper-12">ABOUT</div>
                 <div class="footer-links">
-                    <p class="link" > <a href="{% url 'about' %}">Our story</a></p>
+                    <div class="link">Our story</div>
                 </div>
             </div>
             <div class="content-2">
