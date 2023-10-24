@@ -13,6 +13,8 @@ import logging
 import os
 from pathlib import Path
 
+from django.contrib.messages import constants as messages
+
 from artitone.environment import environment
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -255,3 +257,12 @@ FILE_UPLOAD_HANDLERS = [
 
 # Default file upload memory size 10M
 FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 30
+
+# messages
+MESSAGE_TAGS = {
+    messages.DEBUG: "alert-secondary",
+    messages.INFO: "alert-info",
+    messages.SUCCESS: "alert-success",
+    messages.WARNING: "alert-warning",
+    messages.ERROR: "alert-danger",
+}

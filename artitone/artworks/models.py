@@ -128,5 +128,15 @@ class Artwork(models.Model):
     pubdate = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     model = models.OneToOneField(IndustrialModel, null=True, blank=True, on_delete=models.CASCADE)
 
+    PUBLISHED = "PU"
+    IN_PROGRESS = "PR"
+    ARCHIVED = "AR"
+    STATUS_CHOICES = [
+        (PUBLISHED, "Published"),
+        (IN_PROGRESS, "In Progress"),
+        (ARCHIVED, "Archived"),
+    ]
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, blank=False, default=PUBLISHED)
+
     def __str__(self):
         return self.title
