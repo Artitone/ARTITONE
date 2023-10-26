@@ -2,12 +2,10 @@ import logging
 
 import cv2 as cv
 import numpy as np
+from rembg import remove
 from sklearn.cluster import KMeans
 
-# from rembg import remove
-
-
-logger = logging.getLogger("artitone_colormeter")
+logger = logging.getLogger(__name__)
 
 
 def rgb2hex(rgb):
@@ -22,6 +20,9 @@ def hex2rgb(hex):
 
 NUM_CLUSTERS = 5
 COLOR_PALETTE = [
+    # We would like to discard this color for remove background
+    hex2rgb("#00ff00"),
+    # Here are the color pallates we would like to use
     hex2rgb("#ffffff"),
     hex2rgb("#d9d9d9"),
     hex2rgb("#0d0907"),
@@ -95,7 +96,10 @@ def _get_dominant_color(image_file):
 
     im = cv.cvtColor(im, cv.COLOR_BGR2RGB)
     im = cv.resize(im, (150, 150), interpolation=cv.INTER_AREA)  # optional, to reduce time
-
+    im = remove(im)
+    im = cv.cvtColor(im, cv.COLOR_RGBA2RGB)
+    mask = cv.inRange(im, np.array([0, 0, 0]), np.array([1, 1, 1]))
+    im[mask > 0] = (0, 255, 0)
     clt = KMeans(n_clusters=5)
     clt = clt.fit(im.reshape(-1, 3))
     colors = []
@@ -112,8 +116,9 @@ def find_closet_colors(colors):
     for c in colors:
         color = np.array([c[0], c[1], c[2]])
         distances = np.sqrt(np.sum((COLOR_PALETTE - color) ** 2, axis=1))
-        index_of_smallest = np.where(distances == np.amin(distances))
-        closest_palatte.append(tuple(COLOR_PALETTE[int(index_of_smallest[0])]))
+        index_of_smallest = int(np.where(distances == np.amin(distances))[0])
+        if index_of_smallest != 0:
+            closest_palatte.append(tuple(COLOR_PALETTE[index_of_smallest]))
     return closest_palatte
 
 
@@ -137,7 +142,7 @@ def filter_by_color_pallate(pallate_name, artworks):
 
 def _filter_by_pallate(pallate, artworks):
     colors = [rgb2hex(tuple(color)) for color in pallate]
-    artworks = artworks.filter(colors__name__in=colors)
+    artworks = artworks.filter(colors__name__in=colors).distinct()
     return artworks
 
 

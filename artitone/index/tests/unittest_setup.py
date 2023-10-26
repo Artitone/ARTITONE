@@ -8,9 +8,10 @@ from artitone.settings import BASE_DIR
 from artworks.models import Artwork
 from artworks.models import Category
 from artworks.models import Picture
-from profiles.models import Artist
-from profiles.models import User
-from profiles.models import UserType
+from profiles.models.artist import Artist
+from profiles.models.customer import Customer
+from profiles.models.user import User
+from profiles.models.user import UserType
 
 
 class TestCase(test.TestCase):
@@ -27,6 +28,17 @@ class TestCase(test.TestCase):
             user_name="Van Gogh",
             first_name="Vincint",
             last_name="Gogh",
+        )
+        self.c_user = get_user_model().objects.create_user(
+            email="picasso@gmail.com",
+            password="p_i_c_a_s_s_o",
+            type=UserType.CUSTOMER,
+        )
+        self.customer = Customer.objects.create(
+            user=self.c_user,
+            user_name="P.Picasso",
+            first_name="Pablo",
+            last_name="Picasso",
         )
         self.category = Category.objects.create(name="Painting")
         self.category2 = Category.objects.create(name="Sculpture")
@@ -53,6 +65,7 @@ class TestCase(test.TestCase):
             )
         )
         self.artist.photo = self.picture.picture
+        self.customer.photo = self.picture.picture
 
         self.artwork = Artwork.objects.create(
             artist=self.artist,
@@ -83,4 +96,5 @@ class TestCase(test.TestCase):
         self.artwork.delete()
         self.picture.delete()
         self.artist.delete()
+        self.customer.delete()
         self.category.delete()

@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+<div class="menu">
+    <div class="div">
+
+        <div class="frame" id="artitone-frame" onmouseover="showMenu()" onmouseleave="hideMenu()">
+            <form id="searchbox" method="get" action="{% url 'shop_interface' %}">
+                <div class="new-arrivals">
+                    <div class="home">
+                        <div class="home-2">
+                            <button class="artitone-sidebar" name="category" type="submit"
+                                    value="New Arrivals">New Arrivals
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="group-5">
+                    <div class="photograph">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Photograph">Photograph
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="painting">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Painting">Painting
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="print">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Print">Print
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wall-arts">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Wall Arts">Wall Arts
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="decorative-trays">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Trays">Trays
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wall-hangings">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Hangings">Hangings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Table">Table
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chair">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Chair">Chair
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cabinet">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Cabinets">Cabinets
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sculpture">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Sculpture">Sculpture
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-wrapper-2">Fine Arts</div>
+                    <div class="text-wrapper-3">Home Decor</div>
+                    <div class="text-wrapper-4">Furniture</div>
+                </div>
+            </form>
+        </div>
+
+        <div class="container">
+            <div class="section-title">
+                <div class="text-wrapper-8">Featured Items</div>
+                <p style="width: 75%; text-align: center;">
+                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt sagittis eros.
+                </p>
+            </div>
+            <div class="artitone-article">
+                {% for artwork in page_obj %}
+                <div class="artitone-article-item">
+                    {% with artwork.pictures.all|first as img %}
+                    <img class="element" src="{{ img }}" loading="lazy">
+                    {% endwith %}
+                    Artist: <a href="{% url 'artist_profile_page' artwork.artist.pk %}">{{ artwork.artist.first_name }}, {{ artwork.artist.last_name }}</a>
+                    <div class="text-wrapper-9">{{ artwork.name }}</div>
+                    <p class="text-wrapper-11">{{ artwork.content }}</p>
+                    <p class="text-wrapper-10">$ {{ artwork.price }}</p>
+                    {% if user.is_customer %}
+                    <a href="{% url 'purchase_artwork' artwork.pk %}" class="btn btn-dark artitone-btn"
+                       style="width: 240px;">purchase</a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <nav aria-label="Page navigation" style="display: flex; justify-content: center; align-items: center;">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link artitone-page-link" href="?page=1">&laquo;
+                        first</a></li>
+                    <li class="page-item"><a class="page-link artitone-page-link"
+                                             href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled"><a class="page-link artitone-page-link">&laquo; first</a>
+                    </li>
+                    <li class="page-item disabled"><a class="page-link artitone-page-link">previous</a></li>
+                    {% endif %}
+                    {% for page_num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == page_num %}
+                    <li class="page-item active"><a class="page-link artitone-page-link"
+                                                    href="?page={{ page_num }}">{{ page_num }}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link artitone-page-link"
+                                             href="?page={{ page_num }}">{{ page_num }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link artitone-page-link"
+                                             href="?page={{ page_obj.next_page_number }}">next</a></li>
+                    <li class="page-item"><a class="page-link artitone-page-link"
+                                             href="?page={{ page_obj.paginator.num_pages }}">last
+                        &raquo;</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled"><a class="page-link artitone-page-link">next</a></li>
+                    <li class="page-item disabled"><a class="page-link artitone-page-link">last &raquo;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center;flex-direction: row;">
+            <img class="vector-3" src="{% static 'images/vector-3.svg' %}">
+        </div>
+        <footer class="footer">
+            <div class="logo-wrapper"><img class="logo-2" src="{% static 'images/logo.png' %}"/></div>
+            <div class="content-2">
+                <div class="text-wrapper-12" >ABOUT</div>
+                <div class="footer-links">
+                    <p class="link" > <a href="{% url 'about' %}">Our story</a></p>
+                </div>
+            </div>
+            <div class="content-2">
+                <div class="text-wrapper-12">POLICIES</div>
+                <div class="footer-links">
+                    <p class="link">Term & Condition</p>
+                    <p class="link">Privacy & Policy</p>
+                </div>
+            </div>
+            <div class="content-2">
+                <div class="text-wrapper-12">CONTACT</div>
+                <div class="footer-links">
+                    <div class="link">Contact</div>
+                    <div class="link">Help</div>
+                </div>
+            </div>
+        </footer>
+
+        <div style="display: flex; justify-content: center; align-items: center;flex-direction: column;">
+            <img class="vector-3" src="{% static 'images/vector-3.svg' %}">
+            <p class="text">Copyright © 2023 Artitone</p>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

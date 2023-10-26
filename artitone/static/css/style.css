@@ -1,1106 +1,1046 @@
 .menu {
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .menu .div {
-  background-color: #ffffff;
-  width: 100%;
-  position: relative;
+    background-color: #ffffff;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .menu .overlap-group {
-  width: 1500px;
-  background-image: url(../images/2023-07-17-13-29-1.png);
-  background-size: cover;
-  background-position: 50% 50%;
-  position: relative;
-  height: 753px;
-  left: 0;
-  display: inline-block;
+    width: 100%;
+    background-image: url(../images/2023-07-17-13-29-1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    height: 100vh;
+    left: 0;
+    display: inline-block;
 }
 
-.menu .overlap {
-  width: 1174px;
-  height: 823px;
-  top: 0;
-  left: 0;
-}
-
-.menu .overlap-2 {
-  width: 1110px;
-  position: absolute;
-  height: 823px;
-  top: 0;
-  left: 0;
+.menu .overlap-group2 {
+    width: 100%;
+    background-image: url(../images/2023-07-18-20-43-1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    height: 100vh;
+    left: 0;
+    display: inline-block;
 }
 
 .menu .cotainter {
-  position: absolute;
-  width: 870px;
-  height: 342px;
-  top: 294px;
-  left: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    position: relative;
+    top: 30%;
+    left: 20%;
+    width: 60%;
+}
+
+.parallel-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .menu .content {
-  position: absolute;
-  width: 870px;
-  height: 149px;
-  top: 0;
-  left: 0;
+    max-width: 870px;
 }
 
 .menu .p-lorem-ipsum-dolor {
-  position: absolute;
-  width: 330px;
-  top: 72px;
-  left: 0;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #ffffff;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: normal;
+    width: 330px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: 5px;
+}
+
+.menu .frame-6 {
+    width: 15%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .menu .group {
-  position: absolute;
-  width: 83px;
-  height: 83px;
-  top: -29px;
-  left: 0;
+    display: flex;
+    width: 83px;
+    height: 83px;
 }
 
 .menu .actions {
-  position: absolute;
-  width: 113px;
-  height: 44px;
-  top: 172px;
-  left: 0;
+    width: fit-content;
 }
 
 .menu .button {
-  position: relative;
-  height: 44px;
-  background-color: #ffffff;
-  border-radius: 20px;
-  all: unset;
-  box-sizing: border-box;
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    border: 1px solid #000000;  /* Ensure this comes after `all: unset;` */
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 0 20px;
 }
 
 .menu .text-wrapper {
-  position: absolute;
-  top: 10px;
-  left: 28px;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 22.4px;
-  white-space: nowrap;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 22.4px;
+    white-space: nowrap;
 }
 
 .menu .artitone-color-small {
-  border: none;
-  font-size: 0;
+    border: none;
+    font-size: 0;
 }
 
-.menu .img {
-  position: absolute;
-  width: 41px;
-  height: 41px;
-  top: 238px;
-  left: 0;
+.menu .title-copy-goes {
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
-.menu .group-2 {
-  position: absolute;
-  width: 41px;
-  height: 41px;
-  top: 238px;
-  left: 60px;
+.rectangle, .rectangle-2, .rectangle-3 {
+    width: 42px;
+    height: auto;
+    display: block;
 }
 
-.menu .group-3 {
-  position: absolute;
-  width: 41px;
-  height: 41px;
-  top: 301px;
-  left: 0;
+.artitone-color-small {
+    min-width: 41px; /* This will ensure it always maintains this width */
+    height: 41px;
+    border: none;
+    cursor: pointer;
 }
 
-.menu .group-4 {
-  position: absolute;
-  width: 41px;
-  height: 41px;
-  top: 301px;
-  left: 60px;
+.artitone-color-title {
+    min-width: 85px; /* This will ensure it always maintains this width */
+    height: 85px;
+    border: none;
+    cursor: pointer;
 }
+
+.input-grid {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* adjust for spacing between title and content */
+}
+
 
 .frame {
-  width: 386px;
-  height: 100%;
-  left: 0;
-  background-color: #ffffff;
-  position: fixed;
-  top: 0;
-  z-index: 4;
-  display: none;
+    width: 386px;
+    height: 100%;
+    left: 0;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    z-index: 4;
+    display: none;
 }
 
 .menu .new-arrivals {
-  position: absolute;
-  width: 141px;
-  height: 27px;
-  top: 120px;
-  left: 39px;
+    position: absolute;
+    width: 141px;
+    height: 27px;
+    top: 120px;
+    left: 39px;
 }
 
 .menu .home {
-  position: relative;
-  height: 27px;
+    position: relative;
+    height: 27px;
 }
 
 .menu .home-2 {
-  position: absolute;
-  top: -1px;
-  left: 0;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #ff2929;
-  font-size: 24px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #ff2929;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .group-5 {
-  position: absolute;
-  width: 183px;
-  height: 513px;
-  top: 188px;
-  left: 39px;
+    position: absolute;
+    width: 183px;
+    height: 513px;
+    top: 188px;
+    left: 39px;
 }
 
 .menu .photograph {
-  position: absolute;
-  width: 57px;
-  height: 27px;
-  top: 72px;
-  left: 88px;
+    position: absolute;
+    width: 57px;
+    height: 27px;
+    top: 72px;
+    left: 88px;
 }
 
 .menu .home-3 {
-  position: absolute;
-  top: -1px;
-  left: 0;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 20px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .painting {
-  position: absolute;
-  width: 57px;
-  height: 27px;
-  top: 39px;
-  left: 88px;
+    position: absolute;
+    width: 57px;
+    height: 27px;
+    top: 39px;
+    left: 88px;
 }
 
 .menu .print {
-  position: absolute;
-  width: 57px;
-  height: 27px;
-  top: 138px;
-  left: 88px;
+    position: absolute;
+    width: 57px;
+    height: 27px;
+    top: 138px;
+    left: 88px;
 }
 
 .menu .wall-arts {
-  width: 89px;
-  top: 246px;
-  position: absolute;
-  height: 27px;
-  left: 88px;
+    width: 89px;
+    top: 246px;
+    position: absolute;
+    height: 27px;
+    left: 88px;
 }
 
 .menu .decorative-trays {
-  position: absolute;
-  width: 57px;
-  height: 27px;
-  top: 312px;
-  left: 88px;
+    position: absolute;
+    width: 57px;
+    height: 27px;
+    top: 312px;
+    left: 88px;
 }
 
 .menu .wall-hangings {
-  width: 64px;
-  top: 279px;
-  position: absolute;
-  height: 27px;
-  left: 88px;
+    width: 64px;
+    top: 279px;
+    position: absolute;
+    height: 27px;
+    left: 88px;
 }
 
 .menu .table {
-  position: absolute;
-  width: 57px;
-  height: 27px;
-  top: 420px;
-  left: 88px;
+    position: absolute;
+    width: 57px;
+    height: 27px;
+    top: 420px;
+    left: 88px;
 }
 
 .menu .chair {
-  position: absolute;
-  width: 57px;
-  height: 27px;
-  top: 453px;
-  left: 88px;
+    position: absolute;
+    width: 57px;
+    height: 27px;
+    top: 453px;
+    left: 88px;
 }
 
 .menu .cabinet {
-  position: absolute;
-  width: 57px;
-  height: 27px;
-  top: 486px;
-  left: 88px;
+    position: absolute;
+    width: 57px;
+    height: 27px;
+    top: 486px;
+    left: 88px;
 }
 
 .menu .sculpture {
-  position: absolute;
-  width: 57px;
-  height: 27px;
-  top: 105px;
-  left: 88px;
+    position: absolute;
+    width: 57px;
+    height: 27px;
+    top: 105px;
+    left: 88px;
 }
 
 .menu .text-wrapper-2 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 24px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .text-wrapper-3 {
-  position: absolute;
-  top: 207px;
-  left: 1px;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 24px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: absolute;
+    top: 207px;
+    left: 1px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .text-wrapper-4 {
-  position: absolute;
-  top: 381px;
-  left: 1px;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 24px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: absolute;
+    top: 381px;
+    left: 1px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .logo {
-  position: absolute;
-  width: 256px;
-  height: 47px;
-  top: 27px;
-  left: 39px;
+    position: absolute;
+    width: 256px;
+    height: 47px;
+    top: 27px;
+    left: 39px;
 }
 
 .menu .text-wrapper-5 {
-  position: absolute;
-  top: 32px;
-  left: 1076px;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: absolute;
+    top: 32px;
+    left: 1076px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .general-search {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 35px;
-  left: 1046px;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 35px;
+    left: 1046px;
 }
 
 .menu .vector {
-  width: 97px;
-  top: 54px;
-  left: 1077px;
-  object-fit: cover;
-  position: absolute;
-  height: 1px;
+    width: 97px;
+    top: 54px;
+    left: 1077px;
+    object-fit: cover;
+    position: absolute;
+    height: 1px;
 }
 
 .menu .account {
-  position: absolute;
-  width: 88px;
-  height: 114px;
-  top: 35px;
-  left: 1322px;
+    position: absolute;
+    width: 88px;
+    height: 114px;
+    top: 35px;
+    left: 1322px;
 }
 
 .menu .text-wrapper-6 {
-  position: absolute;
-  top: -8px;
-  left: 0;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: absolute;
+    top: -8px;
+    left: 0;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .arrow-arrow-down {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 0;
-  left: 64px;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 0;
+    left: 64px;
 }
 
 .menu .text-wrapper-7 {
-  position: absolute;
-  top: 34px;
-  left: 1225px;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: absolute;
+    top: 34px;
+    left: 1225px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .container {
-  display: inline-block;
-  position: relative;
-  top: 80px;
-  left: 18px;
-  max-width: inherit;
-  height: 1500px;
-  margin-top: 50px;
+    display: flex; /* Use Flexbox */
+    position: relative;
+    max-width: inherit;
+    margin-top: 50px;
+    flex-direction: column; /* Stack the children vertically */
+    align-items: center; /* Center children horizontally */
+    justify-content: flex-start; /* Align children to the top */
 }
 
 .menu .section-title {
-  position: relative;
-  height: 103px;
-  top: 0;
-  margin-left: 437px;
+    display: flex;
+    flex-direction: column; /* Stack the children vertically */
+    align-items: center; /* Center children horizontally */
+    margin-bottom: 10vh;
 }
 
 .menu .text-wrapper-8 {
-  position: absolute;
-  width: 530px;
-  top: -1px;
-  left: 0;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 36px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: normal;
+    top: -1px;
+    left: 0;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 36px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .p {
-  position: absolute;
-  width: 437px;
-  top: 64px;
-  left: 46px;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #666666;
-  font-size: 14px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: normal;
+    position: absolute;
+    width: 437px;
+    top: 64px;
+    left: 46px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #666666;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .columns {
-  top: 149px;
-  position: absolute;
-  width: 1404px;
-  height: 508px;
-  left: 0;
+    top: 149px;
+    position: absolute;
+    width: 1404px;
+    height: 508px;
+    left: 0;
 }
 
 .menu .element {
-  position: relative;
-  width: 300px;
+    position: relative;
+    width: 300px;
 }
 
 .menu .text-wrapper-9 {
-  position: relative;
-  width: fit-content;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: relative;
+    width: fit-content;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .text-wrapper-10 {
-  position: relative;
-  width: 201px;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 12px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: normal;
+    position: relative;
+    width: 201px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .text-wrapper-11 {
-  position: relative;
-  width: fit-content;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #666666;
-  font-size: 12px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: relative;
+    display: inline-block;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #666666;
+    font-size: 12px;
+    letter-spacing: 0;
+    white-space: nowrap;  /* Prevent wrapping */
+    text-overflow: ellipsis;  /* Display ellipsis for overflowed text */
 }
 
 .menu .frame-3 {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  left: 355px;
-  position: absolute;
-  top: 0;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    left: 355px;
+    position: absolute;
+    top: 0;
 }
 
 .menu .frame-4 {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  left: 710px;
-  position: absolute;
-  top: 0;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    left: 710px;
+    position: absolute;
+    top: 0;
 }
 
 .menu .frame-5 {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  left: 1065px;
-  position: absolute;
-  top: 0;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    left: 1065px;
+    position: absolute;
+    top: 0;
 }
 
 .menu .columns-2 {
-  top: 703px;
-  position: absolute;
-  width: 1404px;
-  height: 508px;
-  left: 0;
+    top: 703px;
+    position: absolute;
+    width: 1404px;
+    height: 508px;
+    left: 0;
 }
 
 .menu .footer {
-  position: relative;
-  height: 161px;
-  margin-top: 100px;
-  margin-left: 240px;
-  background-color: transparent;
-}
-
-.menu .column {
-  position: absolute;
-  width: 320px;
-  height: 52px;
-  top: 0;
-  left: 0;
-}
-
-.menu .logo-wrapper {
-  position: relative;
-  width: 141px;
-  height: 52px;
-}
-
-.menu .logo-2 {
-  position: absolute;
-  /* width: 141px; */
-  height: 25px;
-  top: 20px;
-  left: 100px;
-  object-fit: cover;
-}
-
-.menu .small-columns {
-  position: absolute;
-  width: 600px;
-  height: 161px;
-  top: 0;
-  left: 260px;
-}
-
-.menu .content-wrapper {
-  position: absolute;
-  width: 179px;
-  height: 116px;
-  top: 16px;
-  left: 0;
+    position: relative;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: start; /* To ensure they align at the top */
+    flex-wrap: wrap; /* Ensures the items wrap onto the next line on smaller screens */
+    font-family: Arial, sans-serif;
 }
 
 .menu .content-2 {
-  position: relative;
-  height: 116px;
+    flex: 0.15;
+    box-sizing: border-box; /* Ensures padding is included in the element's total width */
+
+}
+
+.menu .column {
+    width: 320px;
+    height: 52px;
+}
+
+.menu .logo-wrapper {
+    position: relative;
+}
+
+.menu .logo-2 {
+    width: 80%;
 }
 
 .menu .text-wrapper-12 {
-  position: absolute;
-  width: 179px;
-  top: -1px;
-  left: 0;
-  font-family: "Inter", Helvetica;
-  font-weight: 700;
-  color: #212121;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 21px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 700;
+    color: #212121;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 21px;
 }
 
-.menu .footer-links {
-  position: absolute;
-  width: 179px;
-  height: 79px;
-  top: 37px;
-  left: 0;
-}
 
 .menu .link {
-  width: 179px;
-  top: -1px;
-  position: absolute;
-  left: 0;
-  font-family: "Inter", Helvetica;
-  font-weight: 400;
-  color: #212121;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 21px;
-}
-
-.menu .link-2 {
-  width: 179px;
-  top: 28px;
-  position: absolute;
-  left: 0;
-  font-family: "Inter", Helvetica;
-  font-weight: 400;
-  color: #212121;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 21px;
-}
-
-.menu .link-3 {
-  width: 179px;
-  top: 57px;
-  position: absolute;
-  left: 0;
-  font-family: "Inter", Helvetica;
-  font-weight: 400;
-  color: #212121;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 21px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #212121;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 21px;
 }
 
 .menu .div-wrapper {
-  position: absolute;
-  width: 179px;
-  height: 145px;
-  top: 16px;
-  left: 211px;
-}
-
-.menu .content-3 {
-  position: relative;
-  height: 145px;
-}
-
-.menu .footer-links-2 {
-  height: 108px;
-  position: absolute;
-  width: 179px;
-  top: 37px;
-  left: 0;
-}
-
-.menu .link-4 {
-  width: 179px;
-  top: 86px;
-  position: absolute;
-  left: 0;
-  font-family: "Inter", Helvetica;
-  font-weight: 400;
-  color: #212121;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 21px;
-}
-
-.menu .column-2 {
-  position: absolute;
-  width: 179px;
-  height: 87px;
-  top: 16px;
-  left: 421px;
-}
-
-.menu .content-4 {
-  position: relative;
-  height: 87px;
-}
-
-.menu .footer-links-3 {
-  height: 50px;
-  position: absolute;
-  width: 179px;
-  top: 37px;
-  left: 0;
-}
-
-.menu .link-5 {
-  top: -1px;
-  white-space: nowrap;
-  position: absolute;
-  left: 0;
-  font-family: "Inter", Helvetica;
-  font-weight: 400;
-  color: #212121;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 21px;
-}
-
-.menu .link-6 {
-  top: 28px;
-  white-space: nowrap;
-  position: absolute;
-  left: 0;
-  font-family: "Inter", Helvetica;
-  font-weight: 400;
-  color: #212121;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 21px;
-}
-
-.menu .vector-2 {
-  left: 0;
-  position: relative;
-  height: 1px;
-  padding-left: 100px;
+    position: absolute;
+    width: 179px;
+    height: 145px;
+    top: 16px;
+    left: 211px;
 }
 
 .menu .vector-3 {
-  top: 130px;
-  left: 0;
-  position: relative;
-  height: 1px;
-  padding-left: 100px;
+ width: 60%;
 }
 
 .menu .text {
-  position: relative;
-  top: 121px;
-  font-family: "Inter", Helvetica;
-  font-weight: 400;
-  color: #333333;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 21px;
-  white-space: nowrap;
-  margin-left: 400px;
+    position: relative;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #333333;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 21px;
+    white-space: nowrap;
 }
 
 .menu .nav {
-  position: absolute;
-  width: 168px;
-  height: 23px;
-  top: 38px;
-  left: 638px;
+    top: 1.5vh;
+}
+
+/* Setting transparent background for all pills and no border */
+.nav.nav-pills.mb-3 .nav-link {
+    background-color: transparent;
+    border: none;
+    border-radius: 0; /* Remove any border-radius if it exists */
+}
+
+.nav.nav-pills.mb-3 .nav-link {
+    color: gray; /* Color for inactive tabs */
+}
+
+/* Underline for the active pill */
+.nav.nav-pills.mb-3 .nav-link.active {
+    color: black;
+    text-decoration: underline;
+    border: none; /* Ensure that there's no border */
+}
+
+/* Optionally, style the hover state if desired */
+.nav.nav-pills.mb-3 .nav-link:hover {
+    text-decoration: underline; /* Show underline on hover */
 }
 
 .menu .search {
-  position: absolute;
-  width: 54px;
-  height: 1px;
-  top: 22px;
-  left: 0;
+    position: absolute;
+    width: 54px;
+    height: 1px;
+    top: 22px;
+    left: 0;
 }
 
 .menu .color {
-  position: absolute;
-  top: 70px;
-  left: 0;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .menu .texture {
-  position: absolute;
-  top: 70px;
-  left: 97px;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: normal;
+    position: absolute;
+    top: 70px;
+    left: 97px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 nav.artitone-navbar {
-  position: fixed;
-  z-index: 10;
-  width: 100%;
-  background-color: #ffffff;
-  padding: 0rem 0rem;
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 0rem 0rem;
 }
 
 .artitone-logo {
-  margin-left: 10px;
-  display: inline-block;
+    margin-left: 10px;
+    display: inline-block;
 }
 
 .artitone-navitem {
-  padding-right: 30px;
-}
-
-.artitone-article-item {
-  grid-area: span 1 / span 1 / span 1 / span 1;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0px;
-  top: 0;
+    padding-right: 30px;
 }
 
 .artitone-article {
-  position: relative;
-  grid-column-gap: 50px;
-  grid-row-gap: 10px;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-auto-columns: 1fr;
-  margin-top: 50px;
-  display: grid;
-  margin-left: 20px;
-  width: 1404px;
+    position: relative;
+    grid-column-gap: 50px;
+    grid-row-gap: 10px;
+    grid-template-rows: auto auto;
+    grid-template-columns: repeat(4, 1fr); /* Simplified your columns definition */
+    margin-top: 50px;
+    display: grid;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
 }
 
-.artitone-block-content {
-  padding-top: 70px;
+.artitone-article-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Adjust as needed for spacing between child elements */
+    width: 100%; /* Take the full width of its grid cell */
+    height: 100%; /* Take the full height of its grid cell */
+    overflow: hidden; /* Prevent content from overflowing */
+    position: relative; /* Allows absolute positioning inside this item, if needed later */
+}
+
+.element-index {
+    width: 100%; /* Image will take full width of its container */
+    height: 100%; /* Maintain the image's aspect ratio */
+    max-height: 100%; /* Ensure it doesn't overflow its container */
+    object-fit: cover; /* Makes sure the image covers its entire space */
+}
+
+.element {
+    width: 100%; /* Image will take full width of its container */
+    height: 93%; /* Maintain the image's aspect ratio */
+    max-height: 100%; /* Ensure it doesn't overflow its container */
+    object-fit: cover; /* Makes sure the image covers its entire space */
+}
+
+.image-color-wrapper {
+    display: flex;
+    align-items: center;  /* Align vertically in the middle */
+    width: 85%;
+    height: 60%;
+    gap: 5px;  /* Provides spacing between the image and the color divs */
+}
+.color-wrapper {
+    display: flex;
+    flex-direction: column;  /* Stack color divs vertically */
+    gap: 3px;  /* Adjust as necessary for spacing between color divs */
 }
 
 button.artitone-sidebar {
-  background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+    background: none;
+    color: inherit;
+    padding: 0;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }
 
 .slider {
-  width: 300px;
-  height: 510px;
-  position: relative;
+    width: 300px;
+    height: 510px;
+    position: relative;
 }
 
 .slider img {
-  width: 100%;
-  height: 500px;
-  position: absolute;
-  top: 0;
-  left: 0;
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .slider img:first-child {
-  z-index: 1;
+    z-index: 1;
 }
 
 .slider img:nth-child(2) {
-  z-index: 0;
+    z-index: 0;
 }
 
 .navigation-button {
-  text-align: center;
-  position: relative;
+    text-align: center;
+    position: relative;
 }
 
 .dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
 }
 
 .active,
 .dot:hover {
-  background-color: #717171;
+    background-color: #717171;
 }
 
 a.artitone-nav-brand {
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
 }
 
 .artitone-modal {
-  background-color: #ffffff;
-  overflow: hidden;
+    background-color: #ffffff;
+    overflow: hidden;
 }
 
 .artitone-btn {
-  border: 1.2px solid;
-  border-radius: 0;
-  border-color: #000000;
-  width: 300px;
-  height: 50px;
+    border: 1.2px solid;
+    border-radius: 0;
+    border-color: #000000;
+    width: 300px;
+    height: 50px;
 }
 
 button.artitone-btn {
-  border: 1.2px solid;
-  border-radius: 0;
-  border-color: #000000;
-  background-color: #ffffff;
-  color: #000000;
-  width: 300px;
-  height: 50px;
+    border: 1.2px solid;
+    border-radius: 0;
+    border-color: #000000;
+    background-color: #ffffff;
+    color: #000000;
+    width: 300px;
+    height: 50px;
 }
 
 a.artitone-page-link {
-  border: 1.2px solid;
-  border-radius: 0;
-  border-color: #000000;
-  background-color: #ffffff;
-  color: #000000;
-  /* width: 50px; */
-  /* height: 50px; */
+    border: 1.2px solid;
+    border-radius: 0;
+    border-color: #000000;
+    background-color: #ffffff;
+    color: #000000;
+    /* width: 50px; */
+    /* height: 50px; */
 }
 
-.pagination {
-  margin-top: 20px;
+.pagination .page-link {
+    border: none;
+    color: white;
+}
+
+.pagination .page-item.active .page-link {
+    border-bottom: 2px solid black;
+    background-color: transparent;
+}
+
+.pagination .page-link:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 input[type=text],
 input[type=email],
 input[type=password] {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #000000;
-  border-radius: 0%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    border-radius: 0%;
+}
+
+.artitone-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .artitone-artist-bio {
-  position: relative;
-  margin-top: 20px;
-  width: 1400px;
-  display: grid;
-  grid-column-gap: 200px;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr;
-  padding-bottom: 30px;
-  padding-left: 120px;
+    position: relative;
+    padding-top: 100px;
+    width: 100%;
+    display: grid;
+    grid-column-gap: 100px;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 30px;
+    padding-left: 120px;
 }
 
 img.artitone-profile-photo {
-  width: 129px;
-  height: 129px;
-  margin-top: 50px;
-  margin-left: 38px;
-  border: 1px solid;
-  position: relative;
-  display: inline-block;
-  border-color: #000000;
-  grid-column: 1;
-  grid-row: 1;
+    width: 40%;
+    border: 1px solid;
+    position: relative;
+    display: inline-block;
+    border-color: #000000;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .artitone-profile-name {
-  position: relative;
-  display: inline;
-  top: 45px;
-  left: 0px;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 36px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: normal;
-  grid-column: 1;
-  grid-row: 1;
+    position: relative;
+    display: inline;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 36px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .artitone-profile-username {
-  position: relative;
-  display: inline;
-  top: 45px;
-  left: 170px;
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: var(--grey);
-  font-size: 36px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: normal;
-  grid-column: 1;
-  grid-row: 1;
+    position: relative;
+    display: inline;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: var(--grey);
+    font-size: 36px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .artitone-profile-description {
-  position: relative;
-  display: inline-block;
-  width: 500px;
-  grid-column: 2;
-  grid-row: 1;
-  margin-top: 45px;
+    position: relative;
+    display: inline-block;
+    width: 40%;
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 45px;
 }
 
 .artitone-profile-description-title {
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 19.2px;
-  letter-spacing: 0;
-  line-height: normal;
-  margin-bottom: 10px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 19.2px;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-bottom: 10px;
 }
 
 p.artitone-profile-description-content {
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: var(--grey);
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: normal;
+    font-family: "Open Sans", Helvetica;
+    word-wrap: break-word;
+    font-weight: 400;
+    color: var(--grey);
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 button.artitone-profile-follow {
-  grid-column: 1;
-  grid-row: 1;
-  position: relative;
-  display: inline;
-  border: 1.2px solid;
-  border-color: #000000;
-  top: 110px;
-  left: 220px;
-  width: 172px;
-  height: 43px;
-  font-size: 19.2px;
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    display: inline;
+    border: 1.2px solid;
+    border-color: #000000;
+    top: 110px;
+    left: 220px;
+    width: 172px;
+    height: 43px;
+    font-size: 19.2px;
+}
+
+.button-container {
+    position: relative;
+    padding-right: 100%;
 }
 
 hr.artitone-profile-hr {
-  border-top: 0.01em solid;
-  margin-left: 100px;
-  width: 1250px;
-  padding-bottom: 50px;
-  position: relative;
+    position: relative;
+    border-top: 0.01em solid;
+    margin-left: 100px;
+    width: 80%;
+    padding-bottom: 50px;
 }
 
 .artitone-profile-sort {
-  width: 1380px;
-  position: relative;
-  display: inline-flex;
-  justify-content: flex-end;
-  padding-left: 110px;
+    position: relative;
+    width: 90%;
+    display: inline-flex;
+    justify-content: flex-end;
 }
 
 select.artitone-profile-select {
-  width: 200px;
-  border: none;
-  border-bottom: 1px solid #000000;
-  border-radius: 0%;
+    width: 200px;
+    border: none;
+    border-bottom: 1px solid #000000;
+    border-radius: 0%;
 }
 
 .artitone-upload-body {
-  position: relative;
-  padding-left: 45px;
-  padding-top: 100px;
+    position: relative;
+    padding-left: 45px;
+    padding-top: 100px;
 }
 
 .artitone-h2 {
-  font-family: "Open Sans", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 36px;
-  letter-spacing: 0;
-  line-height: normal;
-  padding-bottom: 50px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: normal;
+    padding-bottom: 50px;
 }
 
 label {
-  font-family: "Open Sans", Helvetica;
-  font-weight: 600;
-  color: #000000;
-  font-size: 19.2px;
-  letter-spacing: 0;
-  line-height: normal;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 600;
+    color: #000000;
+    font-size: 19.2px;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 input.artitone-image-upload {
-  width: 500px;
+    width: 500px;
 }
 
 input.artitone-artworks-price {
-  border: none;
-  border-bottom: 1px solid #000000;
-  border-radius: 0%;
+    border: none;
+    border-bottom: 1px solid #000000;
+    border-radius: 0%;
 }
 
 textarea.artitone-artworks-content {
-  border: 1px solid #000000;
-  border-radius: 0%;
+    border: 1px solid #000000;
+    border-radius: 0%;
 }
 
 .artitone-preview-images {
-  margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
 .artitone-menu-token {
-  position: relative;
-  display: inline-block;
-  width: 21px;
-  height: 21px;
-  top: 10px;
-  margin-left: 30px;
-  background-image: url(../images/hamburger.svg);
-  background-size: 100% 100%;
+    position: relative;
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    top: 10px;
+    margin-left: 30px;
+    background-image: url(../images/hamburger.svg);
+    background-size: 100% 100%;
+}
+
+.container-payment {
+    height: 80vh; /* vh is a unit for viewport height */
+    display: flex; /* enabling flexbox for child alignment */
+    align-items: center; /* centers children vertically */
+    justify-content: center; /* centers children horizontally */
+}
+
+.container-payment-content {
+    display: flex;
+    flex-direction: column; /* stacks children vertically */
+    align-items: center; /* centers children horizontally */
+    justify-content: center; /* centers children vertically */
+    width: 60%; /* or any other value that you find appropriate */
+    max-width: 800px; /* or any other value that ensures form doesn't grow too wide */
 }

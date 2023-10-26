@@ -11,13 +11,11 @@ from profiles.forms.artist import UserLoginForm
 from profiles.forms.customer import CustomerCreationForm
 from profiles.views.activate_email import activateEmail
 
-logger = logging.getLogger("artitone")
+logger = logging.getLogger(__name__)
 
 
 def home(request):
     """Directs the user to their home page."""
-    # if request.user.is_authenticated:
-    #     return redirect(f"profile/{request.user.pk}")
     login_form = UserLoginForm(None, prefix="login")
     artist_signup_form = ArtistCreationForm(None, prefix="artist")
     customer_signup_form = CustomerCreationForm(None, prefix="customer")
@@ -39,7 +37,12 @@ def home(request):
                 user = login_form.login(request)
                 if user:
                     login(request, user)
-                    return redirect("home")
+                    if user.is_artist:
+                        return redirect("artist_profile_page", pk=request.user.pk)
+                    elif user.is_customer:
+                        return redirect("home")
+                    else:
+                        return redirect("home")
         elif form_type == "artist":
             artist_signup_form = ArtistCreationForm(request.POST, request.FILES, prefix="artist")
             if artist_signup_form.is_valid():
@@ -60,6 +63,11 @@ def home(request):
                 user = customer_signup_form.save()
                 user.is_active = False
                 user.save()
+                try:
+                    activateEmail(request, user, user.email)
+                except Exception:
+                    user.delete()
+
                 return redirect("home")
 
     return render(

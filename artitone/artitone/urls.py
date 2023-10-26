@@ -28,6 +28,7 @@ urlpatterns = [
     path("profiles/", include("profiles.urls")),
     path("artworks/", include("artworks.urls")),
     path("paypal/", include("paypal.standard.ipn.urls")),
+    path("purchases/", include("purchases.urls")),
 ]
 
 if not environment.is_aws:

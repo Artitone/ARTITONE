@@ -1,9 +1,11 @@
+import os
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase
 
-from profiles.models import Artist
+from profiles.models.artist import Artist
 
 # Create your models here.
 
@@ -36,7 +38,18 @@ def _post_photo_path(instance, filename):
 
 
 def _post_picture_path(instance, filename):
-    return f"artwork/{instance.id}/{filename}"
+    return f"artwork/{filename}"
+
+
+def _post_3d_model_path(instance, filename):
+    return f"3d_models/{filename}"
+
+
+def validate_3d_model_extension(value):
+    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    valid_extensions = [".skp", ".3dm"]
+    if not ext.lower() in valid_extensions:
+        raise ValidationError(f"Unsupported file extension: {ext.lower()}.")
 
 
 class Picture(models.Model):
@@ -54,6 +67,26 @@ class TaggedColors(TaggedItemBase):
 
 class TaggedCustom(TaggedItemBase):
     content_object = models.ForeignKey("Artwork", on_delete=models.CASCADE, null=True)
+
+
+class IndustrialModel(models.Model):
+    model = models.FileField(
+        upload_to=_post_3d_model_path,
+        blank=True,
+        null=False,
+        validators=[validate_3d_model_extension],
+        help_text="Upload your 3d model files for better exposure chances.",
+    )
+    texture = models.ImageField(
+        upload_to=_post_3d_model_path,
+        blank=True,
+        null=False,
+        validators=[file_size],
+        help_text="Upload your 3d model texture as well.",
+    )
+
+    def __str__(self):
+        return str(self.artwork)
 
 
 class Artwork(models.Model):
@@ -93,6 +126,17 @@ class Artwork(models.Model):
     colors = TaggableManager(through=TaggedColors, related_name="colors")
     content = models.TextField(help_text="Caption your artwork", default="")
     pubdate = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    model = models.OneToOneField(IndustrialModel, null=True, blank=True, on_delete=models.CASCADE)
+
+    PUBLISHED = "PU"
+    IN_PROGRESS = "PR"
+    ARCHIVED = "AR"
+    STATUS_CHOICES = [
+        (PUBLISHED, "Published"),
+        (IN_PROGRESS, "In Progress"),
+        (ARCHIVED, "Archived"),
+    ]
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, blank=False, default=PUBLISHED)
 
     def __str__(self):
         return self.title

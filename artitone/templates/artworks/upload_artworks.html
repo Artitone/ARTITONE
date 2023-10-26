@@ -10,7 +10,7 @@
 id="artwork_form" enctype="multipart/form-data" action="{% url 'upload_artwork' %}">
     {% csrf_token %}
     {{ artwork_form|crispy }}
-
+    {{ model_form|crispy }}
     <div class="artitone-preview-images">
         <img id="photo_preview_1" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="200px">
         <img id="photo_preview_2" src="{% static 'images/upload_defualt.png' %}" alt="Preview feature photo" height="200px">

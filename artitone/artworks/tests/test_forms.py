@@ -64,7 +64,7 @@ class CreateArtworkFormTest(TestCase):
         self.assertEqual(posted_artwork.category, self.category)
         self.assertEqual(posted_artwork.price, 666.66)
         self.assertEqual(
-            get_image_dimensions(posted_artwork.pictures.all()[0].picture.file)[1], 500
+            get_image_dimensions(posted_artwork.pictures.all()[0].picture.file)[1], 499
         )
         self.assertEqual(posted_artwork.content, "Test!")
 

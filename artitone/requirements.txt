@@ -4,9 +4,10 @@ coverage==7.2.1
 crispy-bootstrap5==0.7
 Django==3.2.20
 django-crispy-forms==2.0
+django-cleanup==8.0.0
 django-mathfilters==1.0.0
 django-taggit==4.0.0
-django-ses==3.3.0
+django-ses>=3.5.0
 django-storages==1.13.2
 Django-Verify-Email==2.0.3
 django-widget-tweaks==1.4.12
@@ -16,10 +17,11 @@ flake8==5.0.4
 isort==5.11.5
 scipy
 verify-email==2.4.3
-Pillow==9.3.0
+Pillow>=10.0.1
 psycopg2-binary==2.9.5
 pylint==2.17.5
 pylint-django==2.5.3
 scikit-learn
 opencv-python
+rembg==2.0.50
 git+https://github.com/openai/CLIP.git

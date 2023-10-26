@@ -13,6 +13,8 @@ import logging
 import os
 from pathlib import Path
 
+from django.contrib.messages import constants as messages
+
 from artitone.environment import environment
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -71,11 +73,13 @@ INSTALLED_APPS = [
     "profiles.apps.ProfilesConfig",
     "index.apps.IndexConfig",
     "artworks.apps.ArtworksConfig",
+    "purchases.apps.PurchasesConfig",
     # External applications
     "crispy_forms",
     "crispy_bootstrap5",
     "taggit",
     "paypal.standard.ipn",
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 MIDDLEWARE = [
@@ -127,13 +131,9 @@ CHANNEL_LAYERS = {
 if environment.is_local:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "test_service",
-            "USER": "yifanwu",
-            "PASSWORD": "",
-            "HOST": "localhost",
-            "PORT": 5432,
-        }
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        },
     }
 else:
     DATABASES = {
@@ -249,3 +249,20 @@ else:
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+FILE_UPLOAD_HANDLERS = [
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+]
+
+# Default file upload memory size 10M
+FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 30
+
+# messages
+MESSAGE_TAGS = {
+    messages.DEBUG: "alert-secondary",
+    messages.INFO: "alert-info",
+    messages.SUCCESS: "alert-success",
+    messages.WARNING: "alert-warning",
+    messages.ERROR: "alert-danger",
+}

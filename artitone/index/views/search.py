@@ -33,7 +33,7 @@ class Filter:
                 Q(title__icontains=self.keyword)
                 | Q(content__icontains=self.keyword)
                 | Q(tags__name__icontains=self.keyword)
-            )
+            ).distinct()
         return artworks
 
 

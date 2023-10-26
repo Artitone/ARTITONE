@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-<h1>Show me the money!</h1>
-<h2>{{ alert }}</h2>
 <!-- writes out the form tag automatically -->
-{{ form.render }}
   <!-- <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +13,48 @@
     <script src="https://www.paypal.com/sdk/js?client-id=AfGeRejIjIvkxRUqwW0As3UJAhJlsZP6089hulVesTQf-u5yEnpU7LulUaCb9MFLwELhyWmQtaFpvdgn&currency=USD"></script>
     <script src="{% static 'js/payment.js' %}"></script>
   </body> -->
+    <div class="container-payment">
+        <div class="container-payment-content">
+            <div class="text-wrapper-8"><h2>{{ alert }}</h2></div>
+            {{ form.render }}
+        </div>
+    </div>
+
+    <div class="menu">
+        <div class="div">
+            <div style="display: flex; justify-content: center; align-items: center;flex-direction: row;">
+                <img class="vector-3" src="{% static 'images/vector-3.svg' %}">
+            </div>
+            <footer class="footer">
+                <div class="logo-wrapper"><img class="logo-2" src="{% static 'images/logo-1.svg' %}"/></div>
+                <div class="content-2">
+                    <div class="text-wrapper-12" >ABOUT</div>
+                    <div class="footer-links">
+                        <p class="link" > <a href="{% url 'about' %}">Our story</a></p>
+                    </div>
+                </div>
+                <div class="content-2">
+                    <div class="text-wrapper-12">POLICIES</div>
+                    <div class="footer-links">
+                        <p class="link">Term & Condition</p>
+                        <p class="link">Privacy & Policy</p>
+                    </div>
+                </div>
+                <div class="content-2">
+                    <div class="text-wrapper-12">CONTACT</div>
+                    <div class="footer-links">
+                        <div class="link">Contact</div>
+                        <div class="link">Help</div>
+                    </div>
+                </div>
+            </footer>
+
+            <div style="display: flex; justify-content: center; align-items: center;flex-direction: column;">
+                <img class="vector-3" src="{% static 'images/vector-3.svg' %}">
+                <p class="text">Copyright © 2023 Artitone</p>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}

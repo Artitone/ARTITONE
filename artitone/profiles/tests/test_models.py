@@ -1,4 +1,8 @@
-from profiles.models import UserType
+from profiles.models.artist import Artist
+from profiles.models.following import UserFollowing
+from profiles.models.following import follow
+from profiles.models.following import unfollow
+from profiles.models.user import UserType
 from profiles.tests.unittest_setup import TestCase
 
 
@@ -19,3 +23,25 @@ class UserTest(TestCase):
         self.assertTrue(self.admin.is_staff)
         self.assertTrue(self.admin.is_superuser)
         self.assertEqual(self.admin.type, UserType.ADMIN)
+
+
+class TestUserFollowing(TestCase):
+    def setUp(self):
+        super().setUp()
+
+    def test_follow(self):
+        self.assertEqual(self.customer.following.all().count(), 0)
+        self.assertEqual(self.artist.followers.all().count(), 0)
+        follow(self.customer, self.artist)
+        self.assertEqual(self.customer.following.all().count(), 1)
+        self.assertEqual(self.artist.followers.all().count(), 1)
+
+    def test_unfollow(self):
+        self.assertEqual(self.customer.following.all().count(), 0)
+        self.assertEqual(self.artist.followers.all().count(), 0)
+        follow(self.customer, self.artist)
+        self.assertEqual(self.customer.following.all().count(), 1)
+        self.assertEqual(self.artist.followers.all().count(), 1)
+        unfollow(self.customer, self.artist)
+        self.assertEqual(self.customer.following.all().count(), 0)
+        self.assertEqual(self.artist.followers.all().count(), 0)

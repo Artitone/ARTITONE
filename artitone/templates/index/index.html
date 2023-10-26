@@ -1,354 +1,329 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  <body>
-    <div class="menu">
-      <div class="div">
-        <div class="overlap-group">
-          <div class="overlap">
-            <div class="overlap-2">
+<body>
+<div class="menu">
+    <div class="div">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"
+            style="z-index: 1000; position: absolute; left: 45%">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-home-tab" data-toggle="pill"
+                        data-target="#pills-home"
+                        type="button" role="tab" aria-controls="pills-home" aria-selected="true">Color
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-profile-tab" data-toggle="pill"
+                        data-target="#pills-profile"
+                        type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Texture
+                </button>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+              <form id="searchbox" method="get" action="{% url 'shop_interface' %}">
+                <div class="overlap-group">
+                    <div class="cotainter">
+                        <div class="content">
+                            <div class="input-grid" style="height: 85px">
+                                <input type="submit" class="img artitone-color-title"
+                                       style="background:url({% static 'images/group-12-1.png' %}) no-repeat;background-size: 83px 83px;; font-size: 0; text-indent: -9999px; color: transparent;"
+                                       name="color" value="bohemian" />
+                                <div class="text-content">
+                                    <h4 style="font-size: 20px; color: white">Classic Simplicity</h4>
+                                    <p style="color: white; font-size: 11px">Light Brown, Deep Orange, Jungle green, Moon Blue</p>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="actions" style="margin-top: 10px">
+                            <button class="button">
+                                <div class="text-wrapper">Explore</div>
+                            </button>
+                            <div class="input-grid">
+                                <input type="submit" class="img artitone-color-small"
+                                       style="background:url({% static 'images/group-12.png' %}) no-repeat;background-size: 41px 41px;"
+                                       name="color" value="bohemian"/>
+                                <div class="text-content">
+                                    <h4 style="font-size: 16px; color: white">Mystic Wilderness</h4>
+                                    <p style="color: white; font-size: 9px">Light Brown, Deep Orange, Jungle green, Moon Blue</p>
+                                </div>
 
+                                <input type="submit" class="img artitone-color-small"
+                                       style="background:url({% static 'images/group-13.png' %}) no-repeat;background-size: 41px 41px;"
+                                       name="color" value="industrial"/>
+                                <div class="text-content">
+                                    <h4 style="font-size: 16px; color: white">Night Sky Elegance</h4>
+                                    <p style="color: white; font-size: 9px">White, Beige, Moon Blue, Black</p>
+                                </div>
 
+                                <input type="submit" class="img artitone-color-small"
+                                       style="background:url({% static 'images/group-14.png' %}) no-repeat;background-size: 41px 41px;"
+                                       name="color" value="contemporary"/>
+                                <div class="text-content">
+                                    <h4 style="font-size: 16px; color: white">Nature's Whispers</h4>
+                                    <p style="color: white; font-size: 9px">White, Beige, Moon Blue, Black</p>
+                                </div>
 
-
-              <div class="cotainter">
-                <form id="searchbox" method="get" action="{% url 'home' %}">
-                <div class="content">
-                  <p class="p-lorem-ipsum-dolor">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt sagittis eros.
-                    Quisque quis euismod lorem. Etiam sodales ac felis id interdum.
-                  </p>
-                  <button type="submit" class="group" style="background:url({% static 'images/group-12-1.png' %}) no-repeat;border:none;background-size: 83px 83px;" name="color" value="modern" />
+                                <input type="submit" class="img artitone-color-small"
+                                       style="background:url({% static 'images/group-15.png' %}) no-repeat;background-size: 41px 41px;"
+                                       name="color" value="minimalist"/>
+                                <div class="text-content">
+                                    <h4 style="font-size: 16px; color: white">Sunset Tapestry</h4>
+                                    <p style="color: white; font-size: 9px">Beige, Light Brown, Deep Orange, Brown</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="actions">
-                  <button class="button"><div class="text-wrapper">Explore</div></button>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+              <form id="searchbox" method="get" action="{% url 'shop_interface' %}">
+                <div class="overlap-group2">
+                    <div class="cotainter">
+                        <div class="content">
+                            <div class="parallel-container">
+                                <div class="title-copy-goes">Rough</div>
+                                <input type="submit" class="rectangle artitone-color-small"
+                                    style="background:url({% static 'images/rectangle-2-1.png' %}) no-repeat;background-size: 41px 41px;"
+                                    name="texture" value="RO"/>
+                            </div>
+                            <p class="p-lorem-ipsum-dolor">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt
+                                sagittis eros.
+                                Quisque quis euismod lorem. Etiam sodales ac felis id interdum.
+
+                            </p>
+                        </div>
+                        <div class="actions">
+                            <button class="button">
+                                <div class="text-wrapper">Explore</div>
+                            </button>
+                        </div>
+                        <div class="frame-6">
+                            <input type="submit" class="rectangle-2 artitone-color-small"
+                                       style="background:url({% static 'images/rectangle-2.png' %}) no-repeat;background-size: 41px 41px;"
+                                       name="texture" value="SA"/>
+                            <input type="submit" class="rectangle-3 artitone-color-small"
+                                       style="background:url({% static 'images/rectangle-3.png' %}) no-repeat;background-size: 41px 41px;"
+                                       name="texture" value="MA"/>
+                        </div>
+                    </div>
                 </div>
-                <input type="submit" class="img artitone-color-small" style="background:url({% static 'images/group-12.png' %}) no-repeat;background-size: 41px 41px;" name="color" value="bohemian" />
-                <input type="submit" class="group-2 artitone-color-small" style="background:url({% static 'images/group-13.png' %}) no-repeat;background-size: 41px 41px;" name="color" value="industrial" />
-                <input type="submit" class="group-3 artitone-color-small" style="background:url({% static 'images/group-14.png' %}) no-repeat;background-size: 41px 41px;" name="color" value="contemporary" />
-                <input type="submit" class="group-4 artitone-color-small" style="background:url({% static 'images/group-15.png' %}) no-repeat;background-size: 41px 41px;" name="color" value="minimalist" />
-                </form>
-              </div>
-
-
-
-
-              <div class="frame" id="artitone-frame" onmouseover="showMenu()" onmouseleave="hideMenu()">
-                <form id="searchbox" method="get" action="{% url 'home' %}">
+              </form>
+            </div>
+        </div>
+        <div class="frame" id="artitone-frame" onmouseover="showMenu()" onmouseleave="hideMenu()">
+            <form id="searchbox" method="get" action="{% url 'shop_interface' %}">
                 <div class="new-arrivals">
-                  <div class="home"><div class="home-2">
-                    <button class="artitone-sidebar" name="category" type="submit" value="New Arrivals">New Arrivals</button>
-                  </div></div>
+                    <div class="home">
+                        <div class="home-2">
+                            <button class="artitone-sidebar" name="category" type="submit"
+                                    value="New Arrivals">New Arrivals
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="group-5">
-                  <div class="photograph">
-                    <div class="home"><div class="home-3">
-                      <button class="artitone-sidebar" name="category" type="submit" value="Photograph">Photograph</button>
-                    </div></div>
-                  </div>
-                  <div class="painting">
-                    <div class="home"><div class="home-3">
-                      <button class="artitone-sidebar" name="category" type="submit" value="Painting">Painting</button>
-                    </div></div>
-                  </div>
-                  <div class="print">
-                    <div class="home"><div class="home-3">
-                      <button class="artitone-sidebar" name="category" type="submit" value="Print">Print</button>
-                    </div></div>
-                  </div>
-                  <div class="wall-arts">
-                    <div class="home"><div class="home-3">
-                      <button class="artitone-sidebar" name="category" type="submit" value="Wall Arts">Wall Arts</button>
-                    </div></div>
-                  </div>
-                  <div class="decorative-trays">
-                    <div class="home"><div class="home-3">
-                      <button class="artitone-sidebar" name="category" type="submit" value="Trays">Trays</button>
-                    </div></div>
-                  </div>
-                  <div class="wall-hangings">
-                    <div class="home"><div class="home-3">
-                      <button class="artitone-sidebar" name="category" type="submit" value="Hangings">Hangings</button>
-                    </div></div>
-                  </div>
-                  <div class="table">
-                    <div class="home"><div class="home-3">
-                      <button class="artitone-sidebar" name="category" type="submit" value="Table">Table</button>
-                    </div></div>
-                  </div>
-                  <div class="chair">
-                    <div class="home"><div class="home-3">
-                      <button class="artitone-sidebar" name="category" type="submit" value="Chair">Chair</button>
-                    </div></div>
-                  </div>
-                  <div class="cabinet">
-                    <div class="home"><div class="home-3">
-                      <button class="artitone-sidebar" name="category" type="submit" value="Cabinets">Cabinets</button>
-                    </div></div>
-                  </div>
-                  <div class="sculpture">
-                    <div class="home"><div class="home-3">
-                      <button class="artitone-sidebar" name="category" type="submit" value="Sculpture">Sculpture</button>
-                    </div></div>
-                  </div>
-                  <div class="text-wrapper-2">Fine Arts</div>
-                  <div class="text-wrapper-3">Home Decor</div>
-                  <div class="text-wrapper-4">Furniture</div>
+                    <div class="photograph">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Photograph">Photograph
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="painting">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Painting">Painting
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="print">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Print">Print
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wall-arts">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Wall Arts">Wall Arts
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="decorative-trays">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Trays">Trays
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wall-hangings">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Hangings">Hangings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Table">Table
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chair">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Chair">Chair
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cabinet">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Cabinets">Cabinets
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sculpture">
+                        <div class="home">
+                            <div class="home-3">
+                                <button class="artitone-sidebar" name="category" type="submit"
+                                        value="Sculpture">Sculpture
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-wrapper-2">Fine Arts</div>
+                    <div class="text-wrapper-3">Home Decor</div>
+                    <div class="text-wrapper-4">Furniture</div>
                 </div>
-                </form>
-              </div>
-            </div>
-          </div>
+            </form>
         </div>
-
-
-
 
         <div class="container">
-          <div class="section-title">
-            <div class="text-wrapper-8">Featured Items</div>
-            <p class="p">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt sagittis eros.
-            </p>
-          </div>
-          <div class="artitone-article">
-            {% for artwork in page_obj %}
-            <div class="artitone-article-item">
-              {% with artwork.pictures.all|first as img %}
-                <img class="element" src="{{img}}" loading="lazy">
-              {% endwith %}
-              <div class="text-wrapper-9">{{ artwork.name }}</div>
-              <p class="text-wrapper-11">{{ artwork.content }}</p>
-              <p class="text-wrapper-10">$ {{ artwork.price }}</p>
-              {% if user.is_customer %}
-                <a href="{% url 'purchase_artwork' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">purchase</a>
-              {% endif %}
+<!--            <div class="section-title">-->
+<!--                <div class="text-wrapper-8">Featured Items</div>-->
+<!--                <p style="width: 75%; text-align: center;">-->
+<!--                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt sagittis eros.-->
+<!--                </p>-->
+<!--            </div>-->
+            <div style="text-align: left; width: 100%;">
+                <p style="margin: 0; padding: 0; font-size: 36px;">Trending Now</p>
             </div>
-            {% endfor %}
-          </div>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                {% if page_obj.has_previous %}
-                  <li class="page-item"><a class="page-link artitone-page-link" href="?page=1">&laquo; first</a></li>
-                  <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
-                {% else %}
-                  <li class="page-item disabled"><a class="page-link artitone-page-link">&laquo; first</a></li>
-                  <li class="page-item disabled"><a class="page-link artitone-page-link">previous</a></li>
-                {% endif %}
-                {% for page_num in page_obj.paginator.page_range %}
-                  {% if page_obj.number == page_num %}
-                  <li class="page-item active"><a class="page-link artitone-page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
-                  {% else %}
-                  <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
-                  {% endif %}
+            <div style="text-align: left; width: 100%;">
+                <p style="margin: 0; padding: 0; font-size: 36px;">Trending Now</p>
+            </div>
+            <div class="artitone-article">
+                {% for artwork in page_obj %}
+                <div class="artitone-article-item">
+                    {% with artwork.pictures.all|first as img %}
+                    <img class="element-index" src="{{ img }}" loading="lazy">
+                    {% endwith %}
+                    Artist: <a href="{% url 'artist_profile_page' artwork.artist.pk %}">{{ artwork.artist.first_name }}, {{ artwork.artist.last_name }}</a>
+                    <div class="text-wrapper-9">{{ artwork.name }}</div>
+                    <p class="text-wrapper-11">{{ artwork.content }}</p>
+                    <p class="text-wrapper-10">$ {{ artwork.price }}</p>
+                    {% if user.is_customer %}
+                    <a href="{% url 'purchase_artwork' artwork.pk %}" class="btn btn-dark artitone-btn"
+                       style="width: 240px;">purchase</a>
+                    {% endif %}
+                </div>
                 {% endfor %}
-                {% if page_obj.has_next %}
-                  <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
-                  <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
-                {% else %}
-                  <li class="page-item disabled"><a class="page-link artitone-page-link">next</a></li>
-                  <li class="page-item disabled"><a class="page-link artitone-page-link">last &raquo;</a></li>
-                {% endif %}
-              </ul>
-          </nav>
+            </div>
+            <nav aria-label="Page navigation" style="display: flex; justify-content: center; align-items: center;">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link artitone-page-link" href="?page=1">&laquo;
+                        first</a></li>
+                    <li class="page-item"><a class="page-link artitone-page-link"
+                                             href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled"><a class="page-link artitone-page-link">&laquo; first</a>
+                    </li>
+                    <li class="page-item disabled"><a class="page-link artitone-page-link">previous</a></li>
+                    {% endif %}
+                    {% for page_num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == page_num %}
+                    <li class="page-item active"><a class="page-link artitone-page-link"
+                                                    href="?page={{ page_num }}">{{ page_num }}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link artitone-page-link"
+                                             href="?page={{ page_num }}">{{ page_num }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link artitone-page-link"
+                                             href="?page={{ page_obj.next_page_number }}">next</a></li>
+                    <li class="page-item"><a class="page-link artitone-page-link"
+                                             href="?page={{ page_obj.paginator.num_pages }}">last
+                        &raquo;</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled"><a class="page-link artitone-page-link">next</a></li>
+                    <li class="page-item disabled"><a class="page-link artitone-page-link">last &raquo;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
 
-
-
+        <div style="display: flex; justify-content: center; align-items: center;flex-direction: row;">
+            <img class="vector-3" src="{% static 'images/vector-3.svg' %}">
+        </div>
         <footer class="footer">
-          <div class="column">
-            <div class="logo-wrapper"><img class="logo-2" src="{% static 'images/logo.png' %}" /></div>
-          </div>
-          <div class="small-columns">
-            <div class="content-wrapper">
-              <div class="content-2">
-                <div class="text-wrapper-12">COMPANY</div>
+            <div class="logo-wrapper"><img class="logo-2" src="{% static 'images/logo-1.svg' %}"/></div>
+            <div class="content-2">
+                <div class="text-wrapper-12" >ABOUT</div>
                 <div class="footer-links">
-                  <div class="link">How it works</div>
-                  <div class="link-2">Pricing</div>
-                  <div class="link-3">Demo</div>
+                    <p class="link" > <a href="{% url 'about' %}">Our story</a></p>
                 </div>
-              </div>
             </div>
-            <div class="div-wrapper">
-              <div class="content-3">
-                <div class="text-wrapper-12">RESOURCES</div>
-                <div class="footer-links-2">
-                  <p class="link">Blog post name goes here</p>
-                  <p class="link-2">Blog post name goes here</p>
-                  <p class="link-3">Blog post name goes here</p>
-                  <div class="link-4">See all resources</div>
+            <div class="content-2">
+                <div class="text-wrapper-12">POLICIES</div>
+                <div class="footer-links">
+                    <p class="link">Term & Condition</p>
+                    <p class="link">Privacy & Policy</p>
                 </div>
-              </div>
             </div>
-            <div class="column-2">
-              <div class="content-4">
-                <div class="text-wrapper-12">ABOUT</div>
-                <div class="footer-links-3">
-                  <div class="link-5">Terms &amp; Conditions</div>
-                  <div class="link-6">Privacy Policy</div>
+            <div class="content-2">
+                <div class="text-wrapper-12">CONTACT</div>
+                <div class="footer-links">
+                    <div class="link">Contact</div>
+                    <div class="link">Help</div>
                 </div>
-              </div>
             </div>
-          </div>
-          <img class="vector-2" src="{% static 'images/vector-3.svg' %}" />
-          <img class="vector-3" src="{% static 'images/vector-3.svg' %}" />
-          <p class="text">Copyright © 2023 Artitone</p>
         </footer>
 
-
-
-      </div>
-      
-    </div>
-    {% load crispy_forms_tags %}
-
-    <!-- This is the LOGIN form -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content artitone-modal">
-          <div class="modal-header">
-            <h5 class="modal-title" id="loginModalLabel">Log In</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          {% if login_form.non_field_errors %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <p class="mb-0">{{ login_form.non_field_errors }}</p>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          {% endif %}
-          <form action="" method="post" enctype="multipart/form-data" novalidate>
-          {% csrf_token %}
-          <div class="modal-body">
-            <input type="hidden" id="form_type" name="type" value="login" />
-            {{ login_form.email|as_crispy_field }}
-            {{ login_form.password|as_crispy_field }}
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-dark artitone-btn">Login</button>
-            <button type="button" class="btn btn-secondary artitone-btn" data-dismiss="modal">Close</button>
-          </div>
-          </form>
+        <div style="display: flex; justify-content: center; align-items: center;flex-direction: column;">
+            <img class="vector-3" src="{% static 'images/vector-3.svg' %}">
+            <p class="text">Copyright © 2023 Artitone</p>
         </div>
-      </div>
     </div>
+</div>
 
-    <!-- This is the SIGNUP form -->
-    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content artitone-modal">
-          <div class="modal-header">
-            <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          {% if artist_signup_form.non_field_errors %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <p class="mb-0">{{ artist_signup_form.non_field_errors }}</p>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          {% endif %}
-          <div id="signup-choice" class="modal-body">
-            <h2>Sign up for a free account</h2>
-            <p class="lead">Select the type of account you want to create:</p>
-            <button id="customer-signup" class="btn btn-dark btn-lg artitone-btn" role="button">Customer</button>
-            <button id="artist-signup" class="btn btn-dark btn-lg artitone-btn" role="button">Artist</button>
-          </div>
-
-
-          <div id="artist-signup-form" style="display: none;">
-            <form method="post" enctype="multipart/form-data" novalidate>
-                {% csrf_token %}
-                <div class="modal-body">
-                  <input type="hidden" name="next" value="{{ next }}">
-                  <input type="hidden" id="form_type" name="type" value="artist" />
-                  {{ artist_signup_form|crispy }}
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-dark artitone-btn">Sign Up</button>
-                </div>
-            </form>
-          </div>
-
-
-          <div id="customer-signup-form" style="display: none;">
-            <form method="post" enctype="multipart/form-data" novalidate>
-                {% csrf_token %}
-                <div class="modal-body">
-                  <input type="hidden" name="next" value="{{ next }}">
-                  <input type="hidden" id="form_type" name="type" value="customer" />
-                  {{ customer_signup_form|crispy }}
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-dark artitone-btn">Sign Up</button>
-                </div>
-            </form>
-          </div>
-
-
-        </div>
-      </div>
-    </div>
-
-    {% if login_form.non_field_errors %}
-    <script>
-      $(document).ready(function() {
-        $("#loginModal").modal('show');
-      });
-    </script>
-    {% endif %}
-    {% if signup_form.non_field_errors %}
-    <script>
-      $(document).ready(function() {
-        $("#signupModal").modal('show');
-      });
-    </script>
-    {% endif %}
-    {% if artist_signup_form.errors %}
-    <script>
-      $(document).ready(function() {
-        $("#signupModal").modal('show');
-        $("#artist-signup-form").show();
-        $("#customer-signup-form").hide();
-        $("#signup-choice").hide();
-      });
-    </script>
-    {% endif %}
-    {% if customer_signup_form.errors %}
-    <script>
-      $(document).ready(function() {
-        $("#signupModal").modal('show');
-        $("#artist-signup-form").hide();
-        $("#customer-signup-form").show();
-        $("#signup-choice").hide();
-      });
-    </script>
-    {% endif %}
-    <script>
-
-      $("button#artist-signup").click(function(){
-        $("#artist-signup-form").show();
-        $("#customer-signup-form").hide();
-        $("#signup-choice").hide();
-      });
-      $("button#customer-signup").click(function(){
-        $("#artist-signup-form").hide();
-        $("#customer-signup-form").show();
-        $("#signup-choice").hide();
-      });
-      $("#artitone-signup-btn").click(function(){
-        $("#artist-signup-form").hide();
-        $("#customer-signup-form").hide();
-        $("#signup-choice").show();
-      });
-    </script>
-  </body>
+</body>
 {% endblock %}

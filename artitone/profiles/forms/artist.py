@@ -8,12 +8,12 @@ from django.contrib.auth.forms import UsernameField
 from django.db import transaction
 
 from artitone.utils import resize_image
-from profiles.models import Artist
-from profiles.models import ArtistPaymentMethod
-from profiles.models import User
-from profiles.models import UserType
+from profiles.models.artist import Artist
+from profiles.models.artist import ArtistPaymentMethod
+from profiles.models.user import User
+from profiles.models.user import UserType
 
-logger = logging.getLogger("artitone")
+logger = logging.getLogger(__name__)
 
 
 class UserLoginForm(forms.Form):
@@ -115,8 +115,13 @@ class ArtistChangeForm(UserChangeForm):
             artist.description = self.cleaned_data.get("description")
             artist.save()
             if self.cleaned_data.get("paypal_email") != "":
-                payment = ArtistPaymentMethod.objects.get(artist=artist)
-                payment.business_email = self.cleaned_data.get("paypal_email")
+                if ArtistPaymentMethod.objects.filter(artist=artist):
+                    payment = ArtistPaymentMethod.objects.get(artist=artist)
+                    payment.business_email = self.cleaned_data.get("paypal_email")
+                else:
+                    payment = ArtistPaymentMethod.objects.create(
+                        artist=artist, business_email=self.cleaned_data.get("paypal_email")
+                    )
                 payment.save()
         else:
             logger = logging.getLogger(__name__)
