@@ -15,6 +15,7 @@ from profiles.models.customer import Customer
 from purchases.models.order import Order
 from purchases.models.purchase import Purchase
 
+logger = logging.getLogger(__name__)
 # Create your views here.
 
 
@@ -24,16 +25,45 @@ def purchase_artwork(request, pk):
         return redirect("home")
 
     artwork = Artwork.objects.get(pk=pk)
+
+    if artwork.status != Artwork.PUBLISHED:
+        messages.error(
+            request,
+            (
+                f"Sorry, the artwork {artwork} you've just browsed is currently unavailable.\n"
+                "Please understand that the artwork may have been acquired by another buyer,"
+                "we kindly suggest you check again later."
+            ),
+        )
+        return redirect("home")
     artist = artwork.artist
     customer = Customer.objects.get(pk=user)
-    order = Order.objects.create(
-        customer=customer,
-    )
-    purchase = Purchase.objects.create(
-        order=order,
-        artwork=artwork,
-        price=artwork.price,
-    )
+
+    if (
+        Purchase.objects.filter(artwork=artwork)
+        and Purchase.objects.get(artwork=artwork).order.customer == customer
+    ):
+        purchase = Purchase.objects.get(artwork=artwork)
+        order = purchase.order
+    elif not Purchase.objects.filter(artwork=artwork):
+        order = Order.objects.create(
+            customer=customer,
+        )
+        purchase = Purchase.objects.create(
+            order=order,
+            artwork=artwork,
+            price=artwork.price,
+        )
+    else:
+        messages.error(
+            request,
+            (
+                f"Sorry, the artwork {artwork} you've just browsed is currently unavailable.\n"
+                "Please understand that the artwork may have been acquired by another buyer,"
+                "we kindly suggest you check again later."
+            ),
+        )
+        return redirect("home")
 
     payment_method = ArtistPaymentMethod.objects.get(pk=artist)
 
@@ -61,9 +91,21 @@ def purchase_artwork(request, pk):
 
 def purchase_success(request, order_id):
     messages.success(request, f"Payment successfully made for {order_id}.")
+    update_artwork_status(order_id)
     return redirect("home")
 
 
 def purchase_fail(request, order_id):
     messages.error(request, f"Payment failed made for {order_id}!")
+    order = Order.objects.get(pk=order_id)
+    logger.debug(f"{order} successfully deleted!")
+    order.delete()
     return redirect("home")
+
+
+def update_artwork_status(order_id):
+    order = Order.objects.get(pk=order_id)
+    for purchase in order.purchases.all():
+        purchase.artwork.status = Artwork.IN_PROGRESS
+        purchase.artwork.save()
+        logger.debug(f"Update {purchase.artwork} status to {Artwork.IN_PROGRESS}")

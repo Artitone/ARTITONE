@@ -76,13 +76,6 @@ class TestCase(test.TestCase):
             artist=self.artist, business_email="gogh@vincent.com"
         )
 
-        self.order = Order.objects.create(customer=self.customer)
-        self.purchase = Purchase.objects.create(
-            order=self.order,
-            artwork=self.artwork,
-            price=self.artwork.price,
-        )
-
     def tearDown(self):
         super().tearDown()
         self.artwork.delete()
@@ -90,5 +83,3 @@ class TestCase(test.TestCase):
         self.artist.delete()
         self.customer.delete()
         self.category.delete()
-        self.order.delete()
-        self.purchase.delete()
