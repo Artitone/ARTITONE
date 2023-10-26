@@ -129,19 +129,33 @@
     display: block;
 }
 
-.input-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* two columns of equal width */
-    gap: 10px; /* adjust as per your spacing preference */
-    margin-top: 10px;
-}
-
 .artitone-color-small {
-    width: 100%;
-    height: 41px; /* assuming you want to keep the height to match your background-size */
+    min-width: 41px; /* This will ensure it always maintains this width */
+    height: 41px;
     border: none;
     cursor: pointer;
 }
+
+.artitone-color-title {
+    min-width: 85px; /* This will ensure it always maintains this width */
+    height: 85px;
+    border: none;
+    cursor: pointer;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* adjust for spacing between title and content */
+}
+
 
 .frame {
     width: 386px;
@@ -473,13 +487,14 @@
 
 .menu .text-wrapper-11 {
     position: relative;
-    width: fit-content;
+    display: inline-block;
     font-family: "Open Sans", Helvetica;
     font-weight: 400;
     color: #666666;
     font-size: 12px;
     letter-spacing: 0;
-    line-height: normal;
+    white-space: nowrap;  /* Prevent wrapping */
+    text-overflow: ellipsis;  /* Display ellipsis for overflowed text */
 }
 
 .menu .frame-3 {
@@ -543,14 +558,10 @@
 
 .menu .logo-wrapper {
     position: relative;
-    width: 141px;
-    height: 52px;
 }
 
 .menu .logo-2 {
-    height: 25px;
-    top: 20px;
-    object-fit: cover;
+    width: 80%;
 }
 
 .menu .text-wrapper-12 {
@@ -673,28 +684,56 @@ nav.artitone-navbar {
     padding-right: 30px;
 }
 
-.artitone-article-item {
-    grid-area: span 1 / span 1 / span 1 / span 1;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0px;
-    top: 0;
-}
-
 .artitone-article {
     position: relative;
     grid-column-gap: 50px;
     grid-row-gap: 10px;
     grid-template-rows: auto auto;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-auto-columns: 1fr;
+    grid-template-columns: repeat(4, 1fr); /* Simplified your columns definition */
     margin-top: 50px;
     display: grid;
-    margin-left: 20px;
-    width: 1404px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
 }
 
+.artitone-article-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Adjust as needed for spacing between child elements */
+    width: 100%; /* Take the full width of its grid cell */
+    height: 100%; /* Take the full height of its grid cell */
+    overflow: hidden; /* Prevent content from overflowing */
+    position: relative; /* Allows absolute positioning inside this item, if needed later */
+}
+
+.element-index {
+    width: 100%; /* Image will take full width of its container */
+    height: 100%; /* Maintain the image's aspect ratio */
+    max-height: 100%; /* Ensure it doesn't overflow its container */
+    object-fit: cover; /* Makes sure the image covers its entire space */
+}
+
+.element {
+    width: 100%; /* Image will take full width of its container */
+    height: 93%; /* Maintain the image's aspect ratio */
+    max-height: 100%; /* Ensure it doesn't overflow its container */
+    object-fit: cover; /* Makes sure the image covers its entire space */
+}
+
+.image-color-wrapper {
+    display: flex;
+    align-items: center;  /* Align vertically in the middle */
+    width: 85%;
+    height: 60%;
+    gap: 5px;  /* Provides spacing between the image and the color divs */
+}
+.color-wrapper {
+    display: flex;
+    flex-direction: column;  /* Stack color divs vertically */
+    gap: 3px;  /* Adjust as necessary for spacing between color divs */
+}
 
 button.artitone-sidebar {
     background: none;
@@ -809,12 +848,18 @@ input[type=password] {
     border-radius: 0%;
 }
 
+.artitone-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .artitone-artist-bio {
     position: relative;
-    margin-top: 20px;
-    width: 1400px;
+    padding-top: 100px;
+    width: 100%;
     display: grid;
-    grid-column-gap: 200px;
+    grid-column-gap: 100px;
     grid-template-rows: auto auto;
     grid-template-columns: 1fr 1fr;
     padding-bottom: 30px;
@@ -822,10 +867,7 @@ input[type=password] {
 }
 
 img.artitone-profile-photo {
-    width: 129px;
-    height: 129px;
-    margin-top: 50px;
-    margin-left: 38px;
+    width: 40%;
     border: 1px solid;
     position: relative;
     display: inline-block;
@@ -837,8 +879,6 @@ img.artitone-profile-photo {
 .artitone-profile-name {
     position: relative;
     display: inline;
-    top: 45px;
-    left: 0px;
     font-family: "Open Sans", Helvetica;
     font-weight: 400;
     color: #000000;
@@ -853,8 +893,6 @@ img.artitone-profile-photo {
 .artitone-profile-username {
     position: relative;
     display: inline;
-    top: 45px;
-    left: 170px;
     font-family: "Open Sans", Helvetica;
     font-weight: 400;
     color: var(--grey);
@@ -869,7 +907,7 @@ img.artitone-profile-photo {
 .artitone-profile-description {
     position: relative;
     display: inline-block;
-    width: 500px;
+    width: 40%;
     grid-column: 2;
     grid-row: 1;
     margin-top: 45px;
@@ -887,6 +925,7 @@ img.artitone-profile-photo {
 
 p.artitone-profile-description-content {
     font-family: "Open Sans", Helvetica;
+    word-wrap: break-word;
     font-weight: 400;
     color: var(--grey);
     font-size: 14px;
@@ -908,20 +947,24 @@ button.artitone-profile-follow {
     font-size: 19.2px;
 }
 
+.button-container {
+    position: relative;
+    padding-right: 100%;
+}
+
 hr.artitone-profile-hr {
+    position: relative;
     border-top: 0.01em solid;
     margin-left: 100px;
-    width: 1250px;
+    width: 80%;
     padding-bottom: 50px;
-    position: relative;
 }
 
 .artitone-profile-sort {
-    width: 1380px;
     position: relative;
+    width: 90%;
     display: inline-flex;
     justify-content: flex-end;
-    padding-left: 110px;
 }
 
 select.artitone-profile-select {
@@ -984,4 +1027,20 @@ textarea.artitone-artworks-content {
     margin-left: 30px;
     background-image: url(../images/hamburger.svg);
     background-size: 100% 100%;
+}
+
+.container-payment {
+    height: 80vh; /* vh is a unit for viewport height */
+    display: flex; /* enabling flexbox for child alignment */
+    align-items: center; /* centers children vertically */
+    justify-content: center; /* centers children horizontally */
+}
+
+.container-payment-content {
+    display: flex;
+    flex-direction: column; /* stacks children vertically */
+    align-items: center; /* centers children horizontally */
+    justify-content: center; /* centers children vertically */
+    width: 60%; /* or any other value that you find appropriate */
+    max-width: 800px; /* or any other value that ensures form doesn't grow too wide */
 }

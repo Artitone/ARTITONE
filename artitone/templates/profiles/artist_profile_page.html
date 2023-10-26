@@ -2,15 +2,18 @@
 {% load static %}
 {% block content %}
     <div class="artitone-artist-bio">
-        {% if artist.photo %}
-            <img class="artitone-profile-photo" src="{{artist.photo.url}}" alt="profile pic"/>
-        {% endif %}
-        <div class="artitone-profile-name">
-            {{ artist.first_name }}, {{ artist.last_name }}
+        <div class="artitone-profile">
+            {% if artist.photo %}
+                <img class="artitone-profile-photo" src="{{artist.photo.url}}" alt="profile pic"/>
+            {% endif %}
+            <div class="artitone-profile-name">
+                {{ artist.first_name }}, {{ artist.last_name }}
+            </div>
+            <div class="artitone-profile-username">
+                @{{ artist.user_name }}
+            </div>
         </div>
-        <div class="artitone-profile-username">
-            @{{ artist.user_name }}
-        </div>
+
         {% if user.is_customer %}
         <a href="{% url 'follow_artist' artist.pk%}">
           <button class="artitone-profile-follow artitone-btn">
@@ -27,6 +30,11 @@
             <div class="artitone-profile-description-title">Bio</div>
             <p class="artitone-profile-description-content">Email: {{ artist.user.email }}</p>
             <p class="artitone-profile-description-content">{{ artist.description }}</p>
+
+                <button type="button" class="btn btn-dark dropdown-item" data-toggle="modal" data-target="#editModal">
+                    Edit Profile
+                </button>
+
         </div>
     </div>
 
@@ -46,57 +54,102 @@
     <div class="artitone-article">
         {% for artwork in page_obj %}
         <div class="artitone-article-item">
-        {% with artwork.pictures.all|first as img %}
-            <img class="element" src="{{img}}" loading="lazy" width="240px">
-        {% endwith %}
-        <div class="text-wrapper-9">{{ artwork.name }}</div>
-        <p class="text-wrapper-11">{{ artwork.content }}</p>
-        <p class="text-wrapper-10">$ {{ artwork.price }}</p>
+            {% with artwork.pictures.all|first as img %}
+            <div class="image-color-wrapper">
+                <img class="element" src="{{img}}" loading="lazy">
+                <div class="color-wrapper">
+                    {% for color in artwork.colors.all %}
+                        <div style="background-color: {{ color.name }};width: 10px; height: 10px;"></div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endwith %}
+            <div class="text-wrapper-9">{{ artwork.name }}</div>
+            <p class="text-wrapper-11">{{ artwork.content }}</p>
+            <p class="text-wrapper-10">$ {{ artwork.price }}</p>
         <!-- <h4>{% for tag in artwork.tags.all %}
             {{ tag.name }}
         {% endfor %}</h4> -->
-        {% for color in artwork.colors.all %}
-            <div style="background-color: {{ color.name }}; padding: 10px;"></div>
-        {% endfor %}
         <!-- <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn">delete</a> -->
-        {% if user.is_artist or user.is_admin %}
-          <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">delete</a>
-        {% endif %}
+            {% if user.is_artist or user.is_admin %}
+                <a href="{% url 'delete_artwork' artwork.pk %}" class="btn btn-dark artitone-btn" style="width: 240px;">delete</a>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
 
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation" style="display: flex; justify-content: center; align-items: center;">
         <ul class="pagination">
             {% if page_obj.has_previous %}
-              <li class="page-item"><a class="page-link artitone-page-link" href="?page=1">&laquo; first</a></li>
-              <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+            <li class="page-item"><a class="page-link artitone-page-link" href="?page=1">&laquo;
+                first</a></li>
+            <li class="page-item"><a class="page-link artitone-page-link"
+                                     href="?page={{ page_obj.previous_page_number }}">previous</a>
+            </li>
             {% else %}
-              <li class="page-item disabled"><a class="page-link artitone-page-link">&laquo; first</a></li>
-              <li class="page-item disabled"><a class="page-link artitone-page-link">previous</a></li>
+            <li class="page-item disabled"><a class="page-link artitone-page-link">&laquo; first</a>
+            </li>
+            <li class="page-item disabled"><a class="page-link artitone-page-link">previous</a></li>
             {% endif %}
             {% for page_num in page_obj.paginator.page_range %}
-              {% if page_obj.number == page_num %}
-              <li class="page-item active"><a class="page-link artitone-page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
-              {% else %}
-              <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
-              {% endif %}
+            {% if page_obj.number == page_num %}
+            <li class="page-item active"><a class="page-link artitone-page-link"
+                                            href="?page={{ page_num }}">{{ page_num }}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link artitone-page-link"
+                                     href="?page={{ page_num }}">{{ page_num }}</a></li>
+            {% endif %}
             {% endfor %}
             {% if page_obj.has_next %}
-              <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
-              <li class="page-item"><a class="page-link artitone-page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+            <li class="page-item"><a class="page-link artitone-page-link"
+                                     href="?page={{ page_obj.next_page_number }}">next</a></li>
+            <li class="page-item"><a class="page-link artitone-page-link"
+                                     href="?page={{ page_obj.paginator.num_pages }}">last
+                &raquo;</a>
+            </li>
             {% else %}
-              <li class="page-item disabled"><a class="page-link artitone-page-link">next</a></li>
-              <li class="page-item disabled"><a class="page-link artitone-page-link">last &raquo;</a></li>
+            <li class="page-item disabled"><a class="page-link artitone-page-link">next</a></li>
+            <li class="page-item disabled"><a class="page-link artitone-page-link">last &raquo;</a>
+            </li>
             {% endif %}
         </ul>
     </nav>
 
+    <div class="menu">
+        <div class="div">
+            <div style="display: flex; justify-content: center; align-items: center;flex-direction: row;">
+                <img class="vector-3" src="{% static 'images/vector-3.svg' %}">
+            </div>
+            <footer class="footer">
+                <div class="logo-wrapper"><img class="logo-2" src="{% static 'images/logo-1.svg' %}"/></div>
+                <div class="content-2">
+                    <div class="text-wrapper-12" >ABOUT</div>
+                    <div class="footer-links">
+                        <p class="link" > <a href="{% url 'about' %}">Our story</a></p>
+                    </div>
+                </div>
+                <div class="content-2">
+                    <div class="text-wrapper-12">POLICIES</div>
+                    <div class="footer-links">
+                        <p class="link">Term & Condition</p>
+                        <p class="link">Privacy & Policy</p>
+                    </div>
+                </div>
+                <div class="content-2">
+                    <div class="text-wrapper-12">CONTACT</div>
+                    <div class="footer-links">
+                        <div class="link">Contact</div>
+                        <div class="link">Help</div>
+                    </div>
+                </div>
+            </footer>
 
-
-    <button type="button" class="btn btn-dark dropdown-item" data-toggle="modal" data-target="#editModal">
-        Edit Profile
-    </button>
+            <div style="display: flex; justify-content: center; align-items: center;flex-direction: column;">
+                <img class="vector-3" src="{% static 'images/vector-3.svg' %}">
+                <p class="text">Copyright © 2023 Artitone</p>
+            </div>
+        </div>
+    </div>
 
     {% load crispy_forms_tags %}
 
