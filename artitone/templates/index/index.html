@@ -25,14 +25,18 @@
                 <div class="overlap-group">
                     <div class="cotainter">
                         <div class="content">
-                            <button type="submit" class="group"
-                                    style="background:url({% static 'images/group-12-1.png' %}) no-repeat;border:none;background-size: 83px 83px;"
-                                    name="color" value="modern"></button>
-                            <p class="p-lorem-ipsum-dolor">
-                                Classic Simplicity
-                            </p>
+                            <div class="input-grid" style="height: 85px">
+                                <input type="submit" class="img artitone-color-title"
+                                       style="background:url({% static 'images/group-12-1.png' %}) no-repeat;background-size: 83px 83px;; font-size: 0; text-indent: -9999px; color: transparent;"
+                                       name="color" value="bohemian" />
+                                <div class="text-content">
+                                    <h4 style="font-size: 20px; color: white">Classic Simplicity</h4>
+                                    <p style="color: white; font-size: 11px">Light Brown, Deep Orange, Jungle green, Moon Blue</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="actions">
+
+                        <div class="actions" style="margin-top: 10px">
                             <button class="button">
                                 <div class="text-wrapper">Explore</div>
                             </button>
@@ -40,15 +44,34 @@
                                 <input type="submit" class="img artitone-color-small"
                                        style="background:url({% static 'images/group-12.png' %}) no-repeat;background-size: 41px 41px;"
                                        name="color" value="bohemian"/>
-                                <input type="submit" class="group-2 artitone-color-small"
+                                <div class="text-content">
+                                    <h4 style="font-size: 16px; color: white">Mystic Wilderness</h4>
+                                    <p style="color: white; font-size: 9px">Light Brown, Deep Orange, Jungle green, Moon Blue</p>
+                                </div>
+
+                                <input type="submit" class="img artitone-color-small"
                                        style="background:url({% static 'images/group-13.png' %}) no-repeat;background-size: 41px 41px;"
                                        name="color" value="industrial"/>
-                                <input type="submit" class="group-3 artitone-color-small"
+                                <div class="text-content">
+                                    <h4 style="font-size: 16px; color: white">Night Sky Elegance</h4>
+                                    <p style="color: white; font-size: 9px">White, Beige, Moon Blue, Black</p>
+                                </div>
+
+                                <input type="submit" class="img artitone-color-small"
                                        style="background:url({% static 'images/group-14.png' %}) no-repeat;background-size: 41px 41px;"
                                        name="color" value="contemporary"/>
-                                <input type="submit" class="group-4 artitone-color-small"
+                                <div class="text-content">
+                                    <h4 style="font-size: 16px; color: white">Nature's Whispers</h4>
+                                    <p style="color: white; font-size: 9px">White, Beige, Moon Blue, Black</p>
+                                </div>
+
+                                <input type="submit" class="img artitone-color-small"
                                        style="background:url({% static 'images/group-15.png' %}) no-repeat;background-size: 41px 41px;"
                                        name="color" value="minimalist"/>
+                                <div class="text-content">
+                                    <h4 style="font-size: 16px; color: white">Sunset Tapestry</h4>
+                                    <p style="color: white; font-size: 9px">Beige, Light Brown, Deep Orange, Brown</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -201,11 +224,14 @@
         </div>
 
         <div class="container">
-            <div class="section-title">
-                <div class="text-wrapper-8">Featured Items</div>
-                <p style="width: 75%; text-align: center;">
-                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt sagittis eros.
-                </p>
+<!--            <div class="section-title">-->
+<!--                <div class="text-wrapper-8">Featured Items</div>-->
+<!--                <p style="width: 75%; text-align: center;">-->
+<!--                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt sagittis eros.-->
+<!--                </p>-->
+<!--            </div>-->
+            <div style="text-align: left; width: 100%;">
+                <p style="margin: 0; padding: 0; font-size: 36px;">Trending Now</p>
             </div>
             <div style="text-align: left; width: 100%;">
                 <p style="margin: 0; padding: 0; font-size: 36px;">Trending Now</p>
@@ -214,7 +240,7 @@
                 {% for artwork in page_obj %}
                 <div class="artitone-article-item">
                     {% with artwork.pictures.all|first as img %}
-                    <img class="element" src="{{ img }}" loading="lazy">
+                    <img class="element-index" src="{{ img }}" loading="lazy">
                     {% endwith %}
                     Artist: <a href="{% url 'artist_profile_page' artwork.artist.pk %}">{{ artwork.artist.first_name }}, {{ artwork.artist.last_name }}</a>
                     <div class="text-wrapper-9">{{ artwork.name }}</div>
@@ -269,7 +295,7 @@
             <img class="vector-3" src="{% static 'images/vector-3.svg' %}">
         </div>
         <footer class="footer">
-            <div class="logo-wrapper"><img class="logo-2" src="{% static 'images/logo.png' %}"/></div>
+            <div class="logo-wrapper"><img class="logo-2" src="{% static 'images/logo-1.svg' %}"/></div>
             <div class="content-2">
                 <div class="text-wrapper-12" >ABOUT</div>
                 <div class="footer-links">
