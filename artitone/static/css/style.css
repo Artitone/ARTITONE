@@ -1044,3 +1044,24 @@ textarea.artitone-artworks-content {
     width: 60%; /* or any other value that you find appropriate */
     max-width: 800px; /* or any other value that ensures form doesn't grow too wide */
 }
+
+.menu .picker {
+    border-radius: 5px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    -webkit-transition: all linear .2s;
+    -moz-transition: all linear .2s;
+    -ms-transition: all linear .2s;
+    -o-transition: all linear .2s;
+    transition: all linear .2s;
+    border: thin solid #eee;
+}
+.menu .picker:hover {
+    transform: scale(1.1);
+}
+
+.container .btn {
+    border-width: 1px;
+    border-color: black;
+}
