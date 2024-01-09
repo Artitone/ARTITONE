@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% include 'search_sidebar.html' %}
 <body>
 <div class="menu">
     <div class="div">
@@ -113,114 +114,6 @@
                 </div>
               </form>
             </div>
-        </div>
-        <div class="frame" id="artitone-frame" onmouseover="showMenu()" onmouseleave="hideMenu()">
-            <form id="searchbox" method="get" action="{% url 'shop_interface' %}">
-                <div class="new-arrivals">
-                    <div class="home">
-                        <div class="home-2">
-                            <button class="artitone-sidebar" name="category" type="submit"
-                                    value="New Arrivals">New Arrivals
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="group-5">
-                    <div class="photograph">
-                        <div class="home">
-                            <div class="home-3">
-                                <button class="artitone-sidebar" name="category" type="submit"
-                                        value="Photograph">Photograph
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="painting">
-                        <div class="home">
-                            <div class="home-3">
-                                <button class="artitone-sidebar" name="category" type="submit"
-                                        value="Painting">Painting
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="print">
-                        <div class="home">
-                            <div class="home-3">
-                                <button class="artitone-sidebar" name="category" type="submit"
-                                        value="Print">Print
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wall-arts">
-                        <div class="home">
-                            <div class="home-3">
-                                <button class="artitone-sidebar" name="category" type="submit"
-                                        value="Wall Arts">Wall Arts
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="decorative-trays">
-                        <div class="home">
-                            <div class="home-3">
-                                <button class="artitone-sidebar" name="category" type="submit"
-                                        value="Trays">Trays
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wall-hangings">
-                        <div class="home">
-                            <div class="home-3">
-                                <button class="artitone-sidebar" name="category" type="submit"
-                                        value="Hangings">Hangings
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table">
-                        <div class="home">
-                            <div class="home-3">
-                                <button class="artitone-sidebar" name="category" type="submit"
-                                        value="Table">Table
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chair">
-                        <div class="home">
-                            <div class="home-3">
-                                <button class="artitone-sidebar" name="category" type="submit"
-                                        value="Chair">Chair
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cabinet">
-                        <div class="home">
-                            <div class="home-3">
-                                <button class="artitone-sidebar" name="category" type="submit"
-                                        value="Cabinets">Cabinets
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sculpture">
-                        <div class="home">
-                            <div class="home-3">
-                                <button class="artitone-sidebar" name="category" type="submit"
-                                        value="Sculpture">Sculpture
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-wrapper-2">Fine Arts</div>
-                    <div class="text-wrapper-3">Home Decor</div>
-                    <div class="text-wrapper-4">Furniture</div>
-                </div>
-            </form>
         </div>
 
         <div class="container">

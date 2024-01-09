@@ -815,6 +815,15 @@ button.artitone-btn {
     height: 50px;
 }
 
+button.artitone-btn-shop {
+    border: 1.2px solid;
+    border-radius: 0;
+    border-color: #000000;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 1rem;
+}
+
 a.artitone-page-link {
     border: 1.2px solid;
     border-radius: 0;

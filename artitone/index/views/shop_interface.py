@@ -19,6 +19,7 @@ def shop_interface(request):
     artist_signup_form = ArtistCreationForm(None, prefix="artist")
     customer_signup_form = CustomerCreationForm(None, prefix="customer")
 
+    print(request.GET)
     filter = parse_search_filter(request.GET)
     artwork_list = filter.search()
     paginator = Paginator(artwork_list, 24)  # Show 25 contacts per page.

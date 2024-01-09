@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% include 'search_sidebar.html' %}
     <div class="artitone-artist-bio">
         <div class="artitone-profile">
             {% if artist.photo %}
@@ -41,7 +42,7 @@
     <div class="artitone-profile-sort">
         <form id="searchbox" method="get" action="{% url 'artist_profile_page' artist.pk%}">
             Sort:
-            <select name="sort" class="form-control artitone-profile-select" onchange="this.form.submit()">
+            <select id="artitone-profile-select-order" name="sort" class="form-control artitone-profile-select" onchange="this.form.submit()">
                 <option value="newest">Newest</option>
                 <option value="price_ltoh">Price-low to high</option>
                 <option value="price_htol">Price-high to low</option>
@@ -185,7 +186,9 @@
         </div>
       </div>
     </div>
-
+    <script>
+        changeSelectByGetValue('artitone-profile-select-order');
+    </script>
     {% if artist_change_form.non_field_errors %}
     <script>
       $(document).ready(function() {
