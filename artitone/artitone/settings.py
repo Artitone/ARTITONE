@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     "taggit",
     "paypal.standard.ipn",
     "django_cleanup.apps.CleanupConfig",
+    'sass_processor',
 ]
 
 MIDDLEWARE = [
@@ -237,6 +238,10 @@ else:
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATICFILES_FINDERS = [
+    'sass_processor.finders.CssFinder',
+]
 
 if environment.is_local:
     STATIC_URL = "/static/"

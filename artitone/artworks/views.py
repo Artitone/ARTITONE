@@ -11,6 +11,9 @@ from artworks.models import Artwork
 # from paypal.standard.forms import PayPalPaymentsForm
 from profiles.models.artist import Artist
 
+from django.shortcuts import render, redirect
+from django.views.decorators.http import require_http_methods
+
 logger = logging.getLogger(__name__)
 # Create your views here.
 

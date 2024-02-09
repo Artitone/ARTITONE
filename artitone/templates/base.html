@@ -60,7 +60,14 @@
       <form class="form-inline artitone-navitem" method="get" action="{% url 'shop_interface' %}">
           <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="Search" aria-label="Search">
           <button class="btn btn-dark my-2 my-sm-0 artitone-btn" type="submit" style="width: 100px;">Search</button>
+
       </form>
+      <form action="{% url 'photo_upload' %}" method="get">
+          <button class="btn btn-dark my-2 my-sm-0 artitone-btn" style="width: 100px;">Upload Photo</button>
+      </form>
+
+        <!-- Place this button where you want it in your template -->
+
     </nav>
     <div class="artitone-block-content">
     {% block content %}

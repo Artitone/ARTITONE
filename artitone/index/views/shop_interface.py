@@ -2,8 +2,10 @@ import logging
 
 from django.contrib.auth import login
 from django.core.paginator import Paginator
-from django.shortcuts import redirect
-from django.shortcuts import render
+from django.urls import reverse
+from django.shortcuts import render, redirect
+from django.views.decorators.http import require_http_methods
+
 
 from index.views.search import parse_search_filter
 from profiles.forms.artist import ArtistCreationForm
@@ -15,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 def shop_interface(request):
+    uploaded_flag = request.GET.get('uploaded', False)
     login_form = UserLoginForm(None, prefix="login")
     artist_signup_form = ArtistCreationForm(None, prefix="artist")
     customer_signup_form = CustomerCreationForm(None, prefix="customer")
@@ -76,5 +79,6 @@ def shop_interface(request):
             "login_form": login_form,
             "artist_signup_form": artist_signup_form,
             "customer_signup_form": customer_signup_form,
+            "photo_uploaded": uploaded_flag,
         },
     )
